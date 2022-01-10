@@ -1,0 +1,38 @@
+﻿	/**
+     * <div>查询m_chn列表</div>
+     * <div style="color:blue;padding-top:10px">
+     * http://192.168.2.226:8082/zoe-optimus-web-api/m_eng/findList
+     * </div>
+     * <dt style="border-top:1px solid #ccc;padding-top:10px;margin-top:10px"/>
+     * @param parameter 参数 非空 json格式
+     * <pre style="background:#fcf6db;padding:10px;border:1px solid #e5e0c6;width:800px;overflow:auto">
+     * <tt style="color:red;">*</tt>: 表示必要参数
+     * {
+     * 	"" : "<tt style="color:red;">*</tt>",
+     * 	"" : "<tt style="color:red;">*</tt>",
+     * }
+     * </pre>
+     * <dt style="border-top:1px solid #ccc;padding-top:10px;margin-top:10px"/>
+     * @return {"code":"返回编码","data":"返回数据","message":"返回信息"}
+     * <pre style="background:#fcf6db;padding:10px;border:1px solid #e5e0c6;width:400px;overflow:auto">
+     * 成功:
+     * {
+     * 	"code":"00000",
+     * 	"data":[
+     * 	    {
+     * 	        "": "",
+     * 	        "": ""
+     * 	    }
+     * 	],
+     * 	"message":"查询列表m_chn成功"
+     * }
+     * 失败：
+     * {
+     * 	"code":"错误码",
+     * 	"data":"",
+     * 	"message":"失败详细信息"
+     * }
+     * </pre>
+     * <dt style="border-top:1px solid #ccc;padding-top:10px;margin-top:10px"/>
+     * @throws
+     */

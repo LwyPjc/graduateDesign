@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduation.education.dao.EduStudentDao">
+
+    <resultMap id="baseInfo" type="EduStudent">
+                <id column="ID" property="id"/>
+                <result column="stu_code" property="stuCode" />
+                <result column="stu_name" property="stuName" />
+                <result column="stu_name_old" property="stuNameOld" />
+                <result column="stu_name_py" property="stuNamePy" />
+                <result column="sex" property="sex" />
+                <result column="certificat_type" property="certificatType" />
+                <result column="certificate_no" property="certificateNo" />
+                <result column="nationality" property="nationality" />
+                <result column="hometown" property="hometown" />
+                <result column="nation" property="nation" />
+                <result column="marriage" property="marriage" />
+                <result column="birthplace" property="birthplace" />
+                <result column="birthday" property="birthday" />
+                <result column="political_status" property="politicalStatus" />
+                <result column="phone" property="phone" />
+                <result column="email" property="email" />
+                <result column="qq" property="qq" />
+                <result column="weChat" property="weChat" />
+                <result column="home_phone" property="homePhone" />
+                <result column="home_address" property="homeAddress" />
+                <result column="postCode" property="postCode" />
+                <result column="skill" property="skill" />
+                <result column="sickness_history" property="sicknessHistory" />
+                <result column="class_id" property="classId" />
+                <result column="candidate_no" property="candidateNo" />
+                <result column="admission_time" property="admissionTime" />
+                <result column="admission_methord" property="admissionMethord" />
+                <result column="stu_status" property="stuStatus" />
+                <result column="training_level" property="trainingLevel" />
+                <result column="educational_system" property="educationalSystem" />
+                <result column="counselor" property="counselor" />
+                <result column="rewards" property="rewards" />
+    </resultMap>
+
+</mapper>

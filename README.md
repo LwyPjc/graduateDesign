@@ -2,6 +2,15 @@
 
 >springboot+vue+mybatisPlus框架
 
+## autocode
+代码生成器
+
+启动类
+autoCode/zoe-optimus-dia-template-generator/src/main/java/com/zoe/optimus/generator/ext/CommandLine.java:17
+
+配置
+autoCode/zoe-optimus-dia-template-generator/src/main/resources/generator.xml:4
+
 ## graduate-student-waring
 
 大学生预警系统:

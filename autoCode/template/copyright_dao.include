@@ -1,0 +1,10 @@
+﻿/**
+ * <p>标题: m_chn管理数据访问层</p>
+ * <p>描述: </p>
+ * <p>版权: Copyright (c) ${now?string('yyyy')}</p>
+ * <p></p>
+ *
+ * @version: 1.0
+ * @author: zhongjiabing
+ * @date ${now?date}
+ */

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduation.education.dao.EduCourseDao">
+
+    <resultMap id="baseInfo" type="EduCourse">
+                <id column="ID" property="id"/>
+                <result column="college" property="college" />
+                <result column="code" property="code" />
+                <result column="name" property="name" />
+                <result column="name_eng" property="nameEng" />
+                <result column="type" property="type" />
+    </resultMap>
+
+</mapper>
