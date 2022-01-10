@@ -1,0 +1,29 @@
+<!--pages/device/add.wxml-->
+<form bindsubmit='onSubmit'>
+  <view class="weui-cells__title"><span style="color:red;width:5vw;">*</span>设备ID</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_active">
+      <view class="weui-cell__bd">
+        <input name="deviceId" class="weui-input" placeholder="请输入华为云平台上注册设备的ID" />
+      </view>
+    </view>
+  </view>
+  <view class="weui-cells__title"><span style="color:red;width:5vw;">*</span>名称</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_active">
+      <view class="weui-cell__bd">
+        <input name="name" class="weui-input" placeholder="接入设备名称" />
+      </view>
+    </view>
+  </view>
+  <view class="weui-cells__title">简介</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_active">
+      <view class="weui-cell__bd">
+        <textarea name="produce" class="weui-textarea" placeholder="请填写接入设备的功能简介" style="height: 4.3em" />
+        </view>
+    </view>
+  </view>
+  <button class="guid-button" formType="submit" type='primary'>提交</button>
+</form>
+<view wx:if="{{topTips}}" class="weui-toptips weui-toptips_warn fadeIn {{hide ? 'fadeOut' : ''}}">{{tipContent}}</view>
