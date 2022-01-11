@@ -13,6 +13,7 @@ Vue.config.productionTip = false
 Vue.prototype.GLOBAL = globalConstant
 /* eslint-disable no-new */
 router.beforeEach((to, from, next) => {
+  console.log('window.sessionStorage内容是', window.sessionStorage)
   document.title = "后台管理系统";
   if (to.path === "/login") {
     window.sessionStorage.removeItem("username");
