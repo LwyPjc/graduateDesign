@@ -31,7 +31,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Alias("${className}")
 @ApiModel(description = "${table.remarks!}实体")
-@TableName("${table.schema}.${table.sqlName}")
+@TableName("${table.sqlName}")
 public class ${className} extends BaseEntity{
 
     <#list table.columns as column>

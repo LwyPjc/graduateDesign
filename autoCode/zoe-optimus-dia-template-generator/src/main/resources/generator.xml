@@ -11,7 +11,7 @@
 	<entry key="module">autoCode</entry>
 
 	<!-- 项目名 -->
-	<entry key="basepackage">com.graduation.education</entry>
+	<entry key="basepackage">com.graduation.warning</entry>
 
 	<!-- 子包,只支持单个词 -->
 	<entry key="subpackage"></entry>
@@ -20,7 +20,7 @@
 	<entry key="namespace">pages</entry>
 
 	<!-- 输出目录,相对 cd 路径 -->
-	<entry key="outRoot">.</entry>
+	<entry key="outRoot">autoCode</entry>
 
 	<!-- 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_ -->
 	<entry key="tableRemovePrefixes">T_AR,T_BD,T_CD,T_PD,T_CL,T_IP,T_LO,T_RI,T_EV</entry>
@@ -33,7 +33,7 @@
 
 	<entry key="gg.isOverride">true</entry>
 
-	<entry key="author">shizh</entry>
+	<entry key="author">mic</entry>
 
 	<!-- 数据库类型映射  -->
 	<entry key="java_typemapping.java.sql.Timestamp">Date</entry>
@@ -47,10 +47,10 @@
 	<entry key="java_typemapping.java.lang.String">String</entry>
 	<entry key="java_typemapping.java.math.BigDecimal">java.math.BigDecimal</entry>
 	<!-- Mysql连接,useInformationSchema 取出表名注释 -->
-	<entry key="jdbc.url">jdbc:mysql://8.136.0.90:3306/education?useUnicode=true&amp;characterEncoding=utf-8</entry>
+	<entry key="jdbc.url">jdbc:mysql://127.0.0.1:3307/graduate?useUnicode=true&amp;characterEncoding=utf-8</entry>
 	<entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
 	<entry key="jdbc.username">root</entry>
-	<entry key="jdbc.password">313540638</entry>
+	<entry key="jdbc.password">root</entry>
 
 	<!-- Oracle 	jdbc:oracle:oci:@tnsname_devdb-->
 	<!-- oracle需要指定jdbc.schema,并且可能要大写，其它数据库忽略此项配置  -->

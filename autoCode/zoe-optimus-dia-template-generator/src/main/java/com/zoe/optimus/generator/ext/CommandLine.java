@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @author badqiu
  */
 public class CommandLine {
-	
+	private static String templateDir = "autoCode/template";
 	public static void main(String[] args) throws Exception {
 		//disable freemarker logging
 		freemarker.log.Logger.selectLoggerLibrary(freemarker.log.Logger.LIBRARY_NONE);
@@ -78,7 +78,7 @@ public class CommandLine {
 	}
 	
 	private static String getTemplateRootDir() {
-		return System.getProperty("templateRootDir", "template");
+		return System.getProperty("templateRootDir", templateDir);
 	}
 
 	private static void printUsages() {
