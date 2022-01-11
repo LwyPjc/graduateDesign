@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduation.education.dao.EduStudentCourseMapper">
+    <select id="getCourseByCondition" resultType="com.graduation.education.entity.EduOpenCourse">
+        SELECT
+            eoc.*
+        FROM
+            edu_student_course esc,
+            edu_open_course eoc
+        WHERE
+            esc.open_course_id = eoc.ID
+        AND eoc.term = #{term}
+        AND eoc.node_start = #{nodeStart}
+        AND eoc.node_end = #{nodeEnd}
+        AND esc.student_id = #{studentId}
+        AND (
+            (#{weekStart} >= eoc.week_start and   eoc.week_end >= #{weekStart})
+            OR
+            (#{weekEnd} >= eoc.week_start and eoc.week_end >= #{weekEnd})
+        )
+
+    </select>
+</mapper>

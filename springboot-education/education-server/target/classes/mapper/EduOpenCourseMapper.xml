@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduation.education.dao.EduOpenCourseMapper">
+
+    <update id="chooseCourse" parameterType="java.lang.Integer">
+        update edu_open_course set choose_num = choose_num + 1 where ID = #{id}
+    </update>
+
+    <select id="findStudentCourse" resultType="com.graduation.education.entity.dto.EduOpenCourseDto">
+        SELECT
+            eoc.*,
+            et.name as teacherName,
+            ecourse.name as courseName,
+            ec.name as roomName
+        FROM
+            `edu_student_course` esc,
+            edu_open_course eoc,
+            edu_teacher et,
+            edu_classroom ec,
+            edu_course ecourse
+        WHERE
+            esc.open_course_id = eoc.ID
+        AND eoc.classroom_id = ec.ID
+        AND eoc.course_id = ecourse.ID
+        AND eoc.teacher_id = et.ID
+        AND esc.student_id = #{studentId};
+    </select>
+</mapper>

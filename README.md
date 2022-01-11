@@ -11,6 +11,10 @@ autoCode/zoe-optimus-dia-template-generator/src/main/java/com/zoe/optimus/genera
 配置
 autoCode/zoe-optimus-dia-template-generator/src/main/resources/generator.xml:4
 
+## graduate-student-demo
+
+添加sql
+
 ## graduate-student-waring
 
 大学生预警系统:
