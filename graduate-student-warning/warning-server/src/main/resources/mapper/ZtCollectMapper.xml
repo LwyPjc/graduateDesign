@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduation.mesume.dao.ZtCollectMapper">
+
+    <select id="countCollectByGoods" parameterType="int" resultType="int">
+        select COALESCE(count(*),0) as price from zt_collect where goods_id = #{goodId}
+    </select>
+
+    <select id="userCollectGood"  resultType="int">
+        select COALESCE(count(*),0) as cnt from zt_collect where goods_id = #{goodId} and user_id = #{userId}
+    </select>
+
+    <delete id="deleteUserGood" >
+        delete from zt_collect where goods_id = #{goodId} and user_id = #{userId}
+    </delete>
+
+    <select id="getCollectGoodByUserId" parameterType="string" resultType="ztGoods">
+        SELECT zg.* FROM `zt_goods` zg,zt_collect zc WHERE zg.ID = zc.goods_id AND zc.user_id = #{userId};
+    </select>
+</mapper>

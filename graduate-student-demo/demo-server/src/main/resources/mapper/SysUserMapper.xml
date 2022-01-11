@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduation.mesume.dao.SysUserMapper">
+
+    <select id="findByUserName" parameterType="string" resultType="sysUser">
+        select * from sys_user where username = #{userName}
+    </select>
+
+    <update id="updateNameByUserName" parameterType="string" >
+        update sys_user set `name` = #{name} where username = #{userName}
+    </update>
+</mapper>

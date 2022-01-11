@@ -1,0 +1,25 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://8.136.0.90:3306/mesume?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 313540638
+#  视图配置
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+#设置文件上传的最大尺寸
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+logging:
+  level:
+    root: info
+mybatis-plus:
+  type-aliases-package: com.graduation.mesume.entity
+  mapper-locations: classpath:mapper/*Mapper.xml
+#  config-location: classpath:mapper/config/sqlMapConfig.xml
