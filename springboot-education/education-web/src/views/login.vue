@@ -50,7 +50,8 @@
         methods: {
             handleSubmit(event) {
                 this.$refs.ruleForm2.validate((valid) => {
-                    if (!valid) {
+                  console.log('校验 valid is ', valid)
+                  if (!valid) {
                         return false;
                     }
                     this.logining = true;
