@@ -1,6 +1,6 @@
-package com.graduation.education.service;
+package com.graduation.warning.service;
 import com.zoe.optimus.core.base.service.BaseService;
-import com.graduation.education.entity.EduTeacher;
+import com.graduation.warning.entity.EduTeacher;
 
 /**
  * <p>标题: 服务 - 业务逻辑层</p>

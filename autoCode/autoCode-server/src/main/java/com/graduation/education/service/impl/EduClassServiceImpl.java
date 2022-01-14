@@ -1,11 +1,11 @@
-package com.graduation.education.service.impl;
+package com.graduation.warning.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.zoe.optimus.core.base.service.impl.BaseServiceImpl;
-import com.graduation.education.entity.EduClass;
-import com.graduation.education.dao.EduClassDao;
-import com.graduation.education.service.EduClassService;
+import com.graduation.warning.entity.EduClass;
+import com.graduation.warning.dao.EduClassDao;
+import com.graduation.warning.service.EduClassService;
 
 /**
  * <p>标题: 服务 - 业务逻辑层</p>

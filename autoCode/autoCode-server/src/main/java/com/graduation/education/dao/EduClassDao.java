@@ -1,7 +1,7 @@
-package com.graduation.education.dao;
+package com.graduation.warning.dao;
 
 import com.zoe.optimus.core.base.dao.BaseDao;
-import com.graduation.education.entity.EduClass;
+import com.graduation.warning.entity.EduClass;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

@@ -1,4 +1,4 @@
-package com.graduation.education.controller;
+package com.graduation.warning.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -10,8 +10,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.graduation.education.entity.EduStudent;
-import com.graduation.education.service.EduStudentService;
+import com.graduation.warning.entity.EduStudent;
+import com.graduation.warning.service.EduStudentService;
 
 import java.io.Serializable;
 import java.util.List;
