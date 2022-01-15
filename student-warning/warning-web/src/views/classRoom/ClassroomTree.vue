@@ -27,7 +27,7 @@
                 <el-row>
                     <el-col :span="24" class="filter-container">
                         <el-input
-                                placeholder="姓名过滤"
+                                placeholder="教室名过滤"
                                 v-model="listQuery.name"
                                 size="small"
                                 class="filter-item"
@@ -64,7 +64,7 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="姓名"
+                                    label="教室名"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
@@ -102,7 +102,7 @@
 
 <script>
     import request from '@/utils/request';
-    import HandleDialog from './EduTeacherDialog'
+    import HandleDialog from './ClassroomDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -157,7 +157,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/teacher'
+                prefixUrl:  this.GLOBAL.baseUrl +  '/classroom'
             }
         },
         watch: {

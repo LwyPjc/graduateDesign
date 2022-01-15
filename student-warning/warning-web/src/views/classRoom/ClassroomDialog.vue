@@ -14,11 +14,8 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-        <el-form-item label="学生id" label-width="105px" prop="studentId">
-            <el-input type="number" placeholder="请输入学生id" v-model.number="dialogFormData.studentId"/>
-        </el-form-item>
-        <el-form-item label="开课课程id" label-width="105px" prop="openCourseId">
-            <el-input type="number" placeholder="请输入开课课程id" v-model.number="dialogFormData.openCourseId"/>
+        <el-form-item label="教室名" label-width="105px" prop="name">
+            <el-input placeholder="请输入教室名" v-model="dialogFormData.name"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -38,23 +35,19 @@
 <script>
   import request from '@/utils/request'
     export default {
-        name: "EduStudentCourseAddOrUpdate",
+        name: "ClassroomAddOrUpdate",
         data () {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/studentCourse',
+                prefixUrl: '/classroom',
                 dialogFormData: {
                     id: '',
-                    studentId: '',
-                    openCourseId: '',
+                    name: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
                 dialogFormRules: {
-                    studentId: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
-                    openCourseId: [
+                    name: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -87,8 +80,7 @@
             resetModel() {
                 this.dialogFormData = {
                     id: '',
-                    studentId: '',
-                    openCourseId: '',
+                    name: '',
                 }
 
             },

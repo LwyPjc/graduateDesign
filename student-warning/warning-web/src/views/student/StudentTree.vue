@@ -574,7 +574,7 @@
 
 <script>
     import request from '@/utils/request';
-    import HandleDialog from './EduStudentDialog'
+    import HandleDialog from './StudentDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {

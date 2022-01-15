@@ -14,21 +14,12 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-        <el-form-item label="开课学院" label-width="105px" prop="college">
-            <el-input placeholder="请输入开课学院" v-model="dialogFormData.college"/>
+        <el-form-item label="学生id" label-width="105px" prop="studentId">
+            <el-input type="number" placeholder="请输入学生id" v-model.number="dialogFormData.studentId"/>
         </el-form-item>
-        <el-form-item label="课程编码" label-width="105px" prop="code">
-            <el-input placeholder="请输入课程编码" v-model="dialogFormData.code"/>
+        <el-form-item label="开课课程id" label-width="105px" prop="openCourseId">
+            <el-input type="number" placeholder="请输入开课课程id" v-model.number="dialogFormData.openCourseId"/>
         </el-form-item>
-        <el-form-item label="中文名称" label-width="105px" prop="name">
-            <el-input placeholder="请输入中文名称" v-model="dialogFormData.name"/>
-        </el-form-item>
-        <el-form-item label="英文名称" label-width="105px" prop="nameEng">
-            <el-input placeholder="请输入英文名称" v-model="dialogFormData.nameEng"/>
-        </el-form-item>
-      <!--  <el-form-item label="课程类别" label-width="105px" prop="type">
-            <el-input placeholder="请输入课程类别" v-model="dialogFormData.type"/>
-        </el-form-item>-->
     </el-form>
     <div slot="footer" class="dialog-footer">
         <el-button size="small" @click.native="dialogVisible = false">取消</el-button>
@@ -47,37 +38,25 @@
 <script>
   import request from '@/utils/request'
     export default {
-        name: "EduCourseAddOrUpdate",
+        name: "StudentCourseAddOrUpdate",
         data () {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/course',
+                prefixUrl: this.GLOBAL.baseUrl + '/studentCourse',
                 dialogFormData: {
                     id: '',
-                    college: '',
-                    code: '',
-                    name: '',
-                    nameEng: '',
-                    // type: '',
+                    studentId: '',
+                    openCourseId: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
                 dialogFormRules: {
-                    college: [
+                    studentId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    code: [
+                    openCourseId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    name: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
-                    nameEng: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
-                    /*type: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],*/
                 }
             }
         },
@@ -108,11 +87,8 @@
             resetModel() {
                 this.dialogFormData = {
                     id: '',
-                    college: '',
-                    code: '',
-                    name: '',
-                    nameEng: '',
-                    // type: '',
+                    studentId: '',
+                    openCourseId: '',
                 }
 
             },

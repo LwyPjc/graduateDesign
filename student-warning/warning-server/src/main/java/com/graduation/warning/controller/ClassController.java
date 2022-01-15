@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  * @since 2022-02-19
  */
 @Controller
-@RequestMapping("/eduClass")
+@RequestMapping("/aClass")
 @ResponseBody
 @CrossOrigin
 public class ClassController {

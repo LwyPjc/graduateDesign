@@ -21,7 +21,7 @@ import java.util.List;
  * @since 2022-02-19
  */
 @Controller
-@RequestMapping("/eduCourse")
+@RequestMapping("/course")
 @ResponseBody
 @CrossOrigin
 public class CourseController {

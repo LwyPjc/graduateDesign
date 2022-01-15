@@ -168,7 +168,7 @@
     import request from '@/utils/request'
 
     export default {
-        name: "EduStudentAddOrUpdate",
+        name: "StudentAddOrUpdate",
         data() {
             return {
                 visible: false,

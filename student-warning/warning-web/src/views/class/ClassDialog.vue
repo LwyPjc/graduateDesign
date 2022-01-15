@@ -14,8 +14,17 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-        <el-form-item label="教室名" label-width="105px" prop="name">
-            <el-input placeholder="请输入教室名" v-model="dialogFormData.name"/>
+        <el-form-item label="学院" label-width="105px" prop="college">
+            <el-input placeholder="请输入学院" v-model="dialogFormData.college"/>
+        </el-form-item>
+        <el-form-item label="年级" label-width="105px" prop="grade">
+            <el-input placeholder="请输入年级" v-model="dialogFormData.grade"/>
+        </el-form-item>
+        <el-form-item label="专业" label-width="105px" prop="subject">
+            <el-input placeholder="请输入专业" v-model="dialogFormData.subject"/>
+        </el-form-item>
+        <el-form-item label="班级" label-width="105px" prop="classNo">
+            <el-input placeholder="请输入班级" v-model="dialogFormData.classNo"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -35,19 +44,35 @@
 <script>
   import request from '@/utils/request'
     export default {
-        name: "EduClassroomAddOrUpdate",
+        name: "ClassAddOrUpdate",
         data () {
             return {
                 visible: false,
-                prefixUrl: '/classroom',
+                prefixUrl: this.GLOBAL.baseUrl + '/aClass',
                 dialogFormData: {
                     id: '',
-                    name: '',
+                    college: '',
+                    grade: '',
+                    subject: '',
+                    classNo: '',
+                    subjectDir: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
                 dialogFormRules: {
-                    name: [
+                    college: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    grade: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    subject: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    classNo: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    subjectDir: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -80,7 +105,11 @@
             resetModel() {
                 this.dialogFormData = {
                     id: '',
-                    name: '',
+                    college: '',
+                    grade: '',
+                    subject: '',
+                    classNo: '',
+                    subjectDir: '',
                 }
 
             },

@@ -16,9 +16,9 @@ export default new Router({
       // component: () => import('@/components/HeaderMenu/index'),
       children: [
         {
-          path: '/eduStudent',
-          name: 'eduStudent',
-          component: () => import('@/views/eduStudent/EduStudent')
+          path: '/student',
+          name: 'Student',
+          component: () => import('@/views/student/Student')
         },
         {
           path: '/data',
@@ -41,34 +41,34 @@ export default new Router({
           component: () => import('@/views/data/timetable')
         },
         {
-          path: '/eduClass',
-          name: 'eduClass',
-          component: () => import('@/views/eduClass/EduClass')
+          path: '/aClass',
+          name: 'Class',
+          component: () => import('@/views/class/Class')
         },
         {
-          path: '/eduClassRoom',
-          name: 'eduClassRoom',
-          component: () => import('@/views/eduClassRoom/EduClassRoom')
+          path: '/classRoom',
+          name: 'ClassRoom',
+          component: () => import('@/views/classRoom/ClassRoom')
         },
         {
-          path: '/eduCourse',
-          name: 'eduCourse',
-          component: () => import('@/views/eduCourse/EduCourse')
+          path: '/course',
+          name: 'Course',
+          component: () => import('@/views/course/Course')
         },
         {
-          path: '/eduOpenCourse',
-          name: 'eduOpenCourse',
-          component: () => import('@/views/eduOpenCourse/EduOpenCourse')
+          path: '/openCourse',
+          name: 'OpenCourse',
+          component: () => import('@/views/openCourse/OpenCourse')
         },
         {
-          path: '/eduStudentCourse',
-          name: 'eduStudentCourse',
-          component: () => import('@/views/eduStudentCourse/EduStudentCourse')
+          path: '/studentCourse',
+          name: 'StudentCourse',
+          component: () => import('@/views/studentCourse/StudentCourse')
         },
         {
-          path: '/eduTeacher',
-          name: 'eduTeacher',
-          component: () => import('@/views/eduTeacher/EduTeacher')
+          path: '/teacher',
+          name: 'Teacher',
+          component: () => import('@/views/teacher/Teacher')
         }
       ]
     }

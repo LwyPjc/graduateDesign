@@ -32,7 +32,7 @@ import java.util.List;
  */
 @Controller
 @ResponseBody
-@RequestMapping("/eduStudentCourse")
+@RequestMapping("/studentCourse")
 @CrossOrigin
 public class StudentCourseController {
     @Autowired

@@ -5,7 +5,7 @@
       <el-col :span="16" class="headerlogo">
         <div class="grid-content bg-purple" style="padding: 8px">
           <p style="font-size: 22px ;color: white">
-            学生监管系统
+            学业预警系统
           </p>
         </div>
       </el-col>

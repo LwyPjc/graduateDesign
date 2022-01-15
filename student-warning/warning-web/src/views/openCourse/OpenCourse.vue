@@ -3,9 +3,9 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="学号过滤" v-model="listQuery.stuCode" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="姓名过滤" v-model="listQuery.stuName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-button
+                    <el-input placeholder="学期过滤" v-model="listQuery.term" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="开课学院过滤" v-model="listQuery.college" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                   <el-button
                             type="primary"
                             icon="el-icon-search"
                             size="small"
@@ -29,6 +29,11 @@
                         :height="tableHeight"
                         style="width: 100%;"
                         highlight-current-row>
+                    <el-table-column label="学期" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.term }}
+                        </template>
+                    </el-table-column>
                   <el-table-column label="学院" show-overflow-tooltip style="width: 10%" align="center">
                     <template slot-scope="scope">
                       {{ scope.row.college }}
@@ -44,39 +49,68 @@
                       {{ scope.row.classNo }}
                     </template>
                   </el-table-column>
-                    <el-table-column label="学号" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="课程名称" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.stuCode }}
+                            {{ scope.row.courseName }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="姓名" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="学分" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.stuName }}
+                            {{ scope.row.score }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="性别" show-overflow-tooltip style="width: 5%" align="center">
+                    <el-table-column label="学时" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.sexChn }}
+                            {{ scope.row.hour }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="学籍状态" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="人数" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.stuStatus }}
+                            {{ scope.row.number }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="辅导员" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="开始周" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.counselorName }}
+                            {{ scope.row.weekStart }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="结束周" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.weekEnd }}
+                        </template>
+                    </el-table-column>
+                  <el-table-column label="周次" show-overflow-tooltip style="width: 10%" align="center">
+                    <template slot-scope="scope">
+                      {{ scope.row.weekTime }}
+                    </template>
+                  </el-table-column>
+                    <el-table-column label="开始节" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.nodeStart }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="结束节" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.nodeEnd }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="教师" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.teacherName }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="教室" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.roomName }}
                         </template>
                     </el-table-column>
                     <el-table-column
                             label="操作"
                             align="center"
-                            width="260"
+                            width="180"
                             class-name="small-padding fixed-width">
                       <template slot-scope="scope">
                         <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
-                        <el-button size="small" @click="showEditPassword(scope.row.stuCode)">修改密码</el-button>
                         <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
                       </template>
                     </el-table-column>
@@ -95,7 +129,7 @@
 
 <script>
     import request from '@/utils/request'
-    import HandleDialog from './EduStudentDialog'
+    import HandleDialog from './OpenCourseDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -137,50 +171,35 @@
                     current: 1,
                     size: 10,
                     query: '',
-                    stuCode: null,
-                    stuName: null,
-                    stuNameOld: null,
-                    stuNamePy: null,
-                    sex: null,
-                    certificatType: null,
-                    certificateNo: null,
-                    nationality: null,
-                    hometown: null,
-                    nation: null,
-                    marriage: null,
-                    birthplace: null,
-                    birthday: null,
-                    politicalStatus: null,
-                    phone: null,
-                    email: null,
-                    qq: null,
-                    weChat: null,
-                    homePhone: null,
-                    homeAddress: null,
-                    postCode: null,
-                    skill: null,
-                    sicknessHistory: null,
+                    term: null,
+                    college: null,
                     classId: null,
-                    candidateNo: null,
-                    admissionTime: null,
-                    admissionMethord: null,
-                    stuStatus: null,
-                    trainingLevel: null,
-                    educationalSystem: null,
-                    counselor: null,
-                    rewards: null,
+                    courseId: null,
+                    score: null,
+                    hour: null,
+                    number: null,
+                    weekStart: null,
+                    weekEnd: null,
+                    nodeStart: null,
+                    nodeEnd: null,
+                    teacherId: null,
+                    classroomId: null,
+                    weekTime: null
                 },
+                classes:[],
+                courses:[],
+                teacheres:[],
+                classrooms:[],
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/student',
-                classes:[]
+                prefixUrl: this.GLOBAL.baseUrl + '/openCourse'
             }
         },
         created() {
             this.fetchData();
-            this.getClasses();
+            this.getInitData();
         },
         methods: {
             /**
@@ -207,17 +226,93 @@
                 })
             },
             /**
-             * 请求所有班级
+             * 显示修改编辑框
              */
-            getClasses(){
+            showDialog(data) {
+                if(data === undefined){
+                    data = {};
+                }
+                data["classes"] = this.classes;
+                data["courses"] = this.courses;
+                data["teacheres"] = this.teacheres;
+                data["classrooms"] = this.classrooms;
+                this.$refs.dlg.init(data)
+            },
+            /**
+             * 请求所有初始化数据
+             */
+            getInitData() {
+                //请求所有班级
                 request({
                     url: `${this.GLOBAL.baseUrl}aClass/findList`,
                     method: 'get'
                 }).then(res => {
-                    for(var i = 0;i<res.length;i++){
-                        var obj  ={value:res[i].id,label:res[i].grade + "-" + res[i].college + "-"
-                                + res[i].subject+ "-" + res[i].classNo + "（辅导员：" + res[i].counselorName + "）"};
+                    for (var i = 0; i < res.length; i++) {
+                        var obj = {
+                            value: res[i].id, label: res[i].grade + "-" + res[i].college + "-"
+                                + res[i].subject + "-" + res[i].classNo + "（教师：" + res[i].counselorName + "）"
+                        };
                         this.classes.push(obj);
+                    }
+                }).catch(error => {
+                    this.$message({
+                        message: error,
+                        type: 'error',
+                        duration: 1500,
+                        onClose: () => {
+                        }
+                    })
+                });
+                //请求所有课程
+                request({
+                    url: `${this.GLOBAL.baseUrl}course/findList`,
+                    method: 'get'
+                }).then(res => {
+                    for (var i = 0; i < res.length; i++) {
+                        var obj = {
+                            value: res[i].id, label: res[i].name
+                        };
+                        this.courses.push(obj);
+                    }
+                }).catch(error => {
+                    this.$message({
+                        message: error,
+                        type: 'error',
+                        duration: 1500,
+                        onClose: () => {
+                        }
+                    })
+                })
+                //请求所有老师
+                request({
+                    url: `${this.GLOBAL.baseUrl}teacher/findList`,
+                    method: 'get'
+                }).then(res => {
+                    for (var i = 0; i < res.length; i++) {
+                        var obj = {
+                            value: res[i].id, label: res[i].name
+                        };
+                        this.teacheres.push(obj);
+                    }
+                }).catch(error => {
+                    this.$message({
+                        message: error,
+                        type: 'error',
+                        duration: 1500,
+                        onClose: () => {
+                        }
+                    })
+                })
+                //请求所有教室
+                request({
+                    url: `${this.GLOBAL.baseUrl}classRoom/findList`,
+                    method: 'get'
+                }).then(res => {
+                    for (var i = 0; i < res.length; i++) {
+                        var obj = {
+                            value: res[i].id, label: res[i].name
+                        };
+                        this.classrooms.push(obj);
                     }
                 }).catch(error => {
                     this.$message({
@@ -230,52 +325,10 @@
                 })
             },
             /**
-             * 显示修改编辑框
+             * 请求所有课程
              */
-            showDialog(data) {
-                if(data === undefined){
-                    data = {};
-                }
-                data["classes"] = this.classes;
-                this.$refs.dlg.init(data)
-            },
-            /**
-             * 显示修改密码的编辑框
-             */
-            showEditPassword(stuCode){
-                this.$prompt('请输入新密码', '修改密码', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    inputPattern: /[^\u4e00-\u9fa5]/,
-                    inputErrorMessage: '密码格式不正确'
-                }).then(({ value }) => {
-                    this.editPassword(stuCode,value);
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: '取消输入'
-                    });
-                });
-            },
-            /**
-             * 显示修改密码的编辑框
-             */
-            editPassword(stuCode, pwd) {
-                request({
-                    url: `${this.GLOBAL.baseUrl}sysUser/editPassword`,
-                    method: 'post',
-                    params: {stuCode:stuCode,password:pwd}
-                }).then(res => {
-                    this.$message({
-                        message: '操作成功',
-                        type: 'success',
-                        duration: 1500,
-                        onClose: () => {
-                            this.$emit('refreshDataList')
-                        }
-                    })
+            getCourse() {
 
-                })
             },
             /**
              * 搜索过滤

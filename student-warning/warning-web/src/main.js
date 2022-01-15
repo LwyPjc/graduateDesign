@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 Vue.prototype.GLOBAL = globalConstant
 /* eslint-disable no-new */
 router.beforeEach((to, from, next) => {
-  document.title = "学生监管系统";
+  document.title = "学业预警系统";
   if (to.path === "/login") {
     window.sessionStorage.removeItem("username");
     next();

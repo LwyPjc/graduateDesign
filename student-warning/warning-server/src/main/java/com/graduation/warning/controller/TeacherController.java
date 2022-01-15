@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  * @since 2022-02-19
  */
 @RestController
-@RequestMapping("/eduTeacher")
+@RequestMapping("/teacher")
 @CrossOrigin
 public class TeacherController {
     @Autowired
@@ -55,6 +55,7 @@ public class TeacherController {
         for (Teacher teacher : teachers) {
             TeacherDto dto = new TeacherDto();
             BeanUtil.copyProperties(teacher, dto);
+            dtos.add(dto);
             if (StringUtils.isNotEmpty(teacher.getRelateClassIds())) {
                 dto.setRelateClassIdList(Arrays.stream(teacher.getRelateClassIds().split(",")).map(x -> Integer.valueOf(x)).collect(Collectors.toList()));
             }

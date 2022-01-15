@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  */
 @Controller
 @ResponseBody
-@RequestMapping("/eduStudent")
+@RequestMapping("/student")
 @CrossOrigin
 public class StudentController {
     @Autowired

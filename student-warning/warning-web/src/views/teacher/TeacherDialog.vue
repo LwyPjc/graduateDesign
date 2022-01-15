@@ -49,7 +49,7 @@
     import request from '@/utils/request'
 
     export default {
-        name: "EduTeacherAddOrUpdate",
+        name: "TeacherAddOrUpdate",
         data() {
             return {
                 visible: false,

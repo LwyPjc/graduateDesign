@@ -14,18 +14,21 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-        <el-form-item label="学院" label-width="105px" prop="college">
-            <el-input placeholder="请输入学院" v-model="dialogFormData.college"/>
+        <el-form-item label="开课学院" label-width="105px" prop="college">
+            <el-input placeholder="请输入开课学院" v-model="dialogFormData.college"/>
         </el-form-item>
-        <el-form-item label="年级" label-width="105px" prop="grade">
-            <el-input placeholder="请输入年级" v-model="dialogFormData.grade"/>
+        <el-form-item label="课程编码" label-width="105px" prop="code">
+            <el-input placeholder="请输入课程编码" v-model="dialogFormData.code"/>
         </el-form-item>
-        <el-form-item label="专业" label-width="105px" prop="subject">
-            <el-input placeholder="请输入专业" v-model="dialogFormData.subject"/>
+        <el-form-item label="中文名称" label-width="105px" prop="name">
+            <el-input placeholder="请输入中文名称" v-model="dialogFormData.name"/>
         </el-form-item>
-        <el-form-item label="班级" label-width="105px" prop="classNo">
-            <el-input placeholder="请输入班级" v-model="dialogFormData.classNo"/>
+        <el-form-item label="英文名称" label-width="105px" prop="nameEng">
+            <el-input placeholder="请输入英文名称" v-model="dialogFormData.nameEng"/>
         </el-form-item>
+      <!--  <el-form-item label="课程类别" label-width="105px" prop="type">
+            <el-input placeholder="请输入课程类别" v-model="dialogFormData.type"/>
+        </el-form-item>-->
     </el-form>
     <div slot="footer" class="dialog-footer">
         <el-button size="small" @click.native="dialogVisible = false">取消</el-button>
@@ -44,18 +47,18 @@
 <script>
   import request from '@/utils/request'
     export default {
-        name: "EduClassAddOrUpdate",
+        name: "CourseAddOrUpdate",
         data () {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/aClass',
+                prefixUrl: this.GLOBAL.baseUrl + '/course',
                 dialogFormData: {
                     id: '',
                     college: '',
-                    grade: '',
-                    subject: '',
-                    classNo: '',
-                    subjectDir: '',
+                    code: '',
+                    name: '',
+                    nameEng: '',
+                    // type: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -63,18 +66,18 @@
                     college: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    grade: [
+                    code: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    subject: [
+                    name: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    classNo: [
+                    nameEng: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    subjectDir: [
+                    /*type: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
+                    ],*/
                 }
             }
         },
@@ -106,10 +109,10 @@
                 this.dialogFormData = {
                     id: '',
                     college: '',
-                    grade: '',
-                    subject: '',
-                    classNo: '',
-                    subjectDir: '',
+                    code: '',
+                    name: '',
+                    nameEng: '',
+                    // type: '',
                 }
 
             },

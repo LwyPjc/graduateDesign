@@ -68,16 +68,19 @@
       <el-form-item label="结束节" label-width="105px" prop="nodeEnd">
         <el-input type="number" placeholder="请输入结束节" v-model.number="dialogFormData.nodeEnd"/>
       </el-form-item>
-      <el-form-item label="教师" label-width="105px" prop="teacherId">
-        <el-select v-model="dialogFormData.teacherId" placeholder="请选择教师" style="width: 220%">
-          <el-option
-            v-for="item in dialogFormData.teacheres"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </el-form-item>
+      <el-row>
+        <el-form-item label="教师" label-width="105px" prop="teacherId">
+          <el-select v-model="dialogFormData.teacherId" placeholder="请选择教师" style="width: 220%">
+            <el-option
+              v-for="item in dialogFormData.teacheres"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-row>
+
       <el-form-item label="教室" label-width="105px" prop="classroomId">
         <el-select v-model="dialogFormData.classroomId" placeholder="请选择教室" style="width: 220%">
           <el-option
@@ -88,22 +91,23 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="选课开始时间" label-width="105px" prop="chooseStart">
-        <el-date-picker
-          v-model="dialogFormData.chooseStart"
-          type="datetime"
-          value-format="yyyy-MM-dd HH:mm:ss"
-          placeholder="选择开始时间">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="选课结束时间" label-width="105px" prop="chooseEnd">
-        <el-date-picker
-          v-model="dialogFormData.chooseEnd"
-          type="datetime"
-          value-format="yyyy-MM-dd HH:mm:ss"
-          placeholder="选择结束时间">
-        </el-date-picker>
-      </el-form-item>
+        <el-form-item label="选课开始时间" label-width="105px" prop="chooseStart">
+          <el-date-picker
+            v-model="dialogFormData.chooseStart"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择开始时间">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="选课结束时间" label-width="105px" prop="chooseEnd">
+          <el-date-picker
+            v-model="dialogFormData.chooseEnd"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择结束时间">
+          </el-date-picker>
+        </el-form-item>
+
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button size="small" @click.native="dialogVisible = false">取消</el-button>
@@ -123,7 +127,7 @@
     import request from '@/utils/request'
 
     export default {
-        name: "EduOpenCourseAddOrUpdate",
+        name: "OpenCourseAddOrUpdate",
         data() {
             return {
                 visible: false,
@@ -147,7 +151,7 @@
                     chooseStart:'',
                     chooseEnd:''
                 },
-                termSelect: ["202101", "202102", "202201", "202202"],
+                termSelect: ["202101", "202102", "202201", "202202", "202301", "202302"],
                 dialogVisible: false,
                 dialogLoading: false,
                 dialogFormRules: {

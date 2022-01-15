@@ -27,8 +27,32 @@
                 <el-row>
                     <el-col :span="24" class="filter-container">
                         <el-input
-                                placeholder="教室名过滤"
-                                v-model="listQuery.name"
+                                placeholder="学院过滤"
+                                v-model="listQuery.college"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="年级过滤"
+                                v-model="listQuery.grade"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="专业过滤"
+                                v-model="listQuery.subject"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="班级过滤"
+                                v-model="listQuery.classNo"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="专业方向过滤"
+                                v-model="listQuery.subjectDir"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -64,12 +88,48 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="教室名"
+                                    label="学院"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.name }}
+                                    {{ scope.row.college }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="年级"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.grade }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="专业"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.subject }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="班级"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.classNo }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="专业方向"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.subjectDir }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -102,7 +162,7 @@
 
 <script>
     import request from '@/utils/request';
-    import HandleDialog from './EduClassroomDialog'
+    import HandleDialog from './ClassDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -151,13 +211,17 @@
                     current: 1,
                     size: 10,
                     query: '',
-                    name: null,
+                    college: null,
+                    grade: null,
+                    subject: null,
+                    classNo: null,
+                    subjectDir: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl:  this.GLOBAL.baseUrl +  '/classroom'
+                prefixUrl: this.GLOBAL.baseUrl + '/aClass'
             }
         },
         watch: {

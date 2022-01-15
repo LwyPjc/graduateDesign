@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  * @since 2022-02-19
  */
 @RestController
-@RequestMapping("/eduOpenCourse")
+@RequestMapping("/openCourse")
 @CrossOrigin
 public class OpenCourseController {
     @Autowired

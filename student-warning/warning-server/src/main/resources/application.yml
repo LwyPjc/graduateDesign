@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://120.25.175.68:3306/student_warning?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://120.25.175.68:3306/warning_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: root
     password: 313540638a.
 #  视图配置

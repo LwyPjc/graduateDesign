@@ -27,16 +27,8 @@
                 <el-row>
                     <el-col :span="24" class="filter-container">
                         <el-input
-                                placeholder="学生id过滤"
-                                type="number"
-                                v-model.number="listQuery.studentId "
-                                size="small"
-                                class="filter-item"
-                                @keyup.enter.native="handleFilter"/>
-                        <el-input
-                                placeholder="开课课程id过滤"
-                                type="number"
-                                v-model.number="listQuery.openCourseId "
+                                placeholder="姓名过滤"
+                                v-model="listQuery.name"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -72,21 +64,12 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="学生id"
+                                    label="姓名"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.studentId }}
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                    label="开课课程id"
-                                    show-overflow-tooltip
-                                    style="width: 10%"
-                                    align="center">
-                                <template slot-scope="scope">
-                                    {{ scope.row.openCourseId }}
+                                    {{ scope.row.name }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -119,7 +102,7 @@
 
 <script>
     import request from '@/utils/request';
-    import HandleDialog from './EduStudentCourseDialog'
+    import HandleDialog from './TeacherDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -168,14 +151,13 @@
                     current: 1,
                     size: 10,
                     query: '',
-                    studentId: null,
-                    openCourseId: null,
+                    name: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/studentCourse'
+                prefixUrl: this.GLOBAL.baseUrl + '/teacher'
             }
         },
         watch: {

@@ -27,32 +27,16 @@
                 <el-row>
                     <el-col :span="24" class="filter-container">
                         <el-input
-                                placeholder="开课学院过滤"
-                                v-model="listQuery.college"
+                                placeholder="学生id过滤"
+                                type="number"
+                                v-model.number="listQuery.studentId "
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
-                                placeholder="课程编码过滤"
-                                v-model="listQuery.code"
-                                size="small"
-                                class="filter-item"
-                                @keyup.enter.native="handleFilter"/>
-                        <el-input
-                                placeholder="中文名称过滤"
-                                v-model="listQuery.name"
-                                size="small"
-                                class="filter-item"
-                                @keyup.enter.native="handleFilter"/>
-                        <el-input
-                                placeholder="英文名称过滤"
-                                v-model="listQuery.nameEng"
-                                size="small"
-                                class="filter-item"
-                                @keyup.enter.native="handleFilter"/>
-                        <el-input
-                                placeholder="课程类别过滤"
-                                v-model="listQuery.type"
+                                placeholder="开课课程id过滤"
+                                type="number"
+                                v-model.number="listQuery.openCourseId "
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -88,48 +72,21 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="开课学院"
+                                    label="学生id"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.college }}
+                                    {{ scope.row.studentId }}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="课程编码"
+                                    label="开课课程id"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.code }}
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                    label="中文名称"
-                                    show-overflow-tooltip
-                                    style="width: 10%"
-                                    align="center">
-                                <template slot-scope="scope">
-                                    {{ scope.row.name }}
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                    label="英文名称"
-                                    show-overflow-tooltip
-                                    style="width: 10%"
-                                    align="center">
-                                <template slot-scope="scope">
-                                    {{ scope.row.nameEng }}
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                    label="课程类别"
-                                    show-overflow-tooltip
-                                    style="width: 10%"
-                                    align="center">
-                                <template slot-scope="scope">
-                                    {{ scope.row.type }}
+                                    {{ scope.row.openCourseId }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -162,7 +119,7 @@
 
 <script>
     import request from '@/utils/request';
-    import HandleDialog from './EduCourseDialog'
+    import HandleDialog from './StudentCourseDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -211,17 +168,14 @@
                     current: 1,
                     size: 10,
                     query: '',
-                    college: null,
-                    code: null,
-                    name: null,
-                    nameEng: null,
-                    type: null,
+                    studentId: null,
+                    openCourseId: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/course'
+                prefixUrl: this.GLOBAL.baseUrl + '/studentCourse'
             }
         },
         watch: {

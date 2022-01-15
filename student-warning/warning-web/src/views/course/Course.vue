@@ -3,8 +3,8 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="学生id过滤" type="number" v-model.number="listQuery.studentId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="开课课程id过滤" type="number" v-model.number="listQuery.openCourseId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="中文名称过滤" v-model="listQuery.name" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+<!--                    <el-input placeholder="课程类别过滤" v-model="listQuery.type" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>-->
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -29,21 +29,31 @@
                         :height="tableHeight"
                         style="width: 100%;"
                         highlight-current-row>
-                    <el-table-column align="center" label="序号" width="80">
+                    <el-table-column label="开课学院" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.$index }}
+                            {{ scope.row.college }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="学生id" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="课程编码" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.studentId }}
+                            {{ scope.row.code }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="开课课程id" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="中文名称" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.openCourseId }}
+                            {{ scope.row.name }}
                         </template>
                     </el-table-column>
+                    <el-table-column label="英文名称" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.nameEng }}
+                        </template>
+                    </el-table-column>
+                   <!-- <el-table-column label="课程类别" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.type }}
+                        </template>
+                    </el-table-column>-->
                     <el-table-column
                             label="操作"
                             align="center"
@@ -69,7 +79,7 @@
 
 <script>
     import request from '@/utils/request'
-    import HandleDialog from './EduStudentCourseDialog'
+    import HandleDialog from './CourseDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -111,14 +121,17 @@
                     current: 1,
                     size: 10,
                     query: '',
-                    studentId: null,
-                    openCourseId: null,
+                    college: null,
+                    code: null,
+                    name: null,
+                    nameEng: null,
+                    type: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/studentCourse'
+                prefixUrl: this.GLOBAL.baseUrl + '/course'
             }
         },
         created() {
@@ -135,8 +148,8 @@
                     method: 'get',
                     params: this.listQuery
                 }).then(res => {
-                  this.list = res.data.records
-                  this.total = res.data.total
+                  this.list = res.records
+                  this.total = res.total
                   this.listLoading = false
                 }).catch(error => {
                   this.$message({

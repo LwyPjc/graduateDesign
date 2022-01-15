@@ -27,32 +27,90 @@
                 <el-row>
                     <el-col :span="24" class="filter-container">
                         <el-input
-                                placeholder="学院过滤"
+                                placeholder="学期过滤"
+                                v-model="listQuery.term"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="开课学院过滤"
                                 v-model="listQuery.college"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
-                                placeholder="年级过滤"
-                                v-model="listQuery.grade"
+                                placeholder="班级id过滤"
+                                type="number"
+                                v-model.number="listQuery.classId "
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
-                                placeholder="专业过滤"
-                                v-model="listQuery.subject"
+                                placeholder="课程id过滤"
+                                type="number"
+                                v-model.number="listQuery.courseId "
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
-                                placeholder="班级过滤"
-                                v-model="listQuery.classNo"
+                                placeholder="学分过滤"
+                                v-model="listQuery.score"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
-                                placeholder="专业方向过滤"
-                                v-model="listQuery.subjectDir"
+                                placeholder="学时过滤"
+                                type="number"
+                                v-model.number="listQuery.hour "
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="人数过滤"
+                                type="number"
+                                v-model.number="listQuery.number "
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="开始周过滤"
+                                type="number"
+                                v-model.number="listQuery.weekStart "
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="结束周过滤"
+                                type="number"
+                                v-model.number="listQuery.weekEnd "
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="开始节过滤"
+                                type="number"
+                                v-model.number="listQuery.nodeStart "
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="结束节过滤"
+                                type="number"
+                                v-model.number="listQuery.nodeEnd "
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="教师id过滤"
+                                type="number"
+                                v-model.number="listQuery.teacherId "
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="教室id过滤"
+                                type="number"
+                                v-model.number="listQuery.classroomId "
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -88,7 +146,16 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="学院"
+                                    label="学期"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.term }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="开课学院"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
@@ -97,39 +164,102 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="年级"
+                                    label="班级id"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.grade }}
+                                    {{ scope.row.classId }}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="专业"
+                                    label="课程id"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.subject }}
+                                    {{ scope.row.courseId }}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="班级"
+                                    label="学分"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.classNo }}
+                                    {{ scope.row.score }}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="专业方向"
+                                    label="学时"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.subjectDir }}
+                                    {{ scope.row.hour }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="人数"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.number }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="开始周"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.weekStart }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="结束周"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.weekEnd }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="开始节"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.nodeStart }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="结束节"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.nodeEnd }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="教师id"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.teacherId }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="教室id"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.classroomId }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -162,7 +292,7 @@
 
 <script>
     import request from '@/utils/request';
-    import HandleDialog from './EduClassDialog'
+    import HandleDialog from './OpenCourseDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -211,17 +341,25 @@
                     current: 1,
                     size: 10,
                     query: '',
+                    term: null,
                     college: null,
-                    grade: null,
-                    subject: null,
-                    classNo: null,
-                    subjectDir: null,
+                    classId: null,
+                    courseId: null,
+                    score: null,
+                    hour: null,
+                    number: null,
+                    weekStart: null,
+                    weekEnd: null,
+                    nodeStart: null,
+                    nodeEnd: null,
+                    teacherId: null,
+                    classroomId: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/aClass'
+                prefixUrl: this.GLOBAL.baseUrl + '/openCourse'
             }
         },
         watch: {
