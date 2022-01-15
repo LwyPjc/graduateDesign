@@ -6,7 +6,7 @@
         update edu_open_course set choose_num = choose_num + 1 where ID = #{id}
     </update>
 
-    <select id="findStudentCourse" resultType="com.graduation.warning.entity.dto.EduOpenCourseDto">
+    <select id="findStudentCourse" resultType="com.graduation.warning.entity.dto.OpenCourseDto">
         SELECT
             eoc.*,
             et.name as teacherName,

@@ -156,7 +156,7 @@
                     {value: 1, label: "是"}
                 ],
                 statusSelect: ["在学", "毕业"],
-                prefixUrl: this.GLOBAL.baseUrl + '/eduStudent'
+                prefixUrl: this.GLOBAL.baseUrl + '/student'
             }
         },
         created() {
@@ -189,7 +189,7 @@
              */
             getClasses() {
                 request({
-                    url: `${this.GLOBAL.baseUrl}eduClass/findList`,
+                    url: `${this.GLOBAL.baseUrl}aClass/findList`,
                     method: 'get'
                 }).then(res => {
                     for (var i = 0; i < res.length; i++) {

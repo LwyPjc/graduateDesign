@@ -139,7 +139,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: '/eduClass'
+                prefixUrl: '/aClass'
             }
         },
         created() {

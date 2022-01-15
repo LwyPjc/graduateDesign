@@ -69,14 +69,14 @@
                         name: "课程管理",
                         id: 2,
                         icon: "el-icon-collection-tag",
-                        url: "/eduCourse",
+                        url: "/course",
                         children: []
                     },
                     {
                         name: "开课管理",
                         id: 3,
                         icon: "el-icon-collection-tag",
-                        url: "/eduOpenCourse",
+                        url: "/openCourse",
                         children: []
                     },
                     {
@@ -119,21 +119,21 @@
                         name: "学生信息管理",
                         id: 1,
                         icon: "el-icon-user-solid",
-                        url: "/eduStudent",
+                        url: "/student",
                         children: []
                     },
                     {
                         name: "教师信息管理",
                         id: 8,
                         icon: "el-icon-s-custom",
-                        url: "/eduTeacher",
+                        url: "/teacher",
                         children: []
                     },
                     {
                         name: "班级信息管理",
                         id: 9,
                         icon: "el-icon-s-custom",
-                        url: "/eduClass",
+                        url: "/aClass",
                         children: []
                     }
                 ]
@@ -143,14 +143,14 @@
                         name: "课程管理",
                         id: 2,
                         icon: "el-icon-collection-tag",
-                        url: "/eduCourse",
+                        url: "/course",
                         children: []
                     },
                     {
                         name: "开课管理",
                         id: 3,
                         icon: "el-icon-collection-tag",
-                        url: "/eduOpenCourse",
+                        url: "/openCourse",
                         children: []
                     },
                     {

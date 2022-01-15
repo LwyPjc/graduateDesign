@@ -11,7 +11,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author auth
- * @since 2021-03-29
+ * @since 2022-02-19
  */
 public class SysUser extends Model<SysUser> {
 

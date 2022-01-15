@@ -173,7 +173,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/eduOpenCourse'
+                prefixUrl: this.GLOBAL.baseUrl + '/openCourse'
             }
         },
         created() {
@@ -210,7 +210,7 @@
             getInitData() {
                 //请求所有课程
                 request({
-                    url: `${this.GLOBAL.baseUrl}eduCourse/findList`,
+                    url: `${this.GLOBAL.baseUrl}course/findList`,
                     method: 'get'
                 }).then(res => {
                     this.courses.push({value:"",label:"全部"});
@@ -253,7 +253,7 @@
                     type: 'warning'
                 }).then(() => {
                     request({
-                        url: `${this.GLOBAL.baseUrl}eduStudentCourse/save`,
+                        url: `${this.GLOBAL.baseUrl}studentCourse/save`,
                         method: 'post',
                         params: {userName:window.sessionStorage.username,openCourseId:id}
                     }).then(res => {

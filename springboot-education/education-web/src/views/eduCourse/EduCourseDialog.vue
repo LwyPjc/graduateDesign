@@ -51,7 +51,7 @@
         data () {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/eduCourse',
+                prefixUrl: this.GLOBAL.baseUrl + '/course',
                 dialogFormData: {
                     id: '',
                     college: '',

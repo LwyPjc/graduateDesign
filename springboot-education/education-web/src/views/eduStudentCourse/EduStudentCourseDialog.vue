@@ -42,7 +42,7 @@
         data () {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/eduStudentCourse',
+                prefixUrl: this.GLOBAL.baseUrl + '/studentCourse',
                 dialogFormData: {
                     id: '',
                     studentId: '',

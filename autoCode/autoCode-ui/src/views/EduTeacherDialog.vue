@@ -39,7 +39,7 @@
         data () {
             return {
                 visible: false,
-                prefixUrl: '/eduTeacher',
+                prefixUrl: '/teacher',
                 dialogFormData: {
                     id: '',
                     name: '',

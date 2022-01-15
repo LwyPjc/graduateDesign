@@ -359,7 +359,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/eduOpenCourse'
+                prefixUrl: this.GLOBAL.baseUrl + '/openCourse'
             }
         },
         watch: {

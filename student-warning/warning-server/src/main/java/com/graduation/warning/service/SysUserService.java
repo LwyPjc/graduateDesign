@@ -8,7 +8,7 @@ import com.graduation.warning.entity.SysUser;
  * </p>
  *
  * @author auth
- * @since 2021-03-29
+ * @since 2022-02-19
  */
 public interface SysUserService extends BaseService<SysUser> {
 

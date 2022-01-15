@@ -64,11 +64,11 @@
                             sessionStorage.setItem('role', res.msg.role);
                             // sessionStorage.setItem('name', res.msg.name);
                             // 管理员
-                            if (res.msg.role === "1") {
-                                this.$router.push({path: '/eduStudent'});
+                            if (res.msg.role === "2") {
+                                this.$router.push({path: '/student'});
                             } else {
                               // 教师
-                                this.$router.push({path: '/data'});
+                              this.$router.push({path: '/data'});
                             }
                         } else {
                             this.$message({message: res.msg, type: 'error', duration: 1500});

@@ -51,7 +51,7 @@
         data () {
             return {
                 visible: false,
-                prefixUrl: '/eduClass',
+                prefixUrl: '/aClass',
                 dialogFormData: {
                     id: '',
                     college: '',

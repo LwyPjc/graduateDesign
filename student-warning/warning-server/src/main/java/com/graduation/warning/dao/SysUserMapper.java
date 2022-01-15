@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author auth
- * @since 2021-03-29
+ * @since 2022-02-19
  */
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {

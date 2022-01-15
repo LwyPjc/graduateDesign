@@ -127,7 +127,7 @@
         data() {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/eduOpenCourse',
+                prefixUrl: this.GLOBAL.baseUrl + '/openCourse',
                 dialogFormData: {
                     id: '',
                     term: '',

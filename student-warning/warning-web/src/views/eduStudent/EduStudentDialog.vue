@@ -172,7 +172,7 @@
         data() {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/eduStudent',
+                prefixUrl: this.GLOBAL.baseUrl + '/student',
                 dialogFormData: {
                     id: '',
                     stuCode: '',

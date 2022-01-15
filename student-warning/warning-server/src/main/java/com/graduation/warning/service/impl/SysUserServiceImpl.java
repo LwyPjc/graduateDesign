@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author auth
- * @since 2021-03-29
+ * @since 2022-02-19
  */
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {

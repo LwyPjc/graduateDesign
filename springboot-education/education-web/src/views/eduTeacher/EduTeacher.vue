@@ -123,7 +123,7 @@
                     '0': '无效'
                 },
                 classInfo:[],
-                prefixUrl: this.GLOBAL.baseUrl + '/eduTeacher'
+                prefixUrl: this.GLOBAL.baseUrl + '/teacher'
             }
         },
         created() {
@@ -159,7 +159,7 @@
              */
             queryClassInfo() {
                 request({
-                    url: `${this.GLOBAL.baseUrl}/eduClass/findWithoutTeacherClass`,
+                    url: `${this.GLOBAL.baseUrl}/aClass/findWithoutTeacherClass`,
                     method: 'get'
                 }).then(res => {
                     for (var i = 0; i < res.length; i++) {

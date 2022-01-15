@@ -75,7 +75,7 @@
         data () {
             return {
                 visible: false,
-                prefixUrl: '/eduOpenCourse',
+                prefixUrl: '/openCourse',
                 dialogFormData: {
                     id: '',
                     term: '',

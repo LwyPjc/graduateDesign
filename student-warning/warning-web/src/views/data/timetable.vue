@@ -35,7 +35,7 @@
                     palette: ['#ff6633', '#eeeeee']
                 },
                 timetable: null,
-                prefixUrl: this.GLOBAL.baseUrl + '/eduStudentCourse'
+                prefixUrl: this.GLOBAL.baseUrl + '/studentCourse'
             }
         },
         created() {

@@ -53,7 +53,7 @@
         data() {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/eduTeacher',
+                prefixUrl: this.GLOBAL.baseUrl + '/teacher',
                 dialogFormData: {
                     id: '',
                     name: '',

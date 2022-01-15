@@ -113,7 +113,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: '/eduClassroom'
+                prefixUrl: '/classroom'
             }
         },
         created() {

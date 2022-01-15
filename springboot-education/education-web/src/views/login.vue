@@ -65,9 +65,9 @@
                             sessionStorage.setItem('role', res.msg.role);
                             // sessionStorage.setItem('name', res.msg.name);
                             if (res.msg.role === "3") {
-                                this.$router.push({path: '/eduStudent'});
+                                this.$router.push({path: '/student'});
                             } else if (res.msg.role === "2") {
-                                this.$router.push({path: '/eduCourse'});
+                                this.$router.push({path: '/course'});
                             } else {
                                 this.$router.push({path: '/data'});
                             }

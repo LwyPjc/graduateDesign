@@ -174,7 +174,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/eduStudent',
+                prefixUrl: this.GLOBAL.baseUrl + '/student',
                 classes:[]
             }
         },
@@ -211,7 +211,7 @@
              */
             getClasses(){
                 request({
-                    url: `${this.GLOBAL.baseUrl}eduClass/findList`,
+                    url: `${this.GLOBAL.baseUrl}aClass/findList`,
                     method: 'get'
                 }).then(res => {
                     for(var i = 0;i<res.length;i++){

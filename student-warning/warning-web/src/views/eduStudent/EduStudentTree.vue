@@ -660,7 +660,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl:this.GLOBAL.baseUrl +  '/eduStudent'
+                prefixUrl:this.GLOBAL.baseUrl +  '/student'
             }
         },
         watch: {

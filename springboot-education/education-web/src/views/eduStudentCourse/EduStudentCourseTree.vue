@@ -175,7 +175,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/eduStudentCourse'
+                prefixUrl: this.GLOBAL.baseUrl + '/studentCourse'
             }
         },
         watch: {

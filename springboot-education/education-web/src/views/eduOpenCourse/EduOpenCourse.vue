@@ -194,7 +194,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/eduOpenCourse'
+                prefixUrl: this.GLOBAL.baseUrl + '/openCourse'
             }
         },
         created() {
@@ -244,7 +244,7 @@
             getInitData() {
                 //请求所有班级
                 request({
-                    url: `${this.GLOBAL.baseUrl}eduClass/findList`,
+                    url: `${this.GLOBAL.baseUrl}aClass/findList`,
                     method: 'get'
                 }).then(res => {
                     for (var i = 0; i < res.length; i++) {
@@ -265,7 +265,7 @@
                 });
                 //请求所有课程
                 request({
-                    url: `${this.GLOBAL.baseUrl}eduCourse/findList`,
+                    url: `${this.GLOBAL.baseUrl}course/findList`,
                     method: 'get'
                 }).then(res => {
                     for (var i = 0; i < res.length; i++) {
@@ -285,7 +285,7 @@
                 })
                 //请求所有老师
                 request({
-                    url: `${this.GLOBAL.baseUrl}eduTeacher/findList`,
+                    url: `${this.GLOBAL.baseUrl}teacher/findList`,
                     method: 'get'
                 }).then(res => {
                     for (var i = 0; i < res.length; i++) {

@@ -140,7 +140,7 @@
         data () {
             return {
                 visible: false,
-                prefixUrl: '/eduStudent',
+                prefixUrl: '/student',
                 dialogFormData: {
                     id: '',
                     stuCode: '',
