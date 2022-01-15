@@ -47,10 +47,10 @@
 	<entry key="java_typemapping.java.lang.String">String</entry>
 	<entry key="java_typemapping.java.math.BigDecimal">java.math.BigDecimal</entry>
 	<!-- Mysql连接,useInformationSchema 取出表名注释 -->
-	<entry key="jdbc.url">jdbc:mysql://127.0.0.1:3307/graduate?useUnicode=true&amp;characterEncoding=utf-8</entry>
+	<entry key="jdbc.url">jdbc:mysql://120.25.175.68:3306/warning_system?useUnicode=true&amp;characterEncoding=utf-8</entry>
 	<entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
 	<entry key="jdbc.username">root</entry>
-	<entry key="jdbc.password">root</entry>
+	<entry key="jdbc.password">313540638a.</entry>
 
 	<!-- Oracle 	jdbc:oracle:oci:@tnsname_devdb-->
 	<!-- oracle需要指定jdbc.schema,并且可能要大写，其它数据库忽略此项配置  -->

@@ -69,7 +69,12 @@ export default new Router({
           path: '/teacher',
           name: 'Teacher',
           component: () => import('@/views/teacher/Teacher')
-        }
+        },
+        {
+          path: '/warningRule',
+          name: 'WarningRule',
+          component: () => import('@/views/warningRule/WarningRule')
+        },
       ]
     }
   ]

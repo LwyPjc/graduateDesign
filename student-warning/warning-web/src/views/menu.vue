@@ -149,6 +149,13 @@
                       url: "/openCourse",
                       children: []
                     },
+                  {
+                    name: "预警规则管理",
+                    id: 10,
+                    icon: "el-icon-collection-tag",
+                    url: "/warningRule",
+                    children: []
+                  },
                     {
                       name: "修改密码",
                       id: 5,
