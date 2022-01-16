@@ -207,6 +207,45 @@ insert  into `sys_user`(`ID`,`username`,`password`,`role`) values
 (2,'t01','123','1'),
 (3,'t02','123','1');
 
+CREATE TABLE `student_evaluate` (
+  `ID` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `student_id` INT(11)  DEFAULT NULL COMMENT '学生ID',
+  `teacher_id` INT(11)  DEFAULT NULL COMMENT '教师ID',
+  `open_course_id` INT(11)  DEFAULT NULL COMMENT '课程ID',
+  `evalution` VARCHAR(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '评价信息',
+  PRIMARY KEY (`ID`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4  COMMENT='学生评价表';
+
+CREATE TABLE `score_evaluate` (
+  `ID` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `student_id` INT(11)  DEFAULT NULL COMMENT '学生ID',
+  `teacher_id` INT(11)  DEFAULT NULL COMMENT '教师ID',
+  `open_course_id` INT(11)  DEFAULT NULL COMMENT '课程ID',
+  `score` DECIMAL(5,2) DEFAULT NULL COMMENT '分数',
+  PRIMARY KEY (`ID`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4  COMMENT='学生成绩表';
+
+
+
+CREATE TABLE `task_evaluate` (
+  `ID` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `student_id` INT(11)  DEFAULT NULL COMMENT '学生ID',
+  `teacher_id` INT(11)  DEFAULT NULL COMMENT '教师ID',
+  `count` INT  DEFAULT NULL COMMENT '缺少作业次数',
+  PRIMARY KEY (`ID`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4  COMMENT='学生作业表';
+
+
+CREATE TABLE `participation_evaluate` (
+  `ID` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `student_id` INT(11)  DEFAULT NULL COMMENT '学生ID',
+  `teacher_id` INT(11)  DEFAULT NULL COMMENT '教师ID',
+  `open_course_id` INT(11)  DEFAULT NULL COMMENT '课程ID',
+  `count` INT  DEFAULT NULL COMMENT '缺勤次数',
+  PRIMARY KEY (`ID`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4  COMMENT='学生缺勤次数表';
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
