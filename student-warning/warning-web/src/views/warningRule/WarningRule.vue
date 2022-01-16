@@ -5,6 +5,7 @@
             <el-col :span="24" class="filter-container">
                     <el-input placeholder="类型:1:缺几节课程 2:缺几次作业 3:成绩不合格过滤" v-model="listQuery.type" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="预警等级过滤" v-model="listQuery.warningLevel" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="预警值过滤" v-model="listQuery.value" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -34,7 +35,7 @@
                             {{ scope.$index }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="类型:1:缺几节课程 2:缺几次作业 3:成绩不合格" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="类型" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.type }}
                         </template>
@@ -44,17 +45,26 @@
                             {{ scope.row.warningLevel }}
                         </template>
                     </el-table-column>
+                    <el-table-column label="预警值" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.valueNew }}
+                        </template>
+                    </el-table-column>
                     <el-table-column
                             label="操作"
                             align="center"
                             width="180"
                             class-name="small-padding fixed-width">
-                        <div slot-scope="scope" class="table-operate-box">
-                            <i class="zoeIconfont z_modifyEI_normal"
-                               @click="showDialog(scope.row)"></i>
-                            <i class="zoeIconfont z_delete_normal danger"
-                               @click="handleDelete(scope.row)"></i>
-                        </div>
+                        <!--<div slot-scope="scope" class="table-operate-box">-->
+                            <!--<i class="zoeIconfont z_modifyEI_normal"-->
+                               <!--@click="showDialog(scope.row)"></i>-->
+                            <!--<i class="zoeIconfont z_delete_normal danger"-->
+                               <!--@click="handleDelete(scope.row)"></i>-->
+                        <!--</div>-->
+                      <template slot-scope="scope">
+                        <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
+                        <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                      </template>
                     </el-table-column>
                 </el-table>
 
@@ -115,6 +125,7 @@
                     query: '',
                     type: null,
                     warningLevel: null,
+                    value: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
@@ -137,8 +148,22 @@
                     method: 'get',
                     params: this.listQuery
                 }).then(res => {
-                  this.list = res.records
-                  this.total = res.total
+                  this.list = res.records;
+                  // 类型:1:缺几节课程 2:缺几次作业 3:成绩不合格过滤
+                  this.list.forEach(l=>{
+                    console.log('内容',l);
+                    if(l.type ==='1'){
+                        l.type = '缺课程(节)';
+                        l.valueNew = '缺少'+l.value +'节课程';
+                    }else if(l.type === '2'){
+                      l.type = '缺作业(次)';
+                      l.valueNew = '缺少'+l.value +'次作业';
+                    }else {
+                      l.type = '成绩不合格';
+                      l.valueNew = '成绩不合格(<'+l.value +')分';
+                    }
+                  });
+                  this.total = res.total;
                   this.listLoading = false
                 }).catch(error => {
                   this.$message({

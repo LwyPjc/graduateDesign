@@ -14,11 +14,28 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-        <el-form-item label="类型:1:缺几节课程 2:缺几次作业 3:成绩不合格" label-width="105px" prop="type">
-            <el-input placeholder="请输入类型:1:缺几节课程 2:缺几次作业 3:成绩不合格" v-model="dialogFormData.type"/>
+        <el-form-item label="类型" style="width: 100%" prop="type">
+          <el-select v-model="dialogFormData.type"  placeholder="请选择预警类型" style="width: 100%">
+            <el-option
+              v-for="item in warningLevelTypes"
+              :key="item.value"
+              :label="item.type"
+              :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="预警等级" label-width="105px" prop="warningLevel">
-            <el-input placeholder="请输入预警等级" v-model="dialogFormData.warningLevel"/>
+      <el-form-item label="请选择预警等级" label-width="125px" style="width: 100%" prop="warningLevel">
+        <el-select v-model="dialogFormData.warningLevel"  placeholder="请选择预警等级" style="width: 90%">
+          <el-option
+            v-for="item in warningLevels"
+            :key="item"
+            :label="item"
+            :value="item">
+          </el-option>
+        </el-select>
+      </el-form-item>
+        <el-form-item label="预警值" style="width: 100%" prop="value">
+            <el-input placeholder="请输入预警值" v-model="dialogFormData.value"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -42,11 +59,12 @@
         data () {
             return {
                 visible: false,
-                prefixUrl: '/warningRule',
+                prefixUrl: this.GLOBAL.baseUrl + '/warningRule',
                 dialogFormData: {
                     id: '',
                     type: '',
                     warningLevel: '',
+                    value: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -57,7 +75,25 @@
                     warningLevel: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                }
+                    value: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                },
+                warningLevels: ['黄色','绿色','红色','黑色','蓝色'],
+                warningLevelTypes: [
+                    {
+                        type: '缺课(节)',
+                        value: 1
+                    },
+                    {
+                        type: '缺作业(次)',
+                        value: 2
+                    },
+                    {
+                        type: '成绩不合格(分)',
+                        value: 3
+                    },
+                ]
             }
         },
         computed: {
@@ -89,6 +125,7 @@
                     id: '',
                     type: '',
                     warningLevel: '',
+                    value: '',
                 }
 
             },
