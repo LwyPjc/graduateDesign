@@ -3,9 +3,6 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="学生ID过滤" type="number" v-model.number="listQuery.studentId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="教师ID过滤" type="number" v-model.number="listQuery.teacherId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="课程ID过滤" type="number" v-model.number="listQuery.openCourseId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="分数过滤" v-model="listQuery.score" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="学生姓名过滤" v-model="listQuery.studentName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="教师姓名过滤" v-model="listQuery.teacherName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
@@ -79,12 +76,10 @@
                             align="center"
                             width="180"
                             class-name="small-padding fixed-width">
-                        <div slot-scope="scope" class="table-operate-box">
-                            <i class="zoeIconfont z_modifyEI_normal"
-                               @click="showDialog(scope.row)"></i>
-                            <i class="zoeIconfont z_delete_normal danger"
-                               @click="handleDelete(scope.row)"></i>
-                        </div>
+                      <template slot-scope="scope">
+                        <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
+                        <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                      </template>
                     </el-table-column>
                 </el-table>
 
