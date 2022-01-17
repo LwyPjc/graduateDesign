@@ -134,6 +134,8 @@
                 listLoading: true, //表格加载框
                 total: 0, //分页总数
                 tableHeight: window.innerHeight - 240, //表格高度
+                students: [],
+                courses: [],
                 listQuery: { //表格查询对象
                     current: 1,
                     size: 10,
@@ -184,8 +186,50 @@
              * 显示修改编辑框
              */
             showDialog(data) {
+              if(data === undefined){
+                data = {};
+              }
+              data["classes"] = this.classes;
+              data["courses"] = this.courses;
+              data["teacheres"] = this.teacheres;
+              data["classrooms"] = this.classrooms;
                 this.$refs.dlg.init(data)
             },
+          /**
+           * 请求所有初始化数据
+           */
+          getInitData() {
+            //请求所有学生
+            request({
+              url: `${this.GLOBAL.baseUrl}student/findList`,
+              method: 'get'
+            }).then(res=>{
+              this.students = res;
+            }).catch(error => {
+              this.$message({
+                message: error,
+                type: 'error',
+                duration: 1500,
+                onClose: () => {
+                }
+              })
+            });
+            //请求所有课程
+            request({
+              url: `${this.GLOBAL.baseUrl}openCourse/findList`,
+              method: 'get'
+            }).then(res=>{
+              this.courses = res;
+            }).catch(error => {
+              this.$message({
+                message: error,
+                type: 'error',
+                duration: 1500,
+                onClose: () => {
+                }
+              })
+            });
+          },
             /**
              * 搜索过滤
              */

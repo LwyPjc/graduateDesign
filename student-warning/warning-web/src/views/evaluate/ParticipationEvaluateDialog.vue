@@ -15,7 +15,15 @@
              ref="dialogForm"
              label-position="right">
         <el-form-item label="学生ID" label-width="105px" prop="studentId">
-            <el-input type="number" placeholder="请输入学生ID" v-model.number="dialogFormData.studentId"/>
+            <!--<el-input type="number" placeholder="请输入学生ID" v-model.number="dialogFormData.studentId"/>-->
+          <el-select v-model="dialogFormData.stuName" placeholder="请选择学生" style="width: 220%">
+            <el-option
+              v-for="item in dialogFormData.students"
+              :key="item.id"
+              :label="item.stuName"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="教师ID" label-width="105px" prop="teacherId">
             <el-input type="number" placeholder="请输入教师ID" v-model.number="dialogFormData.teacherId"/>
@@ -25,15 +33,6 @@
         </el-form-item>
         <el-form-item label="缺勤次数" label-width="105px" prop="count">
             <el-input type="number" placeholder="请输入缺勤次数" v-model.number="dialogFormData.count"/>
-        </el-form-item>
-        <el-form-item label="学生姓名" label-width="105px" prop="studentName">
-            <el-input placeholder="请输入学生姓名" v-model="dialogFormData.studentName"/>
-        </el-form-item>
-        <el-form-item label="教师姓名" label-width="105px" prop="teacherName">
-            <el-input placeholder="请输入教师姓名" v-model="dialogFormData.teacherName"/>
-        </el-form-item>
-        <el-form-item label="课程名称" label-width="105px" prop="courseName">
-            <el-input placeholder="请输入课程名称" v-model="dialogFormData.courseName"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
