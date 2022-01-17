@@ -74,7 +74,7 @@
         data () {
             return {
                 visible: false,
-                prefixUrl: '<#if subpackage != "">/${subpackage}</#if>/${classNameLower}',
+                prefixUrl: this.GLOBAL.baseUrl + '<#if subpackage != "">/${subpackage}</#if>/${classNameLower}',
                 dialogFormData: {
                     <#list table.columns as column>
                     ${column.columnNameLower}: '',

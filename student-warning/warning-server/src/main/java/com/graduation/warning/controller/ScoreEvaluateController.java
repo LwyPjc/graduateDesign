@@ -23,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/scoreEvaluate")
+@CrossOrigin
 public class ScoreEvaluateController {
 
     @Autowired

@@ -165,7 +165,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: '<#if subpackage != "">/${subpackage}</#if>/${classNameLower}'
+                prefixUrl: this.GLOBAL.baseUrl + '<#if subpackage != "">/${subpackage}</#if>/${classNameLower}'
             }
         },
         created() {

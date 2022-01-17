@@ -7,6 +7,9 @@
                     <el-input placeholder="教师ID过滤" type="number" v-model.number="listQuery.teacherId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="课程ID过滤" type="number" v-model.number="listQuery.openCourseId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="缺勤次数过滤" type="number" v-model.number="listQuery.count" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="学生姓名过滤" v-model="listQuery.studentName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="教师姓名过滤" v-model="listQuery.teacherName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="课程名称过滤" v-model="listQuery.courseName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -54,6 +57,21 @@
                     <el-table-column label="缺勤次数" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.count }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="学生姓名" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.studentName }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="教师姓名" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.teacherName }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="课程名称" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.courseName }}
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -129,6 +147,9 @@
                     teacherId: null,
                     openCourseId: null,
                     count: null,
+                    studentName: null,
+                    teacherName: null,
+                    courseName: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',

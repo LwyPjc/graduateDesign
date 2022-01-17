@@ -23,6 +23,15 @@
         <el-form-item label="缺少作业次数" label-width="105px" prop="count">
             <el-input type="number" placeholder="请输入缺少作业次数" v-model.number="dialogFormData.count"/>
         </el-form-item>
+        <el-form-item label="学生姓名" label-width="105px" prop="studentName">
+            <el-input placeholder="请输入学生姓名" v-model="dialogFormData.studentName"/>
+        </el-form-item>
+        <el-form-item label="教师姓名" label-width="105px" prop="teacherName">
+            <el-input placeholder="请输入教师姓名" v-model="dialogFormData.teacherName"/>
+        </el-form-item>
+        <el-form-item label="课程名称" label-width="105px" prop="courseName">
+            <el-input placeholder="请输入课程名称" v-model="dialogFormData.courseName"/>
+        </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
         <el-button size="small" @click.native="dialogVisible = false">取消</el-button>
@@ -51,6 +60,9 @@
                     studentId: '',
                     teacherId: '',
                     count: '',
+                    studentName: '',
+                    teacherName: '',
+                    courseName: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -62,6 +74,15 @@
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     count: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    studentName: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    teacherName: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    courseName: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -97,6 +118,9 @@
                     studentId: '',
                     teacherId: '',
                     count: '',
+                    studentName: '',
+                    teacherName: '',
+                    courseName: '',
                 }
 
             },

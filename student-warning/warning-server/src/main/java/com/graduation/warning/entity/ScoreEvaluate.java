@@ -29,6 +29,36 @@ public class ScoreEvaluate extends Model<ScoreEvaluate> {
 
     private java.math.BigDecimal score;
 
+    private String studentName;
+
+    private String teacherName;
+
+    private String courseName;
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
     public Integer getID() {
         return ID;
     }

@@ -213,6 +213,9 @@ CREATE TABLE `student_evaluate` (
   `teacher_id` INT(11)  DEFAULT NULL COMMENT '教师ID',
   `open_course_id` INT(11)  DEFAULT NULL COMMENT '课程ID',
   `evalution` VARCHAR(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '评价信息',
+  `student_name` varchar(52) DEFAULT NULL COMMENT '学生姓名',
+  `teacher_name` varchar(52) DEFAULT NULL COMMENT '教师姓名',
+  `course_name` varchar(52) DEFAULT NULL COMMENT '课程名称',
   PRIMARY KEY (`ID`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4  COMMENT='学生评价表';
 
@@ -222,6 +225,9 @@ CREATE TABLE `score_evaluate` (
   `teacher_id` INT(11)  DEFAULT NULL COMMENT '教师ID',
   `open_course_id` INT(11)  DEFAULT NULL COMMENT '课程ID',
   `score` DECIMAL(5,2) DEFAULT NULL COMMENT '分数',
+  `student_name` varchar(52) DEFAULT NULL COMMENT '学生姓名',
+  `teacher_name` varchar(52) DEFAULT NULL COMMENT '教师姓名',
+  `course_name` varchar(52) DEFAULT NULL COMMENT '课程名称',
   PRIMARY KEY (`ID`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4  COMMENT='学生成绩表';
 
@@ -232,6 +238,9 @@ CREATE TABLE `task_evaluate` (
   `student_id` INT(11)  DEFAULT NULL COMMENT '学生ID',
   `teacher_id` INT(11)  DEFAULT NULL COMMENT '教师ID',
   `count` INT  DEFAULT NULL COMMENT '缺少作业次数',
+  `student_name` varchar(52) DEFAULT NULL COMMENT '学生姓名',
+  `teacher_name` varchar(52) DEFAULT NULL COMMENT '教师姓名',
+  `course_name` varchar(52) DEFAULT NULL COMMENT '课程名称',
   PRIMARY KEY (`ID`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4  COMMENT='学生作业表';
 
@@ -242,6 +251,9 @@ CREATE TABLE `participation_evaluate` (
   `teacher_id` INT(11)  DEFAULT NULL COMMENT '教师ID',
   `open_course_id` INT(11)  DEFAULT NULL COMMENT '课程ID',
   `count` INT  DEFAULT NULL COMMENT '缺勤次数',
+  `student_name` varchar(52) DEFAULT NULL COMMENT '学生姓名',
+  `teacher_name` varchar(52) DEFAULT NULL COMMENT '教师姓名',
+  `course_name` varchar(52) DEFAULT NULL COMMENT '课程名称',
   PRIMARY KEY (`ID`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4  COMMENT='学生缺勤次数表';
 
