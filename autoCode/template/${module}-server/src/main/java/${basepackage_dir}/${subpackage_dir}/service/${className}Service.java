@@ -1,7 +1,6 @@
 package ${basepackage}<#if subpackage!="">.${subpackage}</#if>.service;
         <#assign className=table.className>
         <#assign classNameLower=className?uncap_first>
-import com.zoe.optimus.core.base.service.BaseService;
 import ${basepackage}<#if subpackage!="">.${subpackage}</#if>.entity.${className};
 
 /**

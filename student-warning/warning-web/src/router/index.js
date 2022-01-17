@@ -75,6 +75,26 @@ export default new Router({
           name: 'WarningRule',
           component: () => import('@/views/warningRule/WarningRule')
         },
+        {
+          path: '/participationEvaluate',
+          name: 'ParticipationEvaluate',
+          component: () => import('@/views/evaluate/ParticipationEvaluate')
+        },
+        {
+          path: '/scoreEvaluate',
+          name: 'ScoreEvaluate',
+          component: () => import('@/views/evaluate/ScoreEvaluate')
+        },
+        {
+          path: '/studentEvaluate',
+          name: 'StudentEvaluate',
+          component: () => import('@/views/evaluate/StudentEvaluate')
+        },
+        {
+          path: '/taskEvaluate',
+          name: 'TaskEvaluate',
+          component: () => import('@/views/evaluate/TaskEvaluate')
+        },
       ]
     }
   ]

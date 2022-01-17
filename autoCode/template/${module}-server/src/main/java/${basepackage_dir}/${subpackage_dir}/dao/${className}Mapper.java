@@ -2,7 +2,7 @@ package ${basepackage}<#if subpackage!="">.${subpackage}</#if>.dao;
 
 <#assign className=table.className>
         <#assign classNameLower=className?uncap_first>
-import com.zoe.optimus.core.base.dao.BaseDao;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import ${basepackage}<#if subpackage!="">.${subpackage}</#if>.entity.${className};
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,6 +17,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @date ${now?date}
  */
 @Mapper
-public interface ${className}Dao extends BaseDao<${className}> {
+public interface ${className}Mapper extends BaseMapper<${className}> {
 
 }

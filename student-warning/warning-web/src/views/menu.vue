@@ -167,19 +167,33 @@
             } else {
                 this.list = [
                     {
-                        name: "课程选课",
+                        name: "评价管理",
                         id: 6,
                         icon: "el-icon-collection-tag",
-                        url: "/chooseCourse",
+                        url: "/studentEvaluate",
                         children: []
                     },
                     {
-                        name: "课程表",
+                        name: "成绩管理",
                         id: 7,
                         icon: "el-icon-collection-tag",
-                        url: "/timetable",
+                        url: "/scoreEvaluate",
                         children: []
                     },
+                  {
+                    name: "作业管理",
+                    id: 14,
+                    icon: "el-icon-collection-tag",
+                    url: "/taskEvaluate",
+                    children: []
+                  },
+                  {
+                    name: "出勤管理",
+                    id: 15,
+                    icon: "el-icon-collection-tag",
+                    url: "/participationEvaluate",
+                    children: []
+                  },
                     {
                         name: "个人信息",
                         id: 4,

@@ -1,15 +1,9 @@
 package ${basepackage}<#if subpackage!="">.${subpackage}</#if>.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.zoe.optimus.core.base.entity.BaseEntity;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Builder;
-import org.apache.ibatis.type.Alias;
+
 
 import java.util.Date;
 <#assign className=table.className>
@@ -25,25 +19,15 @@ import java.util.Date;
  * @author: ${author}
  * @date ${now?date}
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Alias("${className}")
-@ApiModel(description = "${table.remarks!}实体")
-@TableName("${table.sqlName}")
-public class ${className} extends BaseEntity{
+public class ${className} extends Model<${className}>{
 
     <#list table.columns as column>
     <#if column.pk>
-    @TableId
+    @TableId(value = "ID", type = IdType.AUTO)
     </#if>
-    @ApiModelProperty(value="${column.remarks!}")
     <#if column.javaType == "java.sql.Clob">
-    @TableField(jdbcType = JdbcType.CLOB)
     private String ${column.columnNameLower};
     <#elseif column.javaType == "java.sql.Blob">
-    @TableField(typeHandler = com.zoe.optimus.core.mybatis.typehandler.BlobToStringTypeHandler.class)
     private String ${column.columnNameLower};
     <#else>
     private ${column.javaType} ${column.columnNameLower};
