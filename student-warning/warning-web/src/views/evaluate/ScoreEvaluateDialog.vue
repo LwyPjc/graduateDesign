@@ -14,26 +14,30 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-        <el-form-item label="学生ID" label-width="105px" prop="studentId">
-            <el-input type="number" placeholder="请输入学生ID" v-model.number="dialogFormData.studentId"/>
+        <el-form-item label="学生" label-width="105px" prop="studentId">
+            <!--<el-input type="number" placeholder="请输入学生ID" v-model.number="dialogFormData.studentId"/>-->
+          <el-select v-model="dialogFormData.studentId" placeholder="请选择学生" style="width: 220%">
+            <el-option
+              v-for="item in dialogFormData.students"
+              :key="item.id"
+              :label="item.stuName"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="教师ID" label-width="105px" prop="teacherId">
-            <el-input type="number" placeholder="请输入教师ID" v-model.number="dialogFormData.teacherId"/>
-        </el-form-item>
-        <el-form-item label="课程ID" label-width="105px" prop="openCourseId">
-            <el-input type="number" placeholder="请输入课程ID" v-model.number="dialogFormData.openCourseId"/>
+        <el-form-item label="课程" label-width="105px" prop="openCourseId">
+            <!--<el-input type="number" placeholder="请输入课程ID" v-model.number="dialogFormData.openCourseId"/>-->
+          <el-select v-model="dialogFormData.openCourseId" placeholder="请选择课程" style="width: 220%">
+            <el-option
+              v-for="item in dialogFormData.courses"
+              :key="item.id"
+              :label="item.courseName"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="分数" label-width="105px" prop="score">
             <el-input placeholder="请输入分数" v-model="dialogFormData.score"/>
-        </el-form-item>
-        <el-form-item label="学生姓名" label-width="105px" prop="studentName">
-            <el-input placeholder="请输入学生姓名" v-model="dialogFormData.studentName"/>
-        </el-form-item>
-        <el-form-item label="教师姓名" label-width="105px" prop="teacherName">
-            <el-input placeholder="请输入教师姓名" v-model="dialogFormData.teacherName"/>
-        </el-form-item>
-        <el-form-item label="课程名称" label-width="105px" prop="courseName">
-            <el-input placeholder="请输入课程名称" v-model="dialogFormData.courseName"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -74,24 +78,12 @@
                     studentId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    teacherId: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
                     openCourseId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     score: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
-                    studentName: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
-                    teacherName: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
-                    courseName: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
+                    ]
                 }
             }
         },
@@ -143,7 +135,10 @@
                     if (!valid) {
                       return false
                     }
-                  const apiName = `${!this.dialogFormData.id ? 'save' : 'edit'}`
+                  const apiName = `${!this.dialogFormData.id ? 'save' : 'edit'}`;
+                  this.dialogFormData.students = null;
+                  this.dialogFormData.courses = null;
+                  this.dialogFormData.teacherName = window.sessionStorage.username;
                   request({
                     url: `${this.prefixUrl}/${apiName}`,
                     method: 'post',

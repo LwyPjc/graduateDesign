@@ -35,34 +35,10 @@
                             {{ scope.$index }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="学生ID" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.studentId }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="教师ID" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.teacherId }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="课程ID" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.openCourseId }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="分数" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.score }}
-                        </template>
-                    </el-table-column>
+
                     <el-table-column label="学生姓名" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.studentName }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="教师姓名" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.teacherName }}
                         </template>
                     </el-table-column>
                     <el-table-column label="课程名称" show-overflow-tooltip style="width: 10%" align="center">
@@ -70,6 +46,11 @@
                             {{ scope.row.courseName }}
                         </template>
                     </el-table-column>
+                  <el-table-column label="分数" show-overflow-tooltip style="width: 10%" align="center">
+                    <template slot-scope="scope">
+                      {{ scope.row.score }}
+                    </template>
+                  </el-table-column>
                     <el-table-column
                             label="操作"
                             align="center"
@@ -133,6 +114,8 @@
                 listLoading: true, //表格加载框
                 total: 0, //分页总数
                 tableHeight: window.innerHeight - 240, //表格高度
+              students: [],
+              courses: [],
                 listQuery: { //表格查询对象
                     current: 1,
                     size: 10,
@@ -154,6 +137,7 @@
         },
         created() {
             this.fetchData()
+          this.getInitData();
         },
         methods: {
             /**
@@ -184,8 +168,53 @@
              * 显示修改编辑框
              */
             showDialog(data) {
+              if(data === undefined){
+                data = {};
+              }
+              data["students"] = this.students;
+              data["courses"] = this.courses;
                 this.$refs.dlg.init(data)
             },
+          /**
+           * 请求所有初始化数据
+           */
+          getInitData() {
+            //请求所有学生
+            request({
+              url: `${this.GLOBAL.baseUrl}student/findList`,
+              method: 'get'
+            }).then(res=>{
+              res.forEach(aa=>{
+                let v = {};
+                v.id = aa.id;
+                v.stuName = aa.stuName;
+                this.students.push(v);
+              })
+            }).catch(error => {
+              this.$message({
+                message: error,
+                type: 'error',
+                duration: 1500,
+                onClose: () => {
+                }
+              })
+            });
+            //请求所有课程
+            request({
+              url: `${this.GLOBAL.baseUrl}openCourse/findList`,
+              method: 'get'
+            }).then(res=>{
+              this.courses = res;
+            }).catch(error => {
+              this.$message({
+                message: error,
+                type: 'error',
+                duration: 1500,
+                onClose: () => {
+                }
+              })
+            });
+          },
             /**
              * 搜索过滤
              */

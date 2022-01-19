@@ -14,23 +14,30 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-        <el-form-item label="学生ID" label-width="105px" prop="studentId">
-            <el-input type="number" placeholder="请输入学生ID" v-model.number="dialogFormData.studentId"/>
-        </el-form-item>
-        <el-form-item label="教师ID" label-width="105px" prop="teacherId">
-            <el-input type="number" placeholder="请输入教师ID" v-model.number="dialogFormData.teacherId"/>
+        <el-form-item label="学生" label-width="105px" prop="studentId">
+            <!--<el-input type="number" placeholder="请输入学生ID" v-model.number="dialogFormData.studentId"/>-->
+          <el-select v-model="dialogFormData.studentId" placeholder="请选择学生" style="width: 220%">
+            <el-option
+              v-for="item in dialogFormData.students"
+              :key="item.id"
+              :label="item.stuName"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="缺少作业次数" label-width="105px" prop="count">
             <el-input type="number" placeholder="请输入缺少作业次数" v-model.number="dialogFormData.count"/>
         </el-form-item>
-        <el-form-item label="学生姓名" label-width="105px" prop="studentName">
-            <el-input placeholder="请输入学生姓名" v-model="dialogFormData.studentName"/>
-        </el-form-item>
-        <el-form-item label="教师姓名" label-width="105px" prop="teacherName">
-            <el-input placeholder="请输入教师姓名" v-model="dialogFormData.teacherName"/>
-        </el-form-item>
         <el-form-item label="课程名称" label-width="105px" prop="courseName">
-            <el-input placeholder="请输入课程名称" v-model="dialogFormData.courseName"/>
+            <!--<el-input placeholder="请输入课程名称" v-model="dialogFormData.courseName"/>-->
+          <el-select v-model="dialogFormData.courseName" placeholder="请选择课程" style="width: 220%">
+            <el-option
+              v-for="item in dialogFormData.courses"
+              :key="item.courseName"
+              :label="item.courseName"
+              :value="item.courseName">
+            </el-option>
+          </el-select>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -70,16 +77,7 @@
                     studentId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    teacherId: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
                     count: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
-                    studentName: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
-                    teacherName: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     courseName: [
@@ -135,7 +133,10 @@
                     if (!valid) {
                       return false
                     }
-                  const apiName = `${!this.dialogFormData.id ? 'save' : 'edit'}`
+                  const apiName = `${!this.dialogFormData.id ? 'save' : 'edit'}`;
+                  this.dialogFormData.students = null;
+                  this.dialogFormData.courses = null;
+                  this.dialogFormData.teacherName = window.sessionStorage.username;
                   request({
                     url: `${this.prefixUrl}/${apiName}`,
                     method: 'post',
