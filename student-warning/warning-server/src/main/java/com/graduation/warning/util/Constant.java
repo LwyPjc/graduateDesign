@@ -24,4 +24,12 @@ public class Constant {
     public static final String CHOOSE_END = "choose_end";
     /** 用户默认密码 */
     public static final String DEFAULT_PASSWORD = "123";
+    /** 学生Id */
+    public static final String STU_ID = "student_id";
+    /** 开放课程Id */
+    public static final String OPEN_COURSE_ID = "open_course_id";
+    /** 教师Id */
+    public static final String TEACHER_ID = "teacher_id";
+    /** 教师名称 */
+    public static final String TEACHER_NAME = "teacher_name";
 }

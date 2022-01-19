@@ -5,7 +5,6 @@
             <el-col :span="24" class="filter-container">
                     <el-input placeholder="评价信息过滤" v-model="listQuery.evalution" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="学生姓名过滤" v-model="listQuery.studentName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="教师姓名过滤" v-model="listQuery.teacherName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="课程名称过滤" v-model="listQuery.courseName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
@@ -162,6 +161,7 @@
              */
             fetchData() {
                 this.listLoading = true
+              this.listQuery.teacherName = window.sessionStorage.username;
                 request({
                     url: `${this.prefixUrl}/findListByPage`,
                     method: 'get',

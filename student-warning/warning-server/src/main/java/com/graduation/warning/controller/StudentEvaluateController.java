@@ -2,6 +2,7 @@ package com.graduation.warning.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.graduation.warning.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +38,7 @@ public class StudentEvaluateController {
     @GetMapping("/findListByPage")
     public Page<StudentEvaluate> findListByPage(StudentEvaluate studentEvaluate, Page page) {
         QueryWrapper<StudentEvaluate> queryWrapper = new QueryWrapper<>(studentEvaluate);
+        queryWrapper.eq(Constant.TEACHER_NAME, studentEvaluate.getTeacherName());
         return studentEvaluateService.page(page, queryWrapper);
     }
 

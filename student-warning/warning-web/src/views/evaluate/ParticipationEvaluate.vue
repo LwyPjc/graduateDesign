@@ -5,7 +5,6 @@
             <el-col :span="24" class="filter-container">
                     <el-input placeholder="缺勤次数过滤" type="number" v-model.number="listQuery.count" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="学生姓名过滤" v-model="listQuery.studentName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="教师姓名过滤" v-model="listQuery.teacherName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="课程名称过滤" v-model="listQuery.courseName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
@@ -34,21 +33,6 @@
                     <el-table-column align="center" label="序号" width="80">
                         <template slot-scope="scope">
                             {{ scope.$index }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="学生ID" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.studentId }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="教师ID" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.teacherId }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="课程ID" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.openCourseId }}
                         </template>
                     </el-table-column>
                     <el-table-column label="缺勤次数" show-overflow-tooltip style="width: 10%" align="center">
@@ -156,7 +140,8 @@
             }
         },
         created() {
-            this.fetchData()
+            this.fetchData();
+            this.getInitData();
         },
         methods: {
             /**
@@ -164,6 +149,7 @@
              */
             fetchData() {
                 this.listLoading = true
+                this.listQuery.teacherName = window.sessionStorage.username;
                 request({
                     url: `${this.prefixUrl}/findListByPage`,
                     method: 'get',
@@ -189,10 +175,8 @@
               if(data === undefined){
                 data = {};
               }
-              data["classes"] = this.classes;
+              data["students"] = this.students;
               data["courses"] = this.courses;
-              data["teacheres"] = this.teacheres;
-              data["classrooms"] = this.classrooms;
                 this.$refs.dlg.init(data)
             },
           /**
@@ -204,7 +188,12 @@
               url: `${this.GLOBAL.baseUrl}student/findList`,
               method: 'get'
             }).then(res=>{
-              this.students = res;
+              res.forEach(aa=>{
+                let v = {};
+                v.id = aa.id;
+                v.stuName = aa.stuName;
+                this.students.push(v);
+              })
             }).catch(error => {
               this.$message({
                 message: error,

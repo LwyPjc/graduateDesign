@@ -2,13 +2,24 @@ package com.graduation.warning.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.graduation.warning.entity.Course;
+import com.graduation.warning.entity.OpenCourse;
+import com.graduation.warning.entity.Student;
+import com.graduation.warning.service.CourseService;
+import com.graduation.warning.service.OpenCourseService;
+import com.graduation.warning.service.StudentService;
+import com.graduation.warning.util.Constant;
+import com.graduation.warning.util.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import com.graduation.warning.entity.ParticipationEvaluate;
 import com.graduation.warning.service.ParticipationEvaluateService;
 
+import java.beans.PropertyEditorSupport;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +36,14 @@ import java.util.List;
 @RequestMapping("/participationEvaluate")
 @CrossOrigin
 public class ParticipationEvaluateController {
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private CourseService courseService;
+
+    @Autowired
+    private OpenCourseService openCourseService;
 
     @Autowired
     private ParticipationEvaluateService participationEvaluateService;
@@ -37,6 +56,7 @@ public class ParticipationEvaluateController {
     @GetMapping("/findListByPage")
     public Page<ParticipationEvaluate> findListByPage(ParticipationEvaluate participationEvaluate, Page page) {
         QueryWrapper<ParticipationEvaluate> queryWrapper = new QueryWrapper<>(participationEvaluate);
+        queryWrapper.eq(Constant.TEACHER_NAME, participationEvaluate.getTeacherName());
         return participationEvaluateService.page(page, queryWrapper);
     }
 
@@ -46,9 +66,28 @@ public class ParticipationEvaluateController {
     }
 
     @PostMapping("/save")
-    public Serializable save(ParticipationEvaluate participationEvaluate) {
+    public ResultMap save(ParticipationEvaluate participationEvaluate) {
+        ResultMap resultMap = new ResultMap();
+        Integer openCourseId = participationEvaluate.getOpenCourseId();
+        Integer studentId = participationEvaluate.getStudentId();
+        OpenCourse byId = openCourseService.getById(openCourseId);
+        Integer classId = byId.getCourseId();
+        Course course = courseService.getById(classId);
+        Student student = studentService.getById(studentId);
+        participationEvaluate.setStudentName(student.getStuName());
+        participationEvaluate.setCourseName(course.getName());
+        ParticipationEvaluate participationEvaluateCondition = new ParticipationEvaluate();
+        QueryWrapper<ParticipationEvaluate> queryWrapper = new QueryWrapper<>(participationEvaluateCondition);
+        queryWrapper.eq(Constant.OPEN_COURSE_ID, participationEvaluate.getOpenCourseId());
+        queryWrapper.eq(Constant.TEACHER_NAME, participationEvaluate.getTeacherName());
+        queryWrapper.eq(Constant.STU_ID, participationEvaluate.getStudentId());
+        int count = participationEvaluateService.count(queryWrapper);
+        if (count > 0) {
+            return resultMap.setError("此纪录已存在，请使用编辑操作!");
+        }
         participationEvaluateService.save(participationEvaluate);
-        return participationEvaluate.getID();
+
+        return resultMap.setSuccss("保存成功");
     }
 
     @PostMapping("/edit")
@@ -61,4 +100,13 @@ public class ParticipationEvaluateController {
         return participationEvaluateService.removeById(id);
     }
 
+    @InitBinder
+    public void initBinder(final WebDataBinder webdataBinder) {
+        webdataBinder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                setValue(new Date(Long.valueOf(text)));
+            }
+        });
+    }
 }

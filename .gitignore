@@ -31,3 +31,4 @@ hs_err_pid*
 *.iws
 *.iml
 *.i
+/student-warning/warning-server/target/
