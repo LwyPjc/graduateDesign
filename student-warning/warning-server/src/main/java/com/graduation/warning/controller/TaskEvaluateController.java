@@ -2,10 +2,15 @@ package com.graduation.warning.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.graduation.warning.entity.*;
+import com.graduation.warning.service.CourseService;
+import com.graduation.warning.service.OpenCourseService;
+import com.graduation.warning.service.StudentService;
+import com.graduation.warning.util.Constant;
+import com.graduation.warning.util.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.graduation.warning.entity.TaskEvaluate;
 import com.graduation.warning.service.TaskEvaluateService;
 
 import java.io.Serializable;
@@ -25,6 +30,14 @@ import java.util.List;
 @RequestMapping("/taskEvaluate")
 @CrossOrigin
 public class TaskEvaluateController {
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private CourseService courseService;
+
+    @Autowired
+    private OpenCourseService openCourseService;
 
     @Autowired
     private TaskEvaluateService taskEvaluateService;
@@ -46,9 +59,28 @@ public class TaskEvaluateController {
     }
 
     @PostMapping("/save")
-    public Serializable save(TaskEvaluate taskEvaluate) {
+    public ResultMap save(TaskEvaluate taskEvaluate) {
+
+        ResultMap resultMap = new ResultMap();
+        String courseName = taskEvaluate.getCourseName();
+        Integer studentId = taskEvaluate.getStudentId();
+//        OpenCourse byId = openCourseService.getById(openCourseId);
+//        Integer classId = byId.getCourseId();
+//        Course course = courseService.getById(classId);
+        Student student = studentService.getById(studentId);
+        taskEvaluate.setStudentName(student.getStuName());
+//        taskEvaluate.setCourseName(course.getName());
+        QueryWrapper<TaskEvaluate> queryWrapper = new QueryWrapper<>(taskEvaluate);
+        queryWrapper.eq(Constant.COURSE_NAME, taskEvaluate.getCourseName());
+        queryWrapper.eq(Constant.TEACHER_NAME, taskEvaluate.getTeacherName());
+        queryWrapper.eq(Constant.STU_ID, taskEvaluate.getStudentId());
+        int count = taskEvaluateService.count(queryWrapper);
+        if (count > 0) {
+            return resultMap.setError("此纪录已存在，请使用编辑操作!");
+        }
+
         taskEvaluateService.save(taskEvaluate);
-        return taskEvaluate.getId();
+        return resultMap;
     }
 
     @PostMapping("/edit")

@@ -2,11 +2,15 @@ package com.graduation.warning.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.graduation.warning.entity.*;
+import com.graduation.warning.service.CourseService;
+import com.graduation.warning.service.OpenCourseService;
+import com.graduation.warning.service.StudentService;
 import com.graduation.warning.util.Constant;
+import com.graduation.warning.util.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.graduation.warning.entity.ScoreEvaluate;
 import com.graduation.warning.service.ScoreEvaluateService;
 
 import java.io.Serializable;
@@ -26,6 +30,14 @@ import java.util.List;
 @RequestMapping("/scoreEvaluate")
 @CrossOrigin
 public class ScoreEvaluateController {
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private CourseService courseService;
+
+    @Autowired
+    private OpenCourseService openCourseService;
 
     @Autowired
     private ScoreEvaluateService scoreEvaluateService;
@@ -49,9 +61,28 @@ public class ScoreEvaluateController {
 
 
     @PostMapping("/save")
-    public Serializable save(ScoreEvaluate scoreEvaluate) {
+    public ResultMap save(ScoreEvaluate scoreEvaluate) {
+
+        ResultMap resultMap = new ResultMap();
+        Integer openCourseId = scoreEvaluate.getOpenCourseId();
+        Integer studentId = scoreEvaluate.getStudentId();
+        OpenCourse byId = openCourseService.getById(openCourseId);
+        Integer classId = byId.getCourseId();
+        Course course = courseService.getById(classId);
+        Student student = studentService.getById(studentId);
+        scoreEvaluate.setStudentName(student.getStuName());
+        scoreEvaluate.setCourseName(course.getName());
+        QueryWrapper<ScoreEvaluate> queryWrapper = new QueryWrapper<>(scoreEvaluate);
+        queryWrapper.eq(Constant.OPEN_COURSE_ID, scoreEvaluate.getOpenCourseId());
+        queryWrapper.eq(Constant.TEACHER_NAME, scoreEvaluate.getTeacherName());
+        queryWrapper.eq(Constant.STU_ID, scoreEvaluate.getStudentId());
+        int count = scoreEvaluateService.count(queryWrapper);
+        if (count > 0) {
+            return resultMap.setError("此纪录已存在，请使用编辑操作!");
+        }
+
         scoreEvaluateService.save(scoreEvaluate);
-        return scoreEvaluate.getID();
+        return resultMap;
     }
 
     @PostMapping("/edit")

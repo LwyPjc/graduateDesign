@@ -32,4 +32,6 @@ public class Constant {
     public static final String TEACHER_ID = "teacher_id";
     /** 教师名称 */
     public static final String TEACHER_NAME = "teacher_name";
+    /** 课程名称 */
+    public static final String COURSE_NAME = "course_name";
 }
