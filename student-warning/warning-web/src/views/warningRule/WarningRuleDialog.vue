@@ -146,6 +146,18 @@
                     method: 'post',
                     params: this.dialogFormData
                   }).then(res => {
+                    let status = res.status;
+                    if(status === '500'){
+                      this.$message({
+                        message: res.msg,
+                        type: 'error',
+                        duration: 1500,
+                        onClose: () => {
+                        }
+                      });
+                      return;
+                    }
+
                     this.$message({
                       message: '操作成功',
                       type: 'success',

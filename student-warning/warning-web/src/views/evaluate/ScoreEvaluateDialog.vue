@@ -36,9 +36,12 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="分数" label-width="105px" prop="score">
-            <el-input placeholder="请输入分数" v-model="dialogFormData.score"/>
-        </el-form-item>
+        <el-row>
+          <el-form-item label="分数" label-width="105px" prop="score">
+            <el-input placeholder="请输入分数" width="105px" v-model="dialogFormData.score"/>
+          </el-form-item>
+        </el-row>
+
     </el-form>
     <div slot="footer" class="dialog-footer">
         <el-button size="small" @click.native="dialogVisible = false">取消</el-button>

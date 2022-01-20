@@ -2,6 +2,7 @@ package com.graduation.warning.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.graduation.warning.util.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,9 +48,17 @@ public class WarningRuleController {
     }
 
     @PostMapping("/save")
-    public Serializable save(WarningRule warningRule) {
+    public ResultMap save(WarningRule warningRule) {
+        ResultMap resultMap = new ResultMap();
+        QueryWrapper<WarningRule> queryWrapper = new QueryWrapper<>(warningRule);
+        queryWrapper.eq("type", warningRule.getType());
+        queryWrapper.eq("warning_level", warningRule.getWarningLevel());
+        WarningRule one = warningRuleService.getOne(queryWrapper);
+        if(one!=null){
+            return resultMap.setError("此纪录已存在，请更新!");
+        }
         warningRuleService.save(warningRule);
-        return warningRule.getId();
+        return resultMap.setSuccss("保存成功");
     }
 
     @PostMapping("/edit")

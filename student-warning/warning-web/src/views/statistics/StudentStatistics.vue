@@ -51,9 +51,11 @@
                             {{ scope.row.type }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="预警等级" show-overflow-tooltip cell-style="background: blue" align="center">
-                        <template slot-scope="scope" style="color: blue" >
+                    <el-table-column label="预警等级" show-overflow-tooltip  align="center">
+                        <template slot-scope="scope" >
+                          <el-tag :color="getColour(scope.row.warningLevel)">
                             {{ scope.row.warningLevel }}
+                          </el-tag>
                         </template>
                     </el-table-column>
 <!--                    <el-table-column label="预警值" show-overflow-tooltip style="width: 10%" align="center">-->
@@ -147,6 +149,17 @@
             this.fetchData()
         },
         methods: {
+          getColour(s) {
+            console.log("拿到东西", s);
+            if(s === '警告') {
+              return 'yellow';
+            } else if(s === '严重警告') {
+              return 'green'
+            } else if(s === '记过') {
+              return 'blue';
+            }
+            return "red";
+          },
             /**
              * 获取表格数据
              */

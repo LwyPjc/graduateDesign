@@ -36,9 +36,12 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="缺勤次数" label-width="105px" prop="count">
+        <el-row>
+          <el-form-item label="缺勤次数" label-width="105px" prop="count">
             <el-input type="number" placeholder="请输入缺勤次数" v-model.number="dialogFormData.count"/>
-        </el-form-item>
+          </el-form-item>
+        </el-row>
+
     </el-form>
     <div slot="footer" class="dialog-footer">
         <el-button size="small" @click.native="dialogVisible = false">取消</el-button>
