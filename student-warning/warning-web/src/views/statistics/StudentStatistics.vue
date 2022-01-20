@@ -5,19 +5,18 @@
             <el-col :span="24" class="filter-container">
                     <el-input placeholder="学生姓名过滤" v-model="listQuery.studentName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="课程名称过滤" v-model="listQuery.courseName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="类型:1:缺几节课程 2:缺几次作业 3:成绩不合格过滤" v-model="listQuery.type" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+<!--                    <el-input placeholder="类型" v-model="listQuery.type" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>-->
                     <el-input placeholder="预警等级过滤" v-model="listQuery.warningLevel" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="预警值过滤" v-model="listQuery.value" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
                             size="small"
                             @click="handleFilter">搜索</el-button>
-                    <el-button
-                            icon="el-icon-circle-plus-outline"
-                            size="small"
-                            @click="showDialog()"
-                    >新增</el-button>
+<!--                    <el-button-->
+<!--                            icon="el-icon-circle-plus-outline"-->
+<!--                            size="small"-->
+<!--                            @click="showDialog()"-->
+<!--                    >新增</el-button>-->
             </el-col>
         </el-row>
         <!-- 表格list -->
@@ -47,33 +46,33 @@
                             {{ scope.row.courseName }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="类型:1:缺几节课程 2:缺几次作业 3:成绩不合格" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="类型" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.type }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="预警等级" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
+                    <el-table-column label="预警等级" show-overflow-tooltip cell-style="background: blue" align="center">
+                        <template slot-scope="scope" style="color: blue" >
                             {{ scope.row.warningLevel }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="预警值" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.value }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column
-                            label="操作"
-                            align="center"
-                            width="180"
-                            class-name="small-padding fixed-width">
-                        <div slot-scope="scope" class="table-operate-box">
-                            <i class="zoeIconfont z_modifyEI_normal"
-                               @click="showDialog(scope.row)"></i>
-                            <i class="zoeIconfont z_delete_normal danger"
-                               @click="handleDelete(scope.row)"></i>
-                        </div>
-                    </el-table-column>
+<!--                    <el-table-column label="预警值" show-overflow-tooltip style="width: 10%" align="center">-->
+<!--                        <template slot-scope="scope">-->
+<!--                            {{ scope.row.value }}-->
+<!--                        </template>-->
+<!--                    </el-table-column>-->
+<!--                    <el-table-column-->
+<!--                            label="操作"-->
+<!--                            align="center"-->
+<!--                            width="180"-->
+<!--                            class-name="small-padding fixed-width">-->
+<!--                        <div slot-scope="scope" class="table-operate-box">-->
+<!--                            <i class="zoeIconfont z_modifyEI_normal"-->
+<!--                               @click="showDialog(scope.row)"></i>-->
+<!--                            <i class="zoeIconfont z_delete_normal danger"-->
+<!--                               @click="handleDelete(scope.row)"></i>-->
+<!--                        </div>-->
+<!--                    </el-table-column>-->
                 </el-table>
 
                 <pagination v-show="total>0" :total="total"
@@ -152,13 +151,24 @@
              * 获取表格数据
              */
             fetchData() {
-                this.listLoading = true
+                this.listLoading = true;
+              this.listQuery.teacherName = window.sessionStorage.username;
                 request({
                     url: `${this.prefixUrl}/findListByPage`,
                     method: 'get',
                     params: this.listQuery
                 }).then(res => {
                   this.list = res.records
+                  this.list.forEach(l=>{
+                    console.log('内容',l);
+                    if(l.type ==='1'){
+                      l.type = '缺课程(节)';
+                    }else if(l.type === '2'){
+                      l.type = '缺作业(次)';
+                    }else {
+                      l.type = '成绩不合格';
+                    }
+                  });
                   this.total = res.total
                   this.listLoading = false
                 }).catch(error => {

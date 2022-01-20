@@ -95,6 +95,11 @@ export default new Router({
           name: 'TaskEvaluate',
           component: () => import('@/views/evaluate/TaskEvaluate')
         },
+        {
+          path: '/studentStatistics',
+          name: 'StudentStatistics',
+          component: () => import('@/views/statistics/StudentStatistics')
+        },
       ]
     }
   ]
