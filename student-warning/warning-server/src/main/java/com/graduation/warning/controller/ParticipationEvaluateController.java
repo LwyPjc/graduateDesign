@@ -5,9 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.graduation.warning.entity.Course;
 import com.graduation.warning.entity.OpenCourse;
 import com.graduation.warning.entity.Student;
-import com.graduation.warning.service.CourseService;
-import com.graduation.warning.service.OpenCourseService;
-import com.graduation.warning.service.StudentService;
+import com.graduation.warning.service.*;
 import com.graduation.warning.util.Constant;
 import com.graduation.warning.util.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import com.graduation.warning.entity.ParticipationEvaluate;
-import com.graduation.warning.service.ParticipationEvaluateService;
 
 import java.beans.PropertyEditorSupport;
 import java.io.Serializable;
@@ -47,6 +44,9 @@ public class ParticipationEvaluateController {
 
     @Autowired
     private ParticipationEvaluateService participationEvaluateService;
+
+    @Autowired
+    private StudentStatisticsService studentStatisticsService;
 
     @GetMapping("/findList")
     public List<ParticipationEvaluate> findList(ParticipationEvaluate participationEvaluate) {
@@ -86,12 +86,13 @@ public class ParticipationEvaluateController {
             return resultMap.setError("此纪录已存在，请使用编辑操作!");
         }
         participationEvaluateService.save(participationEvaluate);
-
+        studentStatisticsService.handleParticipation(participationEvaluate);
         return resultMap.setSuccss("保存成功");
     }
 
     @PostMapping("/edit")
     public boolean edit(ParticipationEvaluate participationEvaluate) {
+        studentStatisticsService.handleParticipation(participationEvaluate);
         return participationEvaluateService.updateById(participationEvaluate);
     }
 

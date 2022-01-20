@@ -3,15 +3,11 @@ package com.graduation.warning.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.graduation.warning.entity.*;
-import com.graduation.warning.service.CourseService;
-import com.graduation.warning.service.OpenCourseService;
-import com.graduation.warning.service.StudentService;
+import com.graduation.warning.service.*;
 import com.graduation.warning.util.Constant;
 import com.graduation.warning.util.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import com.graduation.warning.service.TaskEvaluateService;
 
 import java.io.Serializable;
 import java.util.List;
@@ -41,6 +37,9 @@ public class TaskEvaluateController {
 
     @Autowired
     private TaskEvaluateService taskEvaluateService;
+
+    @Autowired
+    private StudentStatisticsService studentStatisticsService;
 
     @GetMapping("/findList")
     public List<TaskEvaluate> findList(TaskEvaluate taskEvaluate) {
@@ -80,11 +79,13 @@ public class TaskEvaluateController {
         }
 
         taskEvaluateService.save(taskEvaluate);
+        studentStatisticsService.handleTask(taskEvaluate);
         return resultMap;
     }
 
     @PostMapping("/edit")
     public boolean edit(TaskEvaluate taskEvaluate) {
+        studentStatisticsService.handleTask(taskEvaluate);
         return taskEvaluateService.updateById(taskEvaluate);
     }
 

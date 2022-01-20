@@ -26,6 +26,8 @@ public class Constant {
     public static final String DEFAULT_PASSWORD = "123";
     /** 学生Id */
     public static final String STU_ID = "student_id";
+    /** 学生姓名 */
+    public static final String STU_NAME = "student_name";
     /** 开放课程Id */
     public static final String OPEN_COURSE_ID = "open_course_id";
     /** 教师Id */

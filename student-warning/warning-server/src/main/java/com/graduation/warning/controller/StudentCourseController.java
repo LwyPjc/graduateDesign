@@ -10,6 +10,7 @@ import com.graduation.warning.entity.dto.OpenCourseDto;
 import com.graduation.warning.service.OpenCourseService;
 import com.graduation.warning.service.StudentCourseService;
 import com.graduation.warning.service.StudentService;
+import com.graduation.warning.service.StudentStatisticsService;
 import com.graduation.warning.util.Constant;
 import com.graduation.warning.util.ResultMap;
 import org.apache.commons.lang3.StringUtils;
@@ -42,6 +43,7 @@ public class StudentCourseController {
     private OpenCourseService openCourseService;
     @Autowired
     private StudentService studentService;
+
 
     @GetMapping("/findList")
     public List<StudentCourse> findList(StudentCourse studentCourse) {

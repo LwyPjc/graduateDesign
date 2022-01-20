@@ -194,13 +194,13 @@
                     url: "/participationEvaluate",
                     children: []
                   },
-                    {
-                        name: "个人信息",
-                        id: 4,
-                        icon: "el-icon-collection-tag",
-                        url: "/data",
-                        children: []
-                    },
+                    // {
+                    //     name: "个人信息",
+                    //     id: 4,
+                    //     icon: "el-icon-collection-tag",
+                    //     url: "/data",
+                    //     children: []
+                    // },
                     {
                         name: "修改密码",
                         id: 5,

@@ -68,7 +68,7 @@
                                 this.$router.push({path: '/student'});
                             } else {
                               // 教师
-                              this.$router.push({path: '/data'});
+                              this.$router.push({path: '/studentEvaluate'});
                             }
                         } else {
                             this.$message({message: res.msg, type: 'error', duration: 1500});

@@ -3,15 +3,11 @@ package com.graduation.warning.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.graduation.warning.entity.*;
-import com.graduation.warning.service.CourseService;
-import com.graduation.warning.service.OpenCourseService;
-import com.graduation.warning.service.StudentService;
+import com.graduation.warning.service.*;
 import com.graduation.warning.util.Constant;
 import com.graduation.warning.util.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import com.graduation.warning.service.StudentEvaluateService;
 
 import java.io.Serializable;
 import java.util.List;
@@ -41,6 +37,9 @@ public class StudentEvaluateController {
 
     @Autowired
     private StudentEvaluateService studentEvaluateService;
+
+    @Autowired
+    private StudentStatisticsService studentStatisticsService;
 
     @GetMapping("/findList")
     public List<StudentEvaluate> findList(StudentEvaluate studentEvaluate) {
