@@ -14,6 +14,20 @@
              size="small"
              ref="dialogForm"
              label-position="right">
+      <el-row>
+        <el-form-item label="课程名称" label-width="105px" prop="courseName">
+          <el-select v-model="dialogFormData.courseName" placeholder="请选择课程" style="width: 220%"  >
+            <el-option
+              v-for="item in dialogFormData.courses"
+              :key="item.courseName"
+              :label="item.courseName"
+              :value="item.courseName"
+              @click.native="courseToStu($event,item)"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-row>
         <el-form-item label="学生" label-width="105px" prop="studentId">
             <!--<el-input type="number" placeholder="请输入学生ID" v-model.number="dialogFormData.studentId"/>-->
           <el-select v-model="dialogFormData.studentId" placeholder="请选择学生" style="width: 220%">
@@ -21,29 +35,17 @@
               v-for="item in dialogFormData.students"
               :key="item.id"
               :label="item.stuName"
-              :value="item.id">
+              :value="item.id"
+            >
             </el-option>
           </el-select>
         </el-form-item>
-      <el-row>
-        <el-form-item label="课程名称" label-width="105px" prop="courseName">
-          <!--<el-input placeholder="请输入课程名称" v-model="dialogFormData.courseName"/>-->
-          <el-select v-model="dialogFormData.courseName" placeholder="请选择课程" style="width: 220%">
-            <el-option
-              v-for="item in dialogFormData.courses"
-              :key="item.courseName"
-              :label="item.courseName"
-              :value="item.courseName">
-            </el-option>
-          </el-select>
-        </el-form-item>
-      </el-row>
 
-      <e-row>
+      <el-row>
         <el-form-item label="缺少作业次数" label-width="135px" prop="count">
           <el-input type="number" placeholder="请输入缺少作业次数" v-model.number="dialogFormData.count"/>
         </el-form-item>
-      </e-row>
+      </el-row>
 
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -76,6 +78,7 @@
                     studentName: '',
                     teacherName: '',
                     courseName: '',
+                    students:[]
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -109,6 +112,32 @@
             }
         },
         methods: {
+          courseToStu(event,openCourse){
+            console.log("班级信息", openCourse.classId);
+            //请求学生
+            request({
+              url: `${this.GLOBAL.baseUrl}student/findList`,
+              method: 'get',
+              params: {classId: openCourse.classId}
+            }).then(res=>{
+              console.log('返回数据', res)
+              res.forEach(aa=>{
+                let v = {};
+                v.id = aa.id;
+                v.stuName = aa.stuName;
+                this.dialogFormData.students.push(v);
+              })
+            }).catch(error => {
+              this.$message({
+                message: error,
+                type: 'error',
+                duration: 1500,
+                onClose: () => {
+                }
+              })
+            });
+          }
+          ,
             init(row) {
                 this.resetModel()
                 if (row) {

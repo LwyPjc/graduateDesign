@@ -14,6 +14,18 @@
              size="small"
              ref="dialogForm"
              label-position="right">
+      <el-form-item label="课程" label-width="105px" prop="openCourseId">
+        <el-select v-model="dialogFormData.openCourseId" placeholder="请选择课程" style="width: 220%">
+          <el-option
+            v-for="item in dialogFormData.courses"
+            :key="item.id"
+            :label="item.courseName"
+            :value="item.id"
+            @click.native="courseToStu($event,item)"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
         <el-form-item label="学生" label-width="105px" prop="studentId">
             <!--<el-input type="number" placeholder="请输入学生ID" v-model.number="dialogFormData.studentId"/>-->
           <el-select v-model="dialogFormData.studentId" placeholder="请选择学生" style="width: 220%">
@@ -21,17 +33,6 @@
               v-for="item in dialogFormData.students"
               :key="item.id"
               :label="item.stuName"
-              :value="item.id">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="课程" label-width="105px" prop="openCourseId">
-<!--            <el-input type="number" placeholder="请输入课程ID" v-model.number="dialogFormData.openCourseId"/>-->
-          <el-select v-model="dialogFormData.openCourseId" placeholder="请选择课程" style="width: 220%">
-            <el-option
-              v-for="item in dialogFormData.courses"
-              :key="item.id"
-              :label="item.courseName"
               :value="item.id">
             </el-option>
           </el-select>
@@ -73,7 +74,8 @@
                     count: '',
                     studentName: '',
                     teacherName: '',
-                    courseName: ''
+                    courseName: '',
+                  students:[]
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -107,6 +109,32 @@
             }
         },
         methods: {
+          courseToStu(event,openCourse){
+            console.log("班级信息", openCourse.classId);
+            //请求学生
+            request({
+              url: `${this.GLOBAL.baseUrl}student/findList`,
+              method: 'get',
+              params: {classId: openCourse.classId}
+            }).then(res=>{
+              console.log('返回数据', res)
+              res.forEach(aa=>{
+                let v = {};
+                v.id = aa.id;
+                v.stuName = aa.stuName;
+                this.dialogFormData.students.push(v);
+              })
+            }).catch(error => {
+              this.$message({
+                message: error,
+                type: 'error',
+                duration: 1500,
+                onClose: () => {
+                }
+              })
+            });
+          }
+          ,
             init(row) {
                 this.resetModel()
                 if (row) {

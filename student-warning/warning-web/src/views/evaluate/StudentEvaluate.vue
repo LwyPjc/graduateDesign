@@ -3,7 +3,7 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="评价信息过滤" v-model="listQuery.evalution" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+<!--                    <el-input placeholder="评价信息过滤" v-model="listQuery.evalution" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>-->
                     <el-input placeholder="学生姓名过滤" v-model="listQuery.studentName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="课程名称过滤" v-model="listQuery.courseName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
@@ -179,30 +179,11 @@
            * 请求所有初始化数据
            */
           getInitData() {
-            //请求所有学生
-            request({
-              url: `${this.GLOBAL.baseUrl}student/findList`,
-              method: 'get'
-            }).then(res=>{
-              res.forEach(aa=>{
-                let v = {};
-                v.id = aa.id;
-                v.stuName = aa.stuName;
-                this.students.push(v);
-              })
-            }).catch(error => {
-              this.$message({
-                message: error,
-                type: 'error',
-                duration: 1500,
-                onClose: () => {
-                }
-              })
-            });
             //请求所有课程
             request({
-              url: `${this.GLOBAL.baseUrl}openCourse/findList`,
-              method: 'get'
+              url: `${this.GLOBAL.baseUrl}openCourse/findListByTeacherName`,
+              method: 'get',
+              params: {teacherName : window.sessionStorage.username}
             }).then(res=>{
               this.courses = res;
             }).catch(error => {

@@ -58,23 +58,11 @@
                           </el-tag>
                         </template>
                     </el-table-column>
-<!--                    <el-table-column label="预警值" show-overflow-tooltip style="width: 10%" align="center">-->
-<!--                        <template slot-scope="scope">-->
-<!--                            {{ scope.row.value }}-->
-<!--                        </template>-->
-<!--                    </el-table-column>-->
-<!--                    <el-table-column-->
-<!--                            label="操作"-->
-<!--                            align="center"-->
-<!--                            width="180"-->
-<!--                            class-name="small-padding fixed-width">-->
-<!--                        <div slot-scope="scope" class="table-operate-box">-->
-<!--                            <i class="zoeIconfont z_modifyEI_normal"-->
-<!--                               @click="showDialog(scope.row)"></i>-->
-<!--                            <i class="zoeIconfont z_delete_normal danger"-->
-<!--                               @click="handleDelete(scope.row)"></i>-->
-<!--                        </div>-->
-<!--                    </el-table-column>-->
+                  <el-table-column label="家庭联系方式" show-overflow-tooltip style="width: 10%" align="center">
+                    <template slot-scope="scope">
+                      {{ scope.row.familyPhone }}
+                    </template>
+                  </el-table-column>
                 </el-table>
 
                 <pagination v-show="total>0" :total="total"

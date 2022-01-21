@@ -14,9 +14,9 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-        <el-form-item label="学院" label-width="105px" prop="college">
-            <el-input placeholder="请输入学院" v-model="dialogFormData.college"/>
-        </el-form-item>
+<!--        <el-form-item label="学院" label-width="105px" prop="college">-->
+<!--            <el-input placeholder="请输入学院" v-model="dialogFormData.college"/>-->
+<!--        </el-form-item>-->
         <el-form-item label="年级" label-width="105px" prop="grade">
             <el-input placeholder="请输入年级" v-model="dialogFormData.grade"/>
         </el-form-item>
@@ -60,9 +60,9 @@
                 dialogVisible: false,
                 dialogLoading: false,
                 dialogFormRules: {
-                    college: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
+                    // college: [
+                    //     { required: true, message: '参数不能为空', trigger: 'blur' }
+                    // ],
                     grade: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],

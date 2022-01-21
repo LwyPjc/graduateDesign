@@ -3,7 +3,7 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="类型:1:缺几节课程 2:缺几次作业 3:成绩不合格过滤" v-model="listQuery.type" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+<!--                    <el-input placeholder="类型:1:缺几节课程 2:缺几次作业 3:成绩不合格过滤" v-model="listQuery.type" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>-->
                     <el-input placeholder="预警等级过滤" v-model="listQuery.warningLevel" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="预警值过滤" v-model="listQuery.value" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button

@@ -47,8 +47,32 @@ public class OpenCourseController {
     @Autowired
     private StudentCourseService studentCourseService;
 
+
     @GetMapping("/findList")
     public List<OpenCourseDto> findList(OpenCourse openCourse) {
+        List<OpenCourse> result = openCourseService.findList(openCourse);
+        List<OpenCourseDto> resultDtoList = Lists.newArrayList();
+        if (result != null) {
+            for (OpenCourse course : result) {
+                OpenCourseDto openCourseDto = new OpenCourseDto();
+                BeanUtil.copyProperties(course, openCourseDto, true);
+                Course byId = courseService.getById(course.getId());
+                openCourseDto.setCourseName(byId.getName());
+                resultDtoList.add(openCourseDto);
+            }
+        }
+        return resultDtoList;
+    }
+
+    @GetMapping("/findListByTeacherName")
+    public List<OpenCourseDto> findListByTeacherName(String teacherName) {
+        Teacher teacher = new Teacher();
+        teacher.setCode(teacherName);
+        QueryWrapper<Teacher> queryWrapper = new QueryWrapper<>(teacher);
+        queryWrapper.eq("code", teacher.getCode());
+        Teacher one = teacherService.getOne(queryWrapper);
+        OpenCourse openCourse = new OpenCourse();
+        openCourse.setTeacherId(one.getId());
         List<OpenCourse> result = openCourseService.findList(openCourse);
         List<OpenCourseDto> resultDtoList = Lists.newArrayList();
         if (result != null) {

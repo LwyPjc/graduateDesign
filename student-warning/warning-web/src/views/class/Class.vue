@@ -3,7 +3,7 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="学院过滤" v-model="listQuery.college" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+<!--                    <el-input placeholder="学院过滤" v-model="listQuery.college" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>-->
                     <el-input placeholder="年级过滤" v-model="listQuery.grade" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="专业过滤" v-model="listQuery.subject" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="班级过滤" v-model="listQuery.classNo" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
@@ -31,11 +31,11 @@
                         :height="tableHeight"
                         style="width: 100%;"
                         highlight-current-row>
-                    <el-table-column label="学院" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.college }}
-                        </template>
-                    </el-table-column>
+<!--                    <el-table-column label="学院" show-overflow-tooltip style="width: 10%" align="center">-->
+<!--                        <template slot-scope="scope">-->
+<!--                            {{ scope.row.college }}-->
+<!--                        </template>-->
+<!--                    </el-table-column>-->
                     <el-table-column label="年级" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.grade }}

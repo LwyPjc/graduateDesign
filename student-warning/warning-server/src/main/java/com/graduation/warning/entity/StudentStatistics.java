@@ -34,6 +34,16 @@ public class StudentStatistics extends Model<StudentStatistics>{
 
     private String teacherName;
 
+    private Integer studentId;
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
     public String getTeacherName() {
         return teacherName;
     }

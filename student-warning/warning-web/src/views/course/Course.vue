@@ -29,11 +29,6 @@
                         :height="tableHeight"
                         style="width: 100%;"
                         highlight-current-row>
-                    <el-table-column label="开课学院" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.college }}
-                        </template>
-                    </el-table-column>
                     <el-table-column label="课程编码" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.code }}

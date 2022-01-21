@@ -34,11 +34,11 @@
                             {{ scope.row.term }}
                         </template>
                     </el-table-column>
-                  <el-table-column label="学院" show-overflow-tooltip style="width: 10%" align="center">
-                    <template slot-scope="scope">
-                      {{ scope.row.college }}
-                    </template>
-                  </el-table-column>
+<!--                  <el-table-column label="学院" show-overflow-tooltip style="width: 10%" align="center">-->
+<!--                    <template slot-scope="scope">-->
+<!--                      {{ scope.row.college }}-->
+<!--                    </template>-->
+<!--                  </el-table-column>-->
                   <el-table-column label="专业" show-overflow-tooltip style="width: 10%" align="center">
                     <template slot-scope="scope">
                       {{ scope.row.grade }}
@@ -67,31 +67,6 @@
                     <el-table-column label="人数" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.number }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="开始周" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.weekStart }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="结束周" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.weekEnd }}
-                        </template>
-                    </el-table-column>
-                  <el-table-column label="周次" show-overflow-tooltip style="width: 10%" align="center">
-                    <template slot-scope="scope">
-                      {{ scope.row.weekTime }}
-                    </template>
-                  </el-table-column>
-                    <el-table-column label="开始节" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.nodeStart }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="结束节" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.nodeEnd }}
                         </template>
                     </el-table-column>
                     <el-table-column label="教师" show-overflow-tooltip style="width: 10%" align="center">

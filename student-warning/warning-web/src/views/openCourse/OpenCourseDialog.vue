@@ -53,21 +53,6 @@
       <el-form-item label="人数" label-width="105px" prop="number">
         <el-input type="number" placeholder="请输入人数" v-model.number="dialogFormData.number"/>
       </el-form-item>
-      <el-form-item label="开始周" label-width="105px" prop="weekStart">
-        <el-input type="number" placeholder="请输入开始周" v-model.number="dialogFormData.weekStart"/>
-      </el-form-item>
-      <el-form-item label="结束周" label-width="105px" prop="weekEnd">
-        <el-input type="number" placeholder="请输入结束周" v-model.number="dialogFormData.weekEnd"/>
-      </el-form-item>
-      <el-form-item label="周次" label-width="105px" prop="weekTime">
-        <el-input type="number" placeholder="请输入结束周(一周多节按英文逗号隔开)" v-model.number="dialogFormData.weekTime"/>
-      </el-form-item>
-      <el-form-item label="开始节" label-width="105px" prop="nodeStart">
-        <el-input type="number" placeholder="请输入开始节" v-model.number="dialogFormData.nodeStart"/>
-      </el-form-item>
-      <el-form-item label="结束节" label-width="105px" prop="nodeEnd">
-        <el-input type="number" placeholder="请输入结束节" v-model.number="dialogFormData.nodeEnd"/>
-      </el-form-item>
       <el-row>
         <el-form-item label="教师" label-width="105px" prop="teacherId">
           <el-select v-model="dialogFormData.teacherId" placeholder="请选择教师" style="width: 220%">
@@ -91,23 +76,6 @@
           </el-option>
         </el-select>
       </el-form-item>
-        <el-form-item label="选课开始时间" label-width="105px" prop="chooseStart">
-          <el-date-picker
-            v-model="dialogFormData.chooseStart"
-            type="datetime"
-            value-format="yyyy-MM-dd HH:mm:ss"
-            placeholder="选择开始时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="选课结束时间" label-width="105px" prop="chooseEnd">
-          <el-date-picker
-            v-model="dialogFormData.chooseEnd"
-            type="datetime"
-            value-format="yyyy-MM-dd HH:mm:ss"
-            placeholder="选择结束时间">
-          </el-date-picker>
-        </el-form-item>
-
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button size="small" @click.native="dialogVisible = false">取消</el-button>

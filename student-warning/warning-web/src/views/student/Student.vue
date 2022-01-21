@@ -29,11 +29,11 @@
                         :height="tableHeight"
                         style="width: 100%;"
                         highlight-current-row>
-                  <el-table-column label="学院" show-overflow-tooltip style="width: 10%" align="center">
-                    <template slot-scope="scope">
-                      {{ scope.row.college }}
-                    </template>
-                  </el-table-column>
+<!--                  <el-table-column label="学院" show-overflow-tooltip style="width: 10%" align="center">-->
+<!--                    <template slot-scope="scope">-->
+<!--                      {{ scope.row.college }}-->
+<!--                    </template>-->
+<!--                  </el-table-column>-->
                   <el-table-column label="专业" show-overflow-tooltip style="width: 10%" align="center">
                     <template slot-scope="scope">
                       {{ scope.row.grade }}

@@ -64,6 +64,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
                 studentStatistics.setStudentName(scoreEvaluate.getStudentName());
                 studentStatistics.setCourseName(scoreEvaluate.getCourseName());
                 studentStatistics.setTeacherName(scoreEvaluate.getTeacherName());
+                studentStatistics.setStudentId(scoreEvaluate.getStudentId());
                 studentStatistics.setType(type);
                 studentStatistics.setWarningLevel(warningRule.getWarningLevel());
                 updateOrSave(studentStatistics);
@@ -102,6 +103,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
             studentStatistics.setTeacherName(participationEvaluate.getTeacherName());
             studentStatistics.setType(type);
             studentStatistics.setWarningLevel(warningRuleResult.getWarningLevel());
+            studentStatistics.setStudentId(participationEvaluate.getStudentId());
             updateOrSave(studentStatistics);
         }
     }
@@ -135,6 +137,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
             studentStatistics.setCourseName(taskEvaluate.getCourseName());
             studentStatistics.setTeacherName(taskEvaluate.getTeacherName());
             studentStatistics.setType(type);
+            studentStatistics.setStudentId(taskEvaluate.getStudentId());
             studentStatistics.setWarningLevel(warningRuleResult.getWarningLevel());
             updateOrSave(studentStatistics);
         }
