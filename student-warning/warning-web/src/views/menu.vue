@@ -167,7 +167,7 @@
             } else {
                 this.list = [
                     {
-                        name: "评价管理",
+                        name: "课堂表现管理",
                         id: 6,
                         icon: "el-icon-collection-tag",
                         url: "/studentEvaluate",
