@@ -43,3 +43,5 @@ autoCode/zoe-optimus-dia-template-generator/src/main/resources/generator.xml:4
 科室管理，医生管理，患者管理
 所有人聊天记录
 用户意见反馈
+
+就统计每天或者每周有多少人找他咨询
