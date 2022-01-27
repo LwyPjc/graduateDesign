@@ -51,6 +51,7 @@ public class StudentStatisticsController {
         List<Object> records = result.getRecords();
         if (!CollectionUtils.isEmpty(records)) {
             for (int i = 0; i < records.size(); i++) {
+                // 转换 添加学生家庭电话
                 Object record = records.get(i);
                 StudentStatistics statistics = (StudentStatistics) record;
                 Integer studentId = statistics.getStudentId();

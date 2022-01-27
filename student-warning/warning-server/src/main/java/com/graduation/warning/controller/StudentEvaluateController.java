@@ -60,7 +60,7 @@ public class StudentEvaluateController {
 
     @PostMapping("/save")
     public ResultMap save(StudentEvaluate studentEvaluate) {
-
+        // 校验学生评价记录是否已存在
         ResultMap resultMap = new ResultMap();
         Integer openCourseId = studentEvaluate.getOpenCourseId();
         Integer studentId = studentEvaluate.getStudentId();
@@ -71,6 +71,7 @@ public class StudentEvaluateController {
         studentEvaluate.setStudentName(student.getStuName());
         studentEvaluate.setCourseName(course.getName());
         QueryWrapper<StudentEvaluate> queryWrapper = new QueryWrapper<>(studentEvaluate);
+        // 开课id 教师 学生校验
         queryWrapper.eq(Constant.OPEN_COURSE_ID, studentEvaluate.getOpenCourseId());
         queryWrapper.eq(Constant.TEACHER_NAME, studentEvaluate.getTeacherName());
         queryWrapper.eq(Constant.STU_ID, studentEvaluate.getStudentId());
@@ -78,7 +79,7 @@ public class StudentEvaluateController {
         if (count > 0) {
             return resultMap.setError("此纪录已存在，请使用编辑操作!");
         }
-
+        // 保存记录
         studentEvaluateService.save(studentEvaluate);
         return resultMap;
     }

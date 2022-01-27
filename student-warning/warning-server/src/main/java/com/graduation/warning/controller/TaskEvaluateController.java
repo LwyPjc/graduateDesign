@@ -59,17 +59,13 @@ public class TaskEvaluateController {
 
     @PostMapping("/save")
     public ResultMap save(TaskEvaluate taskEvaluate) {
-
+        // 校验是否唯一
         ResultMap resultMap = new ResultMap();
-        String courseName = taskEvaluate.getCourseName();
         Integer studentId = taskEvaluate.getStudentId();
-//        OpenCourse byId = openCourseService.getById(openCourseId);
-//        Integer classId = byId.getCourseId();
-//        Course course = courseService.getById(classId);
         Student student = studentService.getById(studentId);
         taskEvaluate.setStudentName(student.getStuName());
-//        taskEvaluate.setCourseName(course.getName());
         QueryWrapper<TaskEvaluate> queryWrapper = new QueryWrapper<>(taskEvaluate);
+        // 课程 教师 学生 校验唯一
         queryWrapper.eq(Constant.COURSE_NAME, taskEvaluate.getCourseName());
         queryWrapper.eq(Constant.TEACHER_NAME, taskEvaluate.getTeacherName());
         queryWrapper.eq(Constant.STU_ID, taskEvaluate.getStudentId());
@@ -79,6 +75,7 @@ public class TaskEvaluateController {
         }
 
         taskEvaluateService.save(taskEvaluate);
+        // 发送学生统计记录
         studentStatisticsService.handleTask(taskEvaluate);
         return resultMap;
     }

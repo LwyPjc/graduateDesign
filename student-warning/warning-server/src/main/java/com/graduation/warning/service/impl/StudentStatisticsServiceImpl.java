@@ -34,20 +34,22 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
 
     @Override
     public void updateOrSave(StudentStatistics studentStatistics) {
+        // 先到数据库中查询，此学生的统计情况，若已存在则不保存
         QueryWrapper<StudentStatistics> queryWrapper = new QueryWrapper<>(studentStatistics);
         queryWrapper.eq(Constant.TEACHER_NAME, studentStatistics.getTeacherName());
         queryWrapper.eq(Constant.STU_NAME, studentStatistics.getStudentName());
         queryWrapper.eq("type", studentStatistics.getType());
         queryWrapper.eq("warning_level", studentStatistics.getWarningLevel());
-//        queryWrapper.eq("value", studentStatistics.getValue());
         StudentStatistics one = this.getOne(queryWrapper);
         if (one == null) {
+            // 不存在才保存
             this.save(studentStatistics);
         }
     }
 
     @Override
     public void handleScore(ScoreEvaluate scoreEvaluate) {
+        // 成绩类型
         String type = "3";
         Map<String, List<WarningRule>> warningRuleMap = getWarningRuleMap();
         List<WarningRule> warningRules = warningRuleMap.get(type);
@@ -55,7 +57,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
             return;
         }
         BigDecimal score = scoreEvaluate.getScore();
-
+        // 判读成绩是否符合预警设置的值
         for (WarningRule warningRule : warningRules) {
             String value = warningRule.getValue();
             BigDecimal bigDecimal = new BigDecimal(value);
@@ -67,6 +69,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
                 studentStatistics.setStudentId(scoreEvaluate.getStudentId());
                 studentStatistics.setType(type);
                 studentStatistics.setWarningLevel(warningRule.getWarningLevel());
+                // 调用插入方法
                 updateOrSave(studentStatistics);
                 return;
             }
@@ -76,6 +79,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
 
     @Override
     public void handleParticipation(ParticipationEvaluate participationEvaluate) {
+        // 缺勤类型
         String type = "1";
         Map<String, List<WarningRule>> warningRuleMap = getWarningRuleMap();
         List<WarningRule> warningRules = warningRuleMap.get(type);
@@ -110,6 +114,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
 
     @Override
     public void handleTask(TaskEvaluate taskEvaluate) {
+        // 作业类型
         String type = "2";
         Map<String, List<WarningRule>> warningRuleMap = getWarningRuleMap();
         List<WarningRule> warningRules = warningRuleMap.get(type);
@@ -143,6 +148,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
         }
     }
 
+    // 查询管理员预设的预警等级转为map
     private Map<String, List<WarningRule>> getWarningRuleMap() {
         List<WarningRule> list = warningRuleService.findList(new WarningRule());
         Map<String, List<WarningRule>> collect = list.stream().collect(Collectors.groupingBy(WarningRule::getType));

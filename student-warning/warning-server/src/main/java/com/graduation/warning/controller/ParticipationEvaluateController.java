@@ -67,6 +67,7 @@ public class ParticipationEvaluateController {
 
     @PostMapping("/save")
     public ResultMap save(ParticipationEvaluate participationEvaluate) {
+        // 校验此学生缺勤记录是否已经纯在
         ResultMap resultMap = new ResultMap();
         Integer openCourseId = participationEvaluate.getOpenCourseId();
         Integer studentId = participationEvaluate.getStudentId();
@@ -78,6 +79,7 @@ public class ParticipationEvaluateController {
         participationEvaluate.setCourseName(course.getName());
         ParticipationEvaluate participationEvaluateCondition = new ParticipationEvaluate();
         QueryWrapper<ParticipationEvaluate> queryWrapper = new QueryWrapper<>(participationEvaluateCondition);
+        // 开课id 教师 学生id校验唯一
         queryWrapper.eq(Constant.OPEN_COURSE_ID, participationEvaluate.getOpenCourseId());
         queryWrapper.eq(Constant.TEACHER_NAME, participationEvaluate.getTeacherName());
         queryWrapper.eq(Constant.STU_ID, participationEvaluate.getStudentId());
@@ -86,6 +88,7 @@ public class ParticipationEvaluateController {
             return resultMap.setError("此纪录已存在，请使用编辑操作!");
         }
         participationEvaluateService.save(participationEvaluate);
+        // 发送统计值
         studentStatisticsService.handleParticipation(participationEvaluate);
         return resultMap.setSuccss("保存成功");
     }
