@@ -33,7 +33,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
     private WarningRuleService warningRuleService;
 
     @Override
-    public void updateOrSave(StudentStatistics studentStatistics) {
+    public void saveStatistic(StudentStatistics studentStatistics) {
         // 先到数据库中查询，此学生的统计情况，若已存在则不保存
         QueryWrapper<StudentStatistics> queryWrapper = new QueryWrapper<>(studentStatistics);
         queryWrapper.eq(Constant.TEACHER_NAME, studentStatistics.getTeacherName());
@@ -70,7 +70,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
                 studentStatistics.setType(type);
                 studentStatistics.setWarningLevel(warningRule.getWarningLevel());
                 // 调用插入方法
-                updateOrSave(studentStatistics);
+                saveStatistic(studentStatistics);
                 return;
             }
         }
@@ -89,6 +89,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
         Integer count = participationEvaluate.getCount();
         int countValue = 0;
         WarningRule warningRuleResult = null;
+        // 判断是否符合预警值
         for (WarningRule warningRule : warningRules) {
             String value = warningRule.getValue();
             Integer warningCnt = Integer.valueOf(value);
@@ -100,6 +101,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
                 warningRuleResult = warningRule;
             }
         }
+        // 符合预警值则保存
         if (warningRuleResult != null) {
             StudentStatistics studentStatistics = new StudentStatistics();
             studentStatistics.setStudentName(participationEvaluate.getStudentName());
@@ -108,7 +110,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
             studentStatistics.setType(type);
             studentStatistics.setWarningLevel(warningRuleResult.getWarningLevel());
             studentStatistics.setStudentId(participationEvaluate.getStudentId());
-            updateOrSave(studentStatistics);
+            saveStatistic(studentStatistics);
         }
     }
 
@@ -125,6 +127,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
         Integer count = taskEvaluate.getCount();
         int countValue = 0;
         WarningRule warningRuleResult = null;
+        // 判断是否符合预警值
         for (WarningRule warningRule : warningRules) {
             String value = warningRule.getValue();
             Integer warningCnt = Integer.valueOf(value);
@@ -136,6 +139,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
                 warningRuleResult = warningRule;
             }
         }
+        // 符合的话则保存
         if (warningRuleResult != null) {
             StudentStatistics studentStatistics = new StudentStatistics();
             studentStatistics.setStudentName(taskEvaluate.getStudentName());
@@ -144,7 +148,7 @@ public class StudentStatisticsServiceImpl extends ServiceImpl<StudentStatisticsM
             studentStatistics.setType(type);
             studentStatistics.setStudentId(taskEvaluate.getStudentId());
             studentStatistics.setWarningLevel(warningRuleResult.getWarningLevel());
-            updateOrSave(studentStatistics);
+            saveStatistic(studentStatistics);
         }
     }
 

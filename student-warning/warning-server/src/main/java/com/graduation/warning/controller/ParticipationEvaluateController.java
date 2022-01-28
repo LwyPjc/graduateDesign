@@ -69,6 +69,18 @@ public class ParticipationEvaluateController {
     public ResultMap save(ParticipationEvaluate participationEvaluate) {
         // 校验此学生缺勤记录是否已经纯在
         ResultMap resultMap = new ResultMap();
+        ParticipationEvaluate participationEvaluateCheck = check(participationEvaluate);
+        if (participationEvaluateCheck != null) {
+            return resultMap.setError("此纪录已存在，请使用编辑操作!");
+        }
+        participationEvaluateService.save(participationEvaluate);
+        // 发送统计值
+        studentStatisticsService.handleParticipation(participationEvaluate);
+        return resultMap.setSuccss("保存成功");
+    }
+
+    // 判断数据库是否已存在此记录
+    private ParticipationEvaluate check(ParticipationEvaluate participationEvaluate) {
         Integer openCourseId = participationEvaluate.getOpenCourseId();
         Integer studentId = participationEvaluate.getStudentId();
         OpenCourse byId = openCourseService.getById(openCourseId);
@@ -83,14 +95,7 @@ public class ParticipationEvaluateController {
         queryWrapper.eq(Constant.OPEN_COURSE_ID, participationEvaluate.getOpenCourseId());
         queryWrapper.eq(Constant.TEACHER_NAME, participationEvaluate.getTeacherName());
         queryWrapper.eq(Constant.STU_ID, participationEvaluate.getStudentId());
-        int count = participationEvaluateService.count(queryWrapper);
-        if (count > 0) {
-            return resultMap.setError("此纪录已存在，请使用编辑操作!");
-        }
-        participationEvaluateService.save(participationEvaluate);
-        // 发送统计值
-        studentStatisticsService.handleParticipation(participationEvaluate);
-        return resultMap.setSuccss("保存成功");
+        return participationEvaluateService.getOne(queryWrapper);
     }
 
     @PostMapping("/edit")

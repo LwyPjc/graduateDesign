@@ -2,9 +2,7 @@ package com.graduation.warning.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.google.common.collect.Lists;
 import com.graduation.warning.entity.Student;
 import com.graduation.warning.entity.dto.StudentStatisticsDto;
 import com.graduation.warning.service.StudentService;
@@ -25,7 +23,7 @@ import java.util.List;
  * <p></p>
  *
  * @version: 1.0
- * @author: mic
+ * @author: auth
  * @date 2022-1-20
  */
 @RestController
@@ -72,7 +70,7 @@ public class StudentStatisticsController {
 
     @PostMapping("/save")
     public Serializable save(StudentStatistics studentStatistics) {
-        studentStatisticsService.save(studentStatistics);
+        studentStatisticsService.saveStatistic(studentStatistics);
         return studentStatistics.getId();
     }
 

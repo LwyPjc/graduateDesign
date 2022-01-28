@@ -17,7 +17,7 @@ public interface StudentStatisticsService extends BaseService<StudentStatistics>
      * 判断是更新还是插入学生统计情况
      * @param studentStatistics
      */
-    void updateOrSave(StudentStatistics studentStatistics);
+    void saveStatistic(StudentStatistics studentStatistics);
 
     /**
      * 处理分数成绩

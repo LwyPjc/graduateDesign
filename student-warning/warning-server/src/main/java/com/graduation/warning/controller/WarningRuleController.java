@@ -49,21 +49,33 @@ public class WarningRuleController {
 
     @PostMapping("/save")
     public ResultMap save(WarningRule warningRule) {
+        return getResultMap(warningRule, true);
+    }
+
+    private ResultMap getResultMap(WarningRule warningRule, boolean isSave) {
+        // 一样的预警等级只保存一条
         ResultMap resultMap = new ResultMap();
         QueryWrapper<WarningRule> queryWrapper = new QueryWrapper<>(warningRule);
         queryWrapper.eq("type", warningRule.getType());
         queryWrapper.eq("warning_level", warningRule.getWarningLevel());
         WarningRule one = warningRuleService.getOne(queryWrapper);
-        if(one!=null){
-            return resultMap.setError("此纪录已存在，请更新!");
+        if (isSave) {
+            warningRuleService.save(warningRule);
+            if (one != null) {
+                return resultMap.setError("此纪录已存在，请更新!");
+            }
+        } else {
+            if (!one.getId().equals(warningRule.getId())) {
+                return resultMap.setError("此纪录已存在，请更新!");
+            }
+            warningRuleService.updateById(warningRule);
         }
-        warningRuleService.save(warningRule);
         return resultMap.setSuccss("保存成功");
     }
 
     @PostMapping("/edit")
-    public boolean edit(WarningRule warningRule) {
-        return warningRuleService.updateById(warningRule);
+    public ResultMap edit(WarningRule warningRule) {
+        return getResultMap(warningRule, false);
     }
 
     @GetMapping("/delete/{id}")
