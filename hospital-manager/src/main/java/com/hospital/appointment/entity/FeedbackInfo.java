@@ -25,8 +25,6 @@ public class FeedbackInfo extends Model<FeedbackInfo>{
 
     private String openid;
 
-    private String userName;
-
     private Date createTime;
 
     private String temp1;
@@ -53,14 +51,6 @@ public class FeedbackInfo extends Model<FeedbackInfo>{
 
     public void setOpenid(String openid) {
         this.openid = openid;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public Date getCreateTime() {

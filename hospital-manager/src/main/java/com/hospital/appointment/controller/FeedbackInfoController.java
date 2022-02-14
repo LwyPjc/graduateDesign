@@ -11,6 +11,8 @@ import com.hospital.appointment.service.FeedbackInfoService;
 import java.io.Serializable;
 import java.util.List;
 
+import static com.hospital.appointment.utils.CommUtils.getTimestamp;
+
 /**
  * <p>标题: 服务 - 请求控制层</p>
  * <p>描述: </p>
@@ -45,7 +47,8 @@ public class FeedbackInfoController {
     }
 
     @PostMapping("/save")
-    public Serializable save(FeedbackInfo feedbackInfo) {
+    public Serializable save(@RequestBody FeedbackInfo feedbackInfo) {
+        feedbackInfo.setCreateTime(getTimestamp());
         feedbackInfoService.save(feedbackInfo);
         return feedbackInfo.getId();
     }

@@ -38,6 +38,10 @@ public class UserInfoController {
 
     @PostMapping("/save")
     public Serializable save(@RequestBody UserInfo userInfo) {
+        UserInfo userFromDb = userInfoService.getById(userInfo.getId());
+        if (userFromDb!=null){
+            return userInfo.getId();
+        }
         userInfoService.save(userInfo);
         return userInfo.getId();
     }
