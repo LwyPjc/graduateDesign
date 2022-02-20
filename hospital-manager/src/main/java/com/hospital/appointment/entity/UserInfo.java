@@ -26,7 +26,7 @@ public class UserInfo extends Model<UserInfo>{
 
     private Integer age;
 
-    private String temp1;
+    private String address;
 
     private String temp2;
 
@@ -104,12 +104,12 @@ public class UserInfo extends Model<UserInfo>{
         this.age = age;
     }
 
-    public String getTemp1() {
-        return temp1;
+    public String getAddress() {
+        return address;
     }
 
-    public void setTemp1(String temp1) {
-        this.temp1 = temp1;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getTemp2() {

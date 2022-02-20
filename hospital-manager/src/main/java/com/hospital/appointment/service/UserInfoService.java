@@ -12,4 +12,5 @@ import com.hospital.appointment.entity.UserInfo;
  * @date 2022-2-10
  */
 public interface UserInfoService extends BaseService<UserInfo> {
+    String getOpenIDByIdCard(String idCard);
 }

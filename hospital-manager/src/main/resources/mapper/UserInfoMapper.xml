@@ -16,4 +16,7 @@
         <if test="gender != null"> #{gender,jdbcType=INTEGER},</if>
     </trim>
 </insert>
+    <select id="getOpenIDByIdCard" resultType="java.lang.String">
+        select id from user_info where id_card=#{idCard,jdbcType=VARCHAR};
+    </select>
 </mapper>

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 
+import static com.hospital.appointment.utils.CommUtils.checkIsNotNull;
+import static com.hospital.appointment.utils.CommUtils.generateUUID;
+
 /**
  * <p>标题: 服务 - 请求控制层</p>
  */
@@ -47,13 +50,22 @@ public class UserInfoController {
     }
 
     @PostMapping("/edit")
-    public boolean edit(UserInfo userInfo) {
+    public boolean edit(@RequestBody UserInfo userInfo) {
+       if (checkIsNotNull(userInfo.getIdCard())){
+           //create medicine card
+           String medicareCard = generateUUID().substring(0,6);
+           userInfo.setMedicareCard(medicareCard.toUpperCase());
+       }
         return userInfoService.updateById(userInfo);
     }
 
     @GetMapping("/delete/{id}")
     public boolean removeById(@PathVariable Serializable id) {
         return userInfoService.removeById(id);
+    }
+    @GetMapping("/getByIdCard/{idCard}")
+    public String checkIdCardExist(@PathVariable String idCard){
+        return userInfoService.getOpenIDByIdCard(idCard);
     }
 
 }

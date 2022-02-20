@@ -32,6 +32,10 @@ public class HospitalInfoController {
     public List<HospitalInfo> findList(HospitalInfo hospitalInfo) {
         return hospitalInfoService.findList(hospitalInfo);
     }
+    @GetMapping("/getInfo")
+    public HospitalInfo getHospitalInfo(){
+        return hospitalInfoService.getHospitalInfo();
+    }
 
     @GetMapping("/findListByPage")
     public Page<HospitalInfo> findListByPage(HospitalInfo hospitalInfo, Page page) {

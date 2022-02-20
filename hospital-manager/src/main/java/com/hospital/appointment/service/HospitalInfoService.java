@@ -1,4 +1,5 @@
 package com.hospital.appointment.service;
+
 import com.hospital.appointment.entity.HospitalInfo;
 
 /**
@@ -12,5 +13,5 @@ import com.hospital.appointment.entity.HospitalInfo;
  * @date 2022-2-14
  */
 public interface HospitalInfoService extends BaseService<HospitalInfo> {
-
+    HospitalInfo getHospitalInfo();
 }

@@ -1,5 +1,6 @@
 package com.hospital.appointment.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hospital.appointment.entity.HospitalInfo;
@@ -18,5 +19,11 @@ import com.hospital.appointment.service.HospitalInfoService;
  */
 @Service
 public class HospitalInfoServiceImpl extends ServiceImpl<HospitalInfoMapper, HospitalInfo> implements HospitalInfoService {
+    @Autowired
+    private HospitalInfoMapper hospitalInfoMapper;
 
+    @Override
+    public HospitalInfo getHospitalInfo() {
+        return hospitalInfoMapper.getHospitalInfo();
+    }
 }

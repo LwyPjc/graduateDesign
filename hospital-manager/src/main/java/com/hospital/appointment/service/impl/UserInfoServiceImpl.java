@@ -19,4 +19,9 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
     public boolean save(UserInfo userInfo) {
         return userInfoMapper.save(userInfo);
     }
+
+    @Override
+    public String getOpenIDByIdCard(String idCard) {
+        return userInfoMapper.getOpenIDByIdCard(idCard);
+    }
 }

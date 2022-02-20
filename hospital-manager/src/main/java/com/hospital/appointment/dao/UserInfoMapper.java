@@ -18,4 +18,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserInfoMapper extends BaseMapper<UserInfo> {
 
     boolean save(UserInfo userInfo);
+    String getOpenIDByIdCard(String idCard);
 }
