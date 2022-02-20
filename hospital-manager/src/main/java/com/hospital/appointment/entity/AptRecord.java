@@ -23,15 +23,15 @@ public class AptRecord extends Model<AptRecord>{
 
     private String openid;
 
-    private String dptId;
+    private Integer dptId;
 
-    private String docId;
+    private Integer docId;
 
     private Date aptTime;
 
     private Date createTime;
 
-    private String temp1;
+    private Integer status;
 
     public Integer getId() {
         return id;
@@ -49,19 +49,19 @@ public class AptRecord extends Model<AptRecord>{
         this.openid = openid;
     }
 
-    public String getDptId() {
+    public Integer getDptId() {
         return dptId;
     }
 
-    public void setDptId(String dptId) {
+    public void setDptId(Integer dptId) {
         this.dptId = dptId;
     }
 
-    public String getDocId() {
+    public Integer getDocId() {
         return docId;
     }
 
-    public void setDocId(String docId) {
+    public void setDocId(Integer docId) {
         this.docId = docId;
     }
 
@@ -81,11 +81,11 @@ public class AptRecord extends Model<AptRecord>{
         this.createTime = createTime;
     }
 
-    public String getTemp1() {
-        return temp1;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setTemp1(String temp1) {
-        this.temp1 = temp1;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

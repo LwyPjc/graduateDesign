@@ -28,6 +28,11 @@ public class AptRecordController {
     @Autowired
     private AptRecordService aptRecordService;
 
+    @GetMapping("/findByOpenid")
+    public List<AptRecord> findByOpenid(@RequestParam String openid){
+        return aptRecordService.findByOpenid(openid);
+    }
+
     @GetMapping("/findList")
     public List<AptRecord> findList(AptRecord aptRecord) {
         return aptRecordService.findList(aptRecord);

@@ -19,7 +19,7 @@ import java.util.Date;
 public class Department extends Model<Department>{
 
     @TableId(value = "ID", type = IdType.AUTO)
-    private String id;
+    private Integer id;
 
     private String name;
 
@@ -31,11 +31,11 @@ public class Department extends Model<Department>{
 
     private Date createTime;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

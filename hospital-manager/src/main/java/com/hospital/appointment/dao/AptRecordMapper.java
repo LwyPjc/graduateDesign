@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hospital.appointment.entity.AptRecord;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * <p>标题: 服务 - 数据交互层</p>
  * <p>描述: </p>
@@ -16,5 +18,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface AptRecordMapper extends BaseMapper<AptRecord> {
-
+    List<AptRecord> findByOpenid(String openid);
 }

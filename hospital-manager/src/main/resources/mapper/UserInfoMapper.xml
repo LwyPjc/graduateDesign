@@ -7,13 +7,11 @@
         <if test="id != null">id,</if>
         <if test="nickName != null">nick_name,</if>
         <if test="avatarUrl != null">avatar_url, </if>
-        <if test="gender != null">gender,</if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
         <if test="id != null"> #{id,jdbcType=VARCHAR},</if>
         <if test="nickName != null"> #{nickName,jdbcType=VARCHAR},</if>
         <if test="avatarUrl != null"> #{avatarUrl,jdbcType=VARCHAR},</if>
-        <if test="gender != null"> #{gender,jdbcType=INTEGER},</if>
     </trim>
 </insert>
     <select id="getOpenIDByIdCard" resultType="java.lang.String">

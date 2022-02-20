@@ -36,13 +36,19 @@ public class UserInfoController {
 
     @GetMapping("/{id}")
     public UserInfo getById(@PathVariable("id") String id) {
-        return userInfoService.getById(id);
+        UserInfo userInfo = userInfoService.getById(id);
+        if ("1".equals(userInfo.getGender())){
+            userInfo.setGender("女");
+        }else if ("2".equals(userInfo.getGender())){
+            userInfo.setGender("男");
+        }
+        return userInfo;
     }
 
     @PostMapping("/save")
     public Serializable save(@RequestBody UserInfo userInfo) {
         UserInfo userFromDb = userInfoService.getById(userInfo.getId());
-        if (userFromDb!=null){
+        if (userFromDb != null) {
             return userInfo.getId();
         }
         userInfoService.save(userInfo);
@@ -50,21 +56,23 @@ public class UserInfoController {
     }
 
     @PostMapping("/edit")
-    public boolean edit(@RequestBody UserInfo userInfo) {
-       if (checkIsNotNull(userInfo.getIdCard())){
-           //create medicine card
-           String medicareCard = generateUUID().substring(0,6);
-           userInfo.setMedicareCard(medicareCard.toUpperCase());
-       }
-        return userInfoService.updateById(userInfo);
+    public UserInfo edit(@RequestBody UserInfo userInfo) {
+        if (checkIsNotNull(userInfo.getIdCard())) {
+            //create medicine card
+            String medicareCard = generateUUID().substring(0, 6);
+            userInfo.setMedicareCard(medicareCard.toUpperCase());
+        }
+        userInfoService.updateById(userInfo);
+        return userInfo;
     }
 
     @GetMapping("/delete/{id}")
     public boolean removeById(@PathVariable Serializable id) {
         return userInfoService.removeById(id);
     }
+
     @GetMapping("/getByIdCard/{idCard}")
-    public String checkIdCardExist(@PathVariable String idCard){
+    public String checkIdCardExist(@PathVariable String idCard) {
         return userInfoService.getOpenIDByIdCard(idCard);
     }
 
