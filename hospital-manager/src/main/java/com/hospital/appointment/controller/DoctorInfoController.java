@@ -3,7 +3,10 @@ package com.hospital.appointment.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hospital.appointment.entity.DoctorInfo;
+import com.hospital.appointment.entity.SysUser;
 import com.hospital.appointment.service.DoctorInfoService;
+import com.hospital.appointment.service.SysUserService;
+import com.hospital.appointment.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +31,9 @@ public class DoctorInfoController {
     @Autowired
     private DoctorInfoService doctorInfoService;
 
+    @Autowired
+    private SysUserService sysUserService;
+
     @GetMapping("/findList")
     public List<DoctorInfo> findList(DoctorInfo doctorInfo) {
         return doctorInfoService.findList(doctorInfo);
@@ -47,6 +53,12 @@ public class DoctorInfoController {
     @PostMapping("/save")
     public Serializable save(DoctorInfo doctorInfo) {
         doctorInfoService.save(doctorInfo);
+        // 添加医生登录信息
+        SysUser sysUser = new SysUser();
+        sysUser.setUsername(doctorInfo.getPhone());
+        sysUser.setPassword(Constant.DEFAULT_PASSWORD);
+        sysUser.setRole("1");
+        sysUserService.save(sysUser);
         return doctorInfo.getId();
     }
 
