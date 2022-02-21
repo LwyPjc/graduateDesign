@@ -3,14 +3,26 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-date-picker
-                        v-model="listQuery.createTime"
-                        value-format="timestamp"
-                        type="datetime"
-                        placeholder="选择日期时间"
-                        size="small"
-                        class="filter-item">
-                    </el-date-picker>
+              请选择创建时间范围:
+              <el-date-picker
+                v-model="date"
+                type="daterange"
+                range-separator="-"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+                format="yyyy-MM-dd"
+                :picker-options="pickerOptions1">
+              </el-date-picker>
+
+<!--                    <el-date-picker-->
+<!--                        v-model="listQuery.createTime"-->
+<!--                        value-format="timestamp"-->
+<!--                        type="datetime"-->
+<!--                        placeholder="选择日期时间"-->
+<!--                        size="small"-->
+<!--                        class="filter-item">-->
+<!--                    </el-date-picker>-->
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -55,16 +67,6 @@
                             {{ scope.row.createTime  | timeFilter }}
                         </template>
                     </el-table-column>
-<!--                    <el-table-column-->
-<!--                            label="操作"-->
-<!--                            align="center"-->
-<!--                            width="180"-->
-<!--                            class-name="small-padding fixed-width">-->
-<!--                      <template slot-scope="scope">-->
-<!--                        <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>-->
-<!--                        <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>-->
-<!--                      </template>-->
-<!--                    </el-table-column>-->
                 </el-table>
 
                 <pagination v-show="total>0" :total="total"
@@ -82,10 +84,13 @@
     import request from '@/utils/request'
     import HandleDialog from './FeedbackInfoDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
+    import DateC from '@/views/date/Date'
+
     export default {
         components: {
             HandleDialog,
-            Pagination
+            Pagination,
+            DateC
         },
         filters: {
             statusFilter(status) {
@@ -118,17 +123,38 @@
                 listLoading: true, //表格加载框
                 total: 0, //分页总数
                 tableHeight: window.innerHeight - 240, //表格高度
+                date: null,
                 listQuery: { //表格查询对象
                     current: 1,
                     size: 10,
                     query: '',
                     content: null,
                     openid: null,
-                    createTime: null,
-                    startTime: null,
+                    dateStart: null,
+                    dateEnd: null,
                     endTime:null,
                     temp1: null,
                 },
+              pickerOptionsStart: {
+                disabledDate(time) {
+                  if (this.dateEnd) {
+                    var endTime = new Date(this.dateEnd).valueOf();
+                  }
+                  var startTime =  Date.now() - 8.64e7;
+                  return time && (time.valueOf() < startTime) || time.valueOf() > endTime
+                }
+              },
+              //限制
+              pickerOptions1:{
+                onPick: (obj) => {
+                  this.listQuery.dateStart = new Date(obj.minDate).getTime();
+                  this.listQuery.dateEnd = new Date(obj.maxDate).getTime();
+                  console.log('时间',obj)
+                  console.log('时间 date', this.date)
+                },
+                disabledDate:(time)=> {
+                }
+              },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'

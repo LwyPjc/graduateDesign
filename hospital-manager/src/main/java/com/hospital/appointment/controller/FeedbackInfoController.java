@@ -3,6 +3,7 @@ package com.hospital.appointment.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hospital.appointment.entity.UserInfo;
+import com.hospital.appointment.entity.dto.FeedbackInfoDto;
 import com.hospital.appointment.service.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,12 @@ public class FeedbackInfoController {
     }
 
     @GetMapping("/findListByPage")
-    public Page<FeedbackInfo> findListByPage(FeedbackInfo feedbackInfo, Page page) {
+    public Page<FeedbackInfo> findListByPage(FeedbackInfoDto feedbackInfo, Page page) {
         QueryWrapper<FeedbackInfo> queryWrapper = new QueryWrapper<>(feedbackInfo);
+        if (feedbackInfo.getDateStart() != null && feedbackInfo.getDateEnd() != null) {
+            queryWrapper.gt("create_time", feedbackInfo.getDateStartWithDate());
+            queryWrapper.le("create_time", feedbackInfo.getDateEndWithDate());
+        }
         Page<FeedbackInfo> pageInfo = feedbackInfoService.page(page, queryWrapper);
         HashMap<String, String> nameMap = new HashMap<>();
         if (pageInfo != null) {

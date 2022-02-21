@@ -40,11 +40,11 @@ export default new Router({
           name: 'UserInfo',
           component: () => import('@/views/userInfo/UserInfo')
         },
-        {
-          path: '/statistics',
-          name: 'Statistics',
-          component: () => import('@/views/statistics/Statistics')
-        },
+        // {
+        //   path: '/statistics',
+        //   name: 'Statistics',
+        //   component: () => import('@/views/statistics/Statistics')
+        // },
       ]
     }
   ]
