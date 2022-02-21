@@ -142,13 +142,21 @@
                       url: "/userInfo",
                       children: []
                     },
+                  {
+                    name: "统计",
+                    id: 5,
+                    icon: "el-icon-collection-tag",
+                    url: "/statistics",
+                    children: []
+                  },
                     {
                       name: "修改密码",
                       id: 5,
                       icon: "el-icon-collection-tag",
                       url: "/updatePwd",
                       children: []
-                    }
+                    },
+
                 ]
             } else {
                 this.list = [

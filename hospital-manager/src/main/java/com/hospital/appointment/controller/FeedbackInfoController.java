@@ -13,6 +13,7 @@ import com.hospital.appointment.entity.FeedbackInfo;
 import com.hospital.appointment.service.FeedbackInfoService;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.hospital.appointment.utils.CommUtils.getTimestamp;
@@ -48,12 +49,18 @@ public class FeedbackInfoController {
     public Page<FeedbackInfo> findListByPage(FeedbackInfo feedbackInfo, Page page) {
         QueryWrapper<FeedbackInfo> queryWrapper = new QueryWrapper<>(feedbackInfo);
         Page<FeedbackInfo> pageInfo = feedbackInfoService.page(page, queryWrapper);
+        HashMap<String, String> nameMap = new HashMap<>();
         if (pageInfo != null) {
             List<FeedbackInfo> orders = pageInfo.getRecords();
             if (!CollectionUtils.isEmpty(orders)) {
                 for (FeedbackInfo order : orders) {
+                    String openid = order.getOpenid();
+                    if (nameMap.containsKey(openid)) {
+                        order.setOpenid(nameMap.get(openid));
+                        continue;
+                    }
                     UserInfo userInfo = new UserInfo();
-                    userInfo.setId(order.getOpenid());
+                    userInfo.setId(openid);
                     QueryWrapper<UserInfo> queryWrapperFeed = new QueryWrapper<>(userInfo);
                     queryWrapperFeed.eq("id", userInfo.getId());
                     List<UserInfo> list = userInfoService.list(queryWrapperFeed);
@@ -66,6 +73,7 @@ public class FeedbackInfoController {
                         } else {
                             order.setOpenid(nickName);
                         }
+                        nameMap.put(openid, order.getOpenid());
                     }
                 }
             }

@@ -125,6 +125,8 @@
                     content: null,
                     openid: null,
                     createTime: null,
+                    startTime: null,
+                    endTime:null,
                     temp1: null,
                 },
                 statusOptions: { //有效无效下拉框
