@@ -14,14 +14,24 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-        <el-form-item label="用户名" label-width="105px" prop="username">
-            <el-input placeholder="请输入用户名" v-model="dialogFormData.username"/>
+        <el-form-item label="科室名称" label-width="105px" prop="name">
+            <el-input placeholder="请输入科室名称" v-model="dialogFormData.name"/>
         </el-form-item>
-        <el-form-item label="密码" label-width="105px" prop="password">
-            <el-input placeholder="请输入密码" v-model="dialogFormData.password"/>
+        <el-form-item label="科室简介" label-width="105px" prop="desc">
+            <el-input placeholder="请输入科室简介" v-model="dialogFormData.desc"/>
         </el-form-item>
-        <el-form-item label="角色 2管理员" label-width="105px" prop="role">
-            <el-input placeholder="请输入角色 2管理员" v-model="dialogFormData.role"/>
+        <el-form-item label="父科室id" label-width="105px" prop="parentId">
+            <el-input type="number" placeholder="请输入父科室id" v-model.number="dialogFormData.parentId"/>
+        </el-form-item>
+        <el-form-item label="假删除 1删除，0否" label-width="105px" prop="deleteFlg">
+            <el-input placeholder="请输入假删除 1删除，0否" v-model="dialogFormData.deleteFlg"/>
+        </el-form-item>
+        <el-form-item label="创建时间" label-width="105px" prop="createTime">
+            <el-date-picker
+                v-model="dialogFormData.createTime"
+                type="date"
+                placeholder="选择创建时间">
+            </el-date-picker>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -41,27 +51,35 @@
 <script>
   import request from '@/utils/request'
     export default {
-        name: "SysUserAddOrUpdate",
+        name: "DepartmentAddOrUpdate",
         data () {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/sysUser',
+                prefixUrl: this.GLOBAL.baseUrl + '/department',
                 dialogFormData: {
                     id: '',
-                    username: '',
-                    password: '',
-                    role: '',
+                    name: '',
+                    desc: '',
+                    parentId: '',
+                    deleteFlg: '',
+                    createTime: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
                 dialogFormRules: {
-                    username: [
+                    name: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    password: [
+                    desc: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    role: [
+                    parentId: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    deleteFlg: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    createTime: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -94,9 +112,11 @@
             resetModel() {
                 this.dialogFormData = {
                     id: '',
-                    username: '',
-                    password: '',
-                    role: '',
+                    name: '',
+                    desc: '',
+                    parentId: '',
+                    deleteFlg: '',
+                    createTime: '',
                 }
 
             },

@@ -25,6 +25,7 @@ import static com.hospital.appointment.utils.CommUtils.getTimestamp;
  */
 @RestController
 @RequestMapping("/feedbackInfo")
+@CrossOrigin
 public class FeedbackInfoController {
 
     @Autowired

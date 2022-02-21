@@ -27,20 +27,34 @@
                 <el-row>
                     <el-col :span="24" class="filter-container">
                         <el-input
-                                placeholder="用户名过滤"
-                                v-model="listQuery.username"
+                                placeholder="医生姓名过滤"
+                                v-model="listQuery.name"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
-                                placeholder="密码过滤"
-                                v-model="listQuery.password"
+                                placeholder="科室id过滤"
+                                type="number"
+                                v-model.number="listQuery.dptId "
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
-                                placeholder="角色 2管理员过滤"
-                                v-model="listQuery.role"
+                                placeholder="简介过滤"
+                                v-model="listQuery.desc"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="头衔id过滤"
+                                type="number"
+                                v-model.number="listQuery.titleId "
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="保留字段过滤"
+                                v-model="listQuery.temp1"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -76,30 +90,48 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="用户名"
+                                    label="医生姓名"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.username }}
+                                    {{ scope.row.name }}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="密码"
+                                    label="科室id"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.password }}
+                                    {{ scope.row.dptId }}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="角色 2管理员"
+                                    label="简介"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.role }}
+                                    {{ scope.row.desc }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="头衔id"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.titleId }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="保留字段"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.temp1 }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -132,7 +164,7 @@
 
 <script>
     import request from '@/utils/request';
-    import HandleDialog from './SysUserDialog'
+    import HandleDialog from './DoctorInfoDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -181,15 +213,17 @@
                     current: 1,
                     size: 10,
                     query: '',
-                    username: null,
-                    password: null,
-                    role: null,
+                    name: null,
+                    dptId: null,
+                    desc: null,
+                    titleId: null,
+                    temp1: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: '/sysUser'
+                prefixUrl: '/doctorInfo'
             }
         },
         watch: {

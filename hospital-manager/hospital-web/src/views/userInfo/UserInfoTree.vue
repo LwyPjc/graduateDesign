@@ -27,20 +27,63 @@
                 <el-row>
                     <el-col :span="24" class="filter-container">
                         <el-input
-                                placeholder="用户名过滤"
-                                v-model="listQuery.username"
+                                placeholder="头像地址过滤"
+                                v-model="listQuery.avatarUrl"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
-                                placeholder="密码过滤"
-                                v-model="listQuery.password"
+                                placeholder="微信名称过滤"
+                                v-model="listQuery.nickName"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
-                                placeholder="角色 2管理员过滤"
-                                v-model="listQuery.role"
+                                placeholder="电话号码过滤"
+                                v-model="listQuery.phoneNum"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="医保卡过滤"
+                                v-model="listQuery.medicareCard"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="性别1男 2女 0 未知过滤"
+                                v-model="listQuery.gender"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="身份证号码过滤"
+                                v-model="listQuery.idCard"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="年龄过滤"
+                                type="number"
+                                v-model.number="listQuery.age "
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="详细地址过滤"
+                                v-model="listQuery.address"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="过滤"
+                                v-model="listQuery.temp2"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="真实年龄过滤"
+                                v-model="listQuery.trueName"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -76,30 +119,93 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="用户名"
+                                    label="头像地址"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.username }}
+                                    {{ scope.row.avatarUrl }}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="密码"
+                                    label="微信名称"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.password }}
+                                    {{ scope.row.nickName }}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="角色 2管理员"
+                                    label="电话号码"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.role }}
+                                    {{ scope.row.phoneNum }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="医保卡"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.medicareCard }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="性别1男 2女 0 未知"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.gender }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="身份证号码"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.idCard }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="年龄"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.age }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="详细地址"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.address }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label=""
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.temp2 }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="真实年龄"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.trueName }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -132,7 +238,7 @@
 
 <script>
     import request from '@/utils/request';
-    import HandleDialog from './SysUserDialog'
+    import HandleDialog from './UserInfoDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -181,15 +287,22 @@
                     current: 1,
                     size: 10,
                     query: '',
-                    username: null,
-                    password: null,
-                    role: null,
+                    avatarUrl: null,
+                    nickName: null,
+                    phoneNum: null,
+                    medicareCard: null,
+                    gender: null,
+                    idCard: null,
+                    age: null,
+                    address: null,
+                    temp2: null,
+                    trueName: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: '/sysUser'
+                prefixUrl: '/userInfo'
             }
         },
         watch: {

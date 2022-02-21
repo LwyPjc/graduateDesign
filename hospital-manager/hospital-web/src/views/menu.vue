@@ -57,55 +57,55 @@
                 username: window.sessionStorage.username,
                 collapse: false, //是否折叠
                 list: [
-                    {
-                        name: "学生信息管理",
-                        id: 1,
-                        icon: "el-icon-pie-chart",
-                        url: "/data",
-                        children: []
-                    },
-                    {
-                        name: "课程管理",
-                        id: 2,
-                        icon: "el-icon-collection-tag",
-                        url: "/course",
-                        children: []
-                    },
-                    {
-                        name: "开课管理",
-                        id: 3,
-                        icon: "el-icon-collection-tag",
-                        url: "/openCourse",
-                        children: []
-                    },
-                    {
-                        name: "课程选课",
-                        id: 6,
-                        icon: "el-icon-collection-tag",
-                        url: "/chooseCourse",
-                        children: []
-                    },
-                    {
-                        name: "课程表",
-                        id: 7,
-                        icon: "el-icon-collection-tag",
-                        url: "/timetable",
-                        children: []
-                    },
-                    {
-                        name: "个人信息",
-                        id: 4,
-                        icon: "el-icon-collection-tag",
-                        url: "/data",
-                        children: []
-                    },
-                    {
-                        name: "修改密码",
-                        id: 5,
-                        icon: "el-icon-collection-tag",
-                        url: "/updatePwd",
-                        children: []
-                    }
+                    // {
+                    //     name: "学生信息管理",
+                    //     id: 1,
+                    //     icon: "el-icon-pie-chart",
+                    //     url: "/data",
+                    //     children: []
+                    // },
+                    // {
+                    //     name: "课程管理",
+                    //     id: 2,
+                    //     icon: "el-icon-collection-tag",
+                    //     url: "/course",
+                    //     children: []
+                    // },
+                    // {
+                    //     name: "开课管理",
+                    //     id: 3,
+                    //     icon: "el-icon-collection-tag",
+                    //     url: "/openCourse",
+                    //     children: []
+                    // },
+                    // {
+                    //     name: "课程选课",
+                    //     id: 6,
+                    //     icon: "el-icon-collection-tag",
+                    //     url: "/chooseCourse",
+                    //     children: []
+                    // },
+                    // {
+                    //     name: "课程表",
+                    //     id: 7,
+                    //     icon: "el-icon-collection-tag",
+                    //     url: "/timetable",
+                    //     children: []
+                    // },
+                    // {
+                    //     name: "个人信息",
+                    //     id: 4,
+                    //     icon: "el-icon-collection-tag",
+                    //     url: "/data",
+                    //     children: []
+                    // },
+                    // {
+                    //     name: "修改密码",
+                    //     id: 5,
+                    //     icon: "el-icon-collection-tag",
+                    //     url: "/updatePwd",
+                    //     children: []
+                    // }
                 ], //当行菜单数据源
                 backgroundColor: "#304156", //导航菜单背景颜色
                 textColor: "#BFCBD9" //导航菜单文字颜色
@@ -115,47 +115,33 @@
             if (window.sessionStorage.role === '2') {
                 this.list = [
                     {
-                        name: "学生信息管理",
+                        name: "用户意见反馈",
                         id: 1,
                         icon: "el-icon-user-solid",
-                        url: "/student",
+                        url: "/feedbackInfo",
                         children: []
                     },
                     {
-                        name: "教师信息管理",
-                        id: 8,
+                        name: "科室管理",
+                        id: 2,
                         icon: "el-icon-s-custom",
-                        url: "/teacher",
+                        url: "/department",
                         children: []
                     },
                     {
-                        name: "班级信息管理",
-                        id: 9,
+                        name: "医生管理",
+                        id: 3,
                         icon: "el-icon-s-custom",
-                        url: "/aClass",
+                        url: "/doctorInfo",
                         children: []
                     },
                     {
-                      name: "课程管理",
-                      id: 2,
+                      name: "患者管理",
+                      id: 4,
                       icon: "el-icon-collection-tag",
-                      url: "/course",
+                      url: "/userInfo",
                       children: []
                     },
-                    {
-                      name: "开课管理",
-                      id: 3,
-                      icon: "el-icon-collection-tag",
-                      url: "/openCourse",
-                      children: []
-                    },
-                  {
-                    name: "预警规则管理",
-                    id: 10,
-                    icon: "el-icon-collection-tag",
-                    url: "/warningRule",
-                    children: []
-                  },
                     {
                       name: "修改密码",
                       id: 5,

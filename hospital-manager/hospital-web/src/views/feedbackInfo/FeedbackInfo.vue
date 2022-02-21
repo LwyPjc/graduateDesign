@@ -3,9 +3,17 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="用户名过滤" v-model="listQuery.username" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="密码过滤" v-model="listQuery.password" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="角色 2管理员过滤" v-model="listQuery.role" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="反馈内容过滤" v-model="listQuery.content" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="反馈人openid过滤" v-model="listQuery.openid" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-date-picker
+                        v-model="listQuery.createTime"
+                        value-format="timestamp"
+                        type="datetime"
+                        placeholder="选择日期时间"
+                        size="small"
+                        class="filter-item">
+                    </el-date-picker>
+                    <el-input placeholder="过滤" v-model="listQuery.temp1" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -35,19 +43,24 @@
                             {{ scope.$index }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="用户名" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="反馈内容" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.username }}
+                            {{ scope.row.content }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="密码" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="反馈人openid" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.password }}
+                            {{ scope.row.openid }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="角色 2管理员" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="创建时间" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.role }}
+                            {{ scope.row.createTime  | timeFilter }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.temp1 }}
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -77,7 +90,7 @@
 
 <script>
     import request from '@/utils/request'
-    import HandleDialog from './SysUserDialog'
+    import HandleDialog from './FeedbackInfoDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -119,15 +132,16 @@
                     current: 1,
                     size: 10,
                     query: '',
-                    username: null,
-                    password: null,
-                    role: null,
+                    content: null,
+                    openid: null,
+                    createTime: null,
+                    temp1: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/sysUser'
+                prefixUrl: this.GLOBAL.baseUrl + '/feedbackInfo'
             }
         },
         created() {

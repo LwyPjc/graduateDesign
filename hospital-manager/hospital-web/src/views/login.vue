@@ -65,9 +65,9 @@
                             // sessionStorage.setItem('name', res.msg.name);
                             // 管理员
                             if (res.msg.role === "2") {
-                                this.$router.push({path: '/student'});
+                                this.$router.push({path: '/feedbackInfo'});
                             } else {
-                              // 教师
+                              // 医生
                               this.$router.push({path: '/studentEvaluate'});
                             }
                         } else {

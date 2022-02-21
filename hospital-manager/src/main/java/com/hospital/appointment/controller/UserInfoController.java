@@ -18,6 +18,7 @@ import static com.hospital.appointment.utils.CommUtils.generateUUID;
  */
 @RestController
 @RequestMapping("/userInfo")
+@CrossOrigin
 public class UserInfoController {
 
     @Autowired

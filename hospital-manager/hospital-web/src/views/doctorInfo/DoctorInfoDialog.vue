@@ -14,14 +14,20 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-        <el-form-item label="用户名" label-width="105px" prop="username">
-            <el-input placeholder="请输入用户名" v-model="dialogFormData.username"/>
+        <el-form-item label="医生姓名" label-width="105px" prop="name">
+            <el-input placeholder="请输入医生姓名" v-model="dialogFormData.name"/>
         </el-form-item>
-        <el-form-item label="密码" label-width="105px" prop="password">
-            <el-input placeholder="请输入密码" v-model="dialogFormData.password"/>
+        <el-form-item label="科室id" label-width="105px" prop="dptId">
+            <el-input type="number" placeholder="请输入科室id" v-model.number="dialogFormData.dptId"/>
         </el-form-item>
-        <el-form-item label="角色 2管理员" label-width="105px" prop="role">
-            <el-input placeholder="请输入角色 2管理员" v-model="dialogFormData.role"/>
+        <el-form-item label="简介" label-width="105px" prop="desc">
+            <el-input placeholder="请输入简介" v-model="dialogFormData.desc"/>
+        </el-form-item>
+        <el-form-item label="头衔id" label-width="105px" prop="titleId">
+            <el-input type="number" placeholder="请输入头衔id" v-model.number="dialogFormData.titleId"/>
+        </el-form-item>
+        <el-form-item label="保留字段" label-width="105px" prop="temp1">
+            <el-input placeholder="请输入保留字段" v-model="dialogFormData.temp1"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -41,27 +47,35 @@
 <script>
   import request from '@/utils/request'
     export default {
-        name: "SysUserAddOrUpdate",
+        name: "DoctorInfoAddOrUpdate",
         data () {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/sysUser',
+                prefixUrl: this.GLOBAL.baseUrl + '/doctorInfo',
                 dialogFormData: {
                     id: '',
-                    username: '',
-                    password: '',
-                    role: '',
+                    name: '',
+                    dptId: '',
+                    desc: '',
+                    titleId: '',
+                    temp1: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
                 dialogFormRules: {
-                    username: [
+                    name: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    password: [
+                    dptId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    role: [
+                    desc: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    titleId: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    temp1: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -94,9 +108,11 @@
             resetModel() {
                 this.dialogFormData = {
                     id: '',
-                    username: '',
-                    password: '',
-                    role: '',
+                    name: '',
+                    dptId: '',
+                    desc: '',
+                    titleId: '',
+                    temp1: '',
                 }
 
             },

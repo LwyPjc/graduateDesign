@@ -23,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/hospitalInfo")
+@CrossOrigin
 public class HospitalInfoController {
 
     @Autowired
