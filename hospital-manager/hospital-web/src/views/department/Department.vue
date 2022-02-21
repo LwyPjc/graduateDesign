@@ -43,14 +43,9 @@
                             {{ scope.row.descs }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="父科室id" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="父科室" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.parentId }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="假删除 1删除，0否" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.deleteFlg }}
+                            {{ scope.row.parentName }}
                         </template>
                     </el-table-column>
                     <el-table-column label="创建时间" show-overflow-tooltip style="width: 10%" align="center">
@@ -135,13 +130,34 @@
                     '1': '有效',
                     '0': '无效'
                 },
+                departmentList: [],
                 prefixUrl: this.GLOBAL.baseUrl + 'department'
             }
         },
         created() {
-            this.fetchData()
+            this.fetchData();
+            this.getInitData();
         },
         methods: {
+          /**
+           * 请求所有初始化数据
+           */
+          getInitData() {
+            request({
+              url: `${this.GLOBAL.baseUrl}/department/findList`,
+              method: 'get',
+            }).then(res=>{
+              this.departmentList = res;
+            }).catch(error => {
+              this.$message({
+                message: error,
+                type: 'error',
+                duration: 1500,
+                onClose: () => {
+                }
+              })
+            });
+          },
             /**
              * 获取表格数据
              */
@@ -169,7 +185,11 @@
              * 显示修改编辑框
              */
             showDialog(data) {
-                this.$refs.dlg.init(data)
+              if(data === undefined){
+                data = {};
+              }
+              data["departmentList"] = this.departmentList;
+              this.$refs.dlg.init(data)
             },
             /**
              * 搜索过滤

@@ -9,6 +9,7 @@ import com.hospital.appointment.entity.Department;
 import com.hospital.appointment.service.DepartmentService;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,6 +48,7 @@ public class DepartmentController {
 
     @PostMapping("/save")
     public Serializable save(Department department) {
+        department.setCreateTime(new Date());
         departmentService.save(department);
         return department.getId();
     }

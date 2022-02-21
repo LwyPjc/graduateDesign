@@ -43,24 +43,14 @@
                       {{ scope.row.phone }}
                     </template>
                   </el-table-column>
-                    <el-table-column label="科室id" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="科室" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.dptId }}
+                            {{ scope.row.dptName }}
                         </template>
                     </el-table-column>
                     <el-table-column label="简介" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.descs }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="头衔id" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.titleId }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="保留字段" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.temp1 }}
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -141,13 +131,34 @@
                     '1': '有效',
                     '0': '无效'
                 },
+                departmentList: [],
                 prefixUrl: this.GLOBAL.baseUrl + 'doctorInfo'
             }
         },
         created() {
-            this.fetchData()
+            this.fetchData();
+            this.getInitData();
         },
         methods: {
+          /**
+           * 请求所有初始化数据
+           */
+          getInitData() {
+            request({
+              url: `${this.GLOBAL.baseUrl}/department/findList`,
+              method: 'get',
+            }).then(res=>{
+              this.departmentList = res;
+            }).catch(error => {
+              this.$message({
+                message: error,
+                type: 'error',
+                duration: 1500,
+                onClose: () => {
+                }
+              })
+            });
+          },
             /**
              * 获取表格数据
              */
@@ -175,6 +186,10 @@
              * 显示修改编辑框
              */
             showDialog(data) {
+              if(data === undefined){
+                data = {};
+              }
+              data["departmentList"] = this.departmentList;
                 this.$refs.dlg.init(data)
             },
             /**

@@ -16,11 +16,11 @@
                             icon="el-icon-search"
                             size="small"
                             @click="handleFilter">搜索</el-button>
-                    <el-button
-                            icon="el-icon-circle-plus-outline"
-                            size="small"
-                            @click="showDialog()"
-                    >新增</el-button>
+<!--                    <el-button-->
+<!--                            icon="el-icon-circle-plus-outline"-->
+<!--                            size="small"-->
+<!--                            @click="showDialog()"-->
+<!--                    >新增</el-button>-->
             </el-col>
         </el-row>
         <!-- 表格list -->
@@ -45,7 +45,7 @@
                             {{ scope.row.content }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="反馈人openid" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="反馈人" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.openid }}
                         </template>
@@ -55,16 +55,16 @@
                             {{ scope.row.createTime  | timeFilter }}
                         </template>
                     </el-table-column>
-                    <el-table-column
-                            label="操作"
-                            align="center"
-                            width="180"
-                            class-name="small-padding fixed-width">
-                      <template slot-scope="scope">
-                        <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
-                        <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
-                      </template>
-                    </el-table-column>
+<!--                    <el-table-column-->
+<!--                            label="操作"-->
+<!--                            align="center"-->
+<!--                            width="180"-->
+<!--                            class-name="small-padding fixed-width">-->
+<!--                      <template slot-scope="scope">-->
+<!--                        <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>-->
+<!--                        <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>-->
+<!--                      </template>-->
+<!--                    </el-table-column>-->
                 </el-table>
 
                 <pagination v-show="total>0" :total="total"

@@ -17,20 +17,23 @@
         <el-form-item label="医生姓名" label-width="105px" prop="name">
             <el-input placeholder="请输入医生姓名" v-model="dialogFormData.name"/>
         </el-form-item>
-        <el-form-item label="科室id" label-width="105px" prop="dptId">
-            <el-input type="number" placeholder="请输入科室id" v-model.number="dialogFormData.dptId"/>
-        </el-form-item>
+      <el-form-item label="科室" label-width="105px" prop="openCourseId">
+        <el-select v-model="dialogFormData.dptId" placeholder="请选择科室" style="width: 220%">
+          <el-option
+            v-for="item in dialogFormData.departmentList"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id"
+            @click.native="convert($event,item)"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
         <el-form-item label="简介" label-width="105px" prop="descs">
             <el-input placeholder="请输入简介" v-model="dialogFormData.descs"/>
         </el-form-item>
-        <el-form-item label="头衔id" label-width="105px" prop="titleId">
-            <el-input type="number" placeholder="请输入头衔id" v-model.number="dialogFormData.titleId"/>
-        </el-form-item>
         <el-form-item label="手机号" label-width="105px" prop="phone">
             <el-input placeholder="请输入手机号" v-model="dialogFormData.phone"/>
-        </el-form-item>
-        <el-form-item label="保留字段" label-width="105px" prop="temp1">
-            <el-input placeholder="请输入保留字段" v-model="dialogFormData.temp1"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -59,10 +62,12 @@
                     id: '',
                     name: '',
                     dptId: '',
+                    deptName:'',
                     descs: '',
                     titleId: '',
                     phone: '',
                     temp1: '',
+                    departmentList: [],
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -76,13 +81,7 @@
                     descs: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    titleId: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
                     phone: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
-                    temp1: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -105,6 +104,10 @@
             }
         },
         methods: {
+          convert(event,item){
+            console.log("信息", item);
+            this.dialogFormData.dptName = item.name;
+          },
             init(row) {
                 this.resetModel()
                 if (row) {
@@ -118,7 +121,6 @@
                     name: '',
                     dptId: '',
                     descs: '',
-                    titleId: '',
                     phone: '',
                     temp1: '',
                 }
@@ -135,6 +137,7 @@
                     if (!valid) {
                       return false
                     }
+                  this.dialogFormData.departmentList = null;
                   const apiName = `${!this.dialogFormData.id ? 'save' : 'edit'}`
                   request({
                     url: `${this.prefixUrl}/${apiName}`,

@@ -31,6 +31,16 @@ public class DoctorInfo extends Model<DoctorInfo>{
 
     private String temp1;
 
+    private String dptName;
+
+    public String getDptName() {
+        return dptName;
+    }
+
+    public void setDptName(String dptName) {
+        this.dptName = dptName;
+    }
+
     public Integer getId() {
         return id;
     }

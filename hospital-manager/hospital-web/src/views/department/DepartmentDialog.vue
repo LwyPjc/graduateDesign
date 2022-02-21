@@ -20,19 +20,19 @@
         <el-form-item label="科室简介" label-width="105px" prop="desc">
             <el-input placeholder="请输入科室简介" v-model="dialogFormData.descs"/>
         </el-form-item>
-        <el-form-item label="父科室id" label-width="105px" prop="parentId">
-            <el-input type="number" placeholder="请输入父科室id" v-model.number="dialogFormData.parentId"/>
-        </el-form-item>
-        <el-form-item label="假删除 1删除，0否" label-width="105px" prop="deleteFlg">
-            <el-input placeholder="请输入假删除 1删除，0否" v-model="dialogFormData.deleteFlg"/>
-        </el-form-item>
-        <el-form-item label="创建时间" label-width="105px" prop="createTime">
-            <el-date-picker
-                v-model="dialogFormData.createTime"
-                type="date"
-                placeholder="选择创建时间">
-            </el-date-picker>
-        </el-form-item>
+      <el-form-item label="父科室" label-width="105px" prop="openCourseId">
+        <el-select v-model="dialogFormData.parentId" placeholder="请选择父科室" style="width: 220%">
+          <el-option
+            v-for="item in dialogFormData.departmentList"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id"
+            @click.native="convert($event,item)"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
+
     </el-form>
     <div slot="footer" class="dialog-footer">
         <el-button size="small" @click.native="dialogVisible = false">取消</el-button>
@@ -61,8 +61,10 @@
                     name: '',
                     descs: '',
                     parentId: '',
+                    parentName:'',
                     deleteFlg: '',
                     createTime: '',
+                    departmentList: [],
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -74,12 +76,6 @@
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     parentId: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
-                    deleteFlg: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
-                    createTime: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -102,6 +98,10 @@
             }
         },
         methods: {
+          convert(event,item){
+            console.log("信息", item);
+            this.dialogFormData.parentName = item.name;
+          },
             init(row) {
                 this.resetModel()
                 if (row) {
@@ -117,6 +117,7 @@
                     parentId: '',
                     deleteFlg: '',
                     createTime: '',
+                  departmentList:[]
                 }
 
             },
@@ -131,6 +132,7 @@
                     if (!valid) {
                       return false
                     }
+                  this.dialogFormData.departmentList = null;
                   const apiName = `${!this.dialogFormData.id ? 'save' : 'edit'}`
                   request({
                     url: `${this.prefixUrl}/${apiName}`,

@@ -3,21 +3,19 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="微信名称过滤" v-model="listQuery.nickName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="电话号码过滤" v-model="listQuery.phoneNum" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="医保卡过滤" v-model="listQuery.medicareCard" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="身份证号码过滤" v-model="listQuery.idCard" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="年龄过滤" type="number" v-model.number="listQuery.age" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
                             size="small"
                             @click="handleFilter">搜索</el-button>
-                    <el-button
-                            icon="el-icon-circle-plus-outline"
-                            size="small"
-                            @click="showDialog()"
-                    >新增</el-button>
+<!--                    <el-button-->
+<!--                            icon="el-icon-circle-plus-outline"-->
+<!--                            size="small"-->
+<!--                            @click="showDialog()"-->
+<!--                    >新增</el-button>-->
             </el-col>
         </el-row>
         <!-- 表格list -->
@@ -37,11 +35,11 @@
                             {{ scope.$index }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="头像地址" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.avatarUrl }}
-                        </template>
-                    </el-table-column>
+<!--                    <el-table-column label="头像地址" show-overflow-tooltip style="width: 10%" align="center">-->
+<!--                        <template slot-scope="scope">-->
+<!--                            {{ scope.row.avatarUrl }}-->
+<!--                        </template>-->
+<!--                    </el-table-column>-->
                     <el-table-column label="微信名称" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.nickName }}
@@ -77,26 +75,21 @@
                             {{ scope.row.address }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.temp2 }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="真实年龄" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="真实姓名" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.trueName }}
                         </template>
                     </el-table-column>
-                    <el-table-column
-                            label="操作"
-                            align="center"
-                            width="180"
-                            class-name="small-padding fixed-width">
-                      <template slot-scope="scope">
-                        <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
-                        <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
-                      </template>
-                    </el-table-column>
+<!--                    <el-table-column-->
+<!--                            label="操作"-->
+<!--                            align="center"-->
+<!--                            width="180"-->
+<!--                            class-name="small-padding fixed-width">-->
+<!--                      <template slot-scope="scope">-->
+<!--                        <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>-->
+<!--                        <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>-->
+<!--                      </template>-->
+<!--                    </el-table-column>-->
                 </el-table>
 
                 <pagination v-show="total>0" :total="total"
@@ -187,6 +180,17 @@
                     params: this.listQuery
                 }).then(res => {
                   this.list = res.records
+
+                  this.list.forEach(l=>{
+                    if(0 === l.gender){
+                      l.gender = "未知"
+                    }else if(l.gender === 1){
+                      l.gender = "男"
+                    }else {
+                      l.gender = "女";
+                    }
+                  })
+
                   this.total = res.total
                   this.listLoading = false
                 }).catch(error => {
