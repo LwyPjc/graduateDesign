@@ -40,6 +40,16 @@ export default new Router({
           name: 'UserInfo',
           component: () => import('@/views/userInfo/UserInfo')
         },
+        {
+          path: '/chat',
+          name: 'Chat',
+          component: () => import('@/views/chat/Chat')
+        },
+        {
+          path: '/patient',
+          name: 'Patient',
+          component: () => import('@/views/doctors/Patient')
+        },
         // {
         //   path: '/statistics',
         //   name: 'Statistics',

@@ -57,55 +57,7 @@
                 username: window.sessionStorage.username,
                 collapse: false, //是否折叠
                 list: [
-                    // {
-                    //     name: "学生信息管理",
-                    //     id: 1,
-                    //     icon: "el-icon-pie-chart",
-                    //     url: "/data",
-                    //     children: []
-                    // },
-                    // {
-                    //     name: "课程管理",
-                    //     id: 2,
-                    //     icon: "el-icon-collection-tag",
-                    //     url: "/course",
-                    //     children: []
-                    // },
-                    // {
-                    //     name: "开课管理",
-                    //     id: 3,
-                    //     icon: "el-icon-collection-tag",
-                    //     url: "/openCourse",
-                    //     children: []
-                    // },
-                    // {
-                    //     name: "课程选课",
-                    //     id: 6,
-                    //     icon: "el-icon-collection-tag",
-                    //     url: "/chooseCourse",
-                    //     children: []
-                    // },
-                    // {
-                    //     name: "课程表",
-                    //     id: 7,
-                    //     icon: "el-icon-collection-tag",
-                    //     url: "/timetable",
-                    //     children: []
-                    // },
-                    // {
-                    //     name: "个人信息",
-                    //     id: 4,
-                    //     icon: "el-icon-collection-tag",
-                    //     url: "/data",
-                    //     children: []
-                    // },
-                    // {
-                    //     name: "修改密码",
-                    //     id: 5,
-                    //     icon: "el-icon-collection-tag",
-                    //     url: "/updatePwd",
-                    //     children: []
-                    // }
+
                 ], //当行菜单数据源
                 backgroundColor: "#304156", //导航菜单背景颜色
                 textColor: "#BFCBD9" //导航菜单文字颜色
@@ -160,39 +112,18 @@
                 ]
             } else {
                 this.list = [
+                  {
+                    name: "我的咨询",
+                    id: 6,
+                    icon: "el-icon-collection-tag",
+                    url: "/patient",
+                    children: []
+                  },
                     {
-                        name: "课堂表现管理",
+                        name: "聊天",
                         id: 6,
                         icon: "el-icon-collection-tag",
-                        url: "/studentEvaluate",
-                        children: []
-                    },
-                    {
-                        name: "成绩管理",
-                        id: 7,
-                        icon: "el-icon-collection-tag",
-                        url: "/scoreEvaluate",
-                        children: []
-                    },
-                  {
-                    name: "作业管理",
-                    id: 14,
-                    icon: "el-icon-collection-tag",
-                    url: "/taskEvaluate",
-                    children: []
-                  },
-                  {
-                    name: "出勤管理",
-                    id: 15,
-                    icon: "el-icon-collection-tag",
-                    url: "/participationEvaluate",
-                    children: []
-                  },
-                    {
-                        name: "统计管理",
-                        id: 4,
-                        icon: "el-icon-collection-tag",
-                        url: "/studentStatistics",
+                        url: "/chat",
                         children: []
                     },
                     {
