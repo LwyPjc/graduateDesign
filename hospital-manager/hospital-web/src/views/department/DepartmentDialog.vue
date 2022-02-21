@@ -18,7 +18,7 @@
             <el-input placeholder="请输入科室名称" v-model="dialogFormData.name"/>
         </el-form-item>
         <el-form-item label="科室简介" label-width="105px" prop="desc">
-            <el-input placeholder="请输入科室简介" v-model="dialogFormData.desc"/>
+            <el-input placeholder="请输入科室简介" v-model="dialogFormData.descs"/>
         </el-form-item>
         <el-form-item label="父科室id" label-width="105px" prop="parentId">
             <el-input type="number" placeholder="请输入父科室id" v-model.number="dialogFormData.parentId"/>
@@ -55,11 +55,11 @@
         data () {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/department',
+                prefixUrl: this.GLOBAL.baseUrl + 'department',
                 dialogFormData: {
                     id: '',
                     name: '',
-                    desc: '',
+                    descs: '',
                     parentId: '',
                     deleteFlg: '',
                     createTime: '',
@@ -113,7 +113,7 @@
                 this.dialogFormData = {
                     id: '',
                     name: '',
-                    desc: '',
+                    descs: '',
                     parentId: '',
                     deleteFlg: '',
                     createTime: '',

@@ -3,8 +3,6 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="反馈内容过滤" v-model="listQuery.content" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="反馈人openid过滤" v-model="listQuery.openid" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-date-picker
                         v-model="listQuery.createTime"
                         value-format="timestamp"
@@ -13,7 +11,6 @@
                         size="small"
                         class="filter-item">
                     </el-date-picker>
-                    <el-input placeholder="过滤" v-model="listQuery.temp1" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -115,7 +112,7 @@
             },
             timeFilter(time) {
                 if (time) {
-                    return new Date(time).Format('yyyy-MM-dd hh:mm:ss')
+                    return new Date(time).toLocaleDateString().split('/').join('-')
                 } else {
                     return ''
                 }
@@ -141,7 +138,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/feedbackInfo'
+                prefixUrl: this.GLOBAL.baseUrl + 'feedbackInfo'
             }
         },
         created() {

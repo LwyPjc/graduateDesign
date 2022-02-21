@@ -4,10 +4,6 @@
         <el-row>
             <el-col :span="24" class="filter-container">
                     <el-input placeholder="医生姓名过滤" v-model="listQuery.name" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="科室id过滤" type="number" v-model.number="listQuery.dptId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="简介过滤" v-model="listQuery.desc" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="头衔id过滤" type="number" v-model.number="listQuery.titleId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="保留字段过滤" v-model="listQuery.temp1" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -49,7 +45,7 @@
                     </el-table-column>
                     <el-table-column label="简介" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.desc }}
+                            {{ scope.row.descs }}
                         </template>
                     </el-table-column>
                     <el-table-column label="头衔id" show-overflow-tooltip style="width: 10%" align="center">
@@ -133,7 +129,7 @@
                     query: '',
                     name: null,
                     dptId: null,
-                    desc: null,
+                    descs: null,
                     titleId: null,
                     temp1: null,
                 },
@@ -141,7 +137,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/doctorInfo'
+                prefixUrl: this.GLOBAL.baseUrl + 'doctorInfo'
             }
         },
         created() {

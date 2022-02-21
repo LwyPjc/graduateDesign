@@ -16,14 +16,14 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
  */
 public class DoctorInfo extends Model<DoctorInfo>{
 
-    @TableId(value = "ID" , type = IdType.AUTO)
+    @TableId(value = "id" , type = IdType.AUTO)
     private Integer id;
 
     private String name;
 
     private Integer dptId;
 
-    private String desc;
+    private String descs;
 
     private Integer titleId;
 
@@ -55,12 +55,12 @@ public class DoctorInfo extends Model<DoctorInfo>{
         this.dptId = dptId;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescs() {
+        return descs;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescs(String descs) {
+        this.descs = descs;
     }
 
     public Integer getTitleId() {

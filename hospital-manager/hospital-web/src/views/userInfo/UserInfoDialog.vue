@@ -66,7 +66,7 @@
         data () {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/userInfo',
+                prefixUrl: this.GLOBAL.baseUrl + 'userInfo',
                 dialogFormData: {
                     avatarUrl: '',
                     nickName: '',

@@ -4,17 +4,6 @@
         <el-row>
             <el-col :span="24" class="filter-container">
                     <el-input placeholder="科室名称过滤" v-model="listQuery.name" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="科室简介过滤" v-model="listQuery.desc" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="父科室id过滤" type="number" v-model.number="listQuery.parentId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="假删除 1删除，0否过滤" v-model="listQuery.deleteFlg" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-date-picker
-                        v-model="listQuery.createTime"
-                        value-format="timestamp"
-                        type="datetime"
-                        placeholder="选择日期时间"
-                        size="small"
-                        class="filter-item">
-                    </el-date-picker>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -51,7 +40,7 @@
                     </el-table-column>
                     <el-table-column label="科室简介" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.desc }}
+                            {{ scope.row.descs }}
                         </template>
                     </el-table-column>
                     <el-table-column label="父科室id" show-overflow-tooltip style="width: 10%" align="center">
@@ -121,7 +110,7 @@
             },
             timeFilter(time) {
                 if (time) {
-                    return new Date(time).Format('yyyy-MM-dd hh:mm:ss')
+                    return new Date(time).toLocaleDateString().split('/').join('-')
                 } else {
                     return ''
                 }
@@ -139,7 +128,7 @@
                     size: 10,
                     query: '',
                     name: null,
-                    desc: null,
+                    descs: null,
                     parentId: null,
                     deleteFlg: null,
                     createTime: null,
@@ -148,7 +137,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/department'
+                prefixUrl: this.GLOBAL.baseUrl + 'department'
             }
         },
         created() {

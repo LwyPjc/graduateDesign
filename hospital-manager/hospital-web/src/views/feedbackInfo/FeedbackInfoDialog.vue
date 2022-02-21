@@ -52,7 +52,7 @@
         data () {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/feedbackInfo',
+                prefixUrl: this.GLOBAL.baseUrl + 'feedbackInfo',
                 dialogFormData: {
                     id: '',
                     content: '',

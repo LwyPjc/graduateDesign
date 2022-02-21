@@ -3,16 +3,11 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="头像地址过滤" v-model="listQuery.avatarUrl" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="微信名称过滤" v-model="listQuery.nickName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="电话号码过滤" v-model="listQuery.phoneNum" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="医保卡过滤" v-model="listQuery.medicareCard" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="性别1男 2女 0 未知过滤" v-model="listQuery.gender" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="身份证号码过滤" v-model="listQuery.idCard" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="年龄过滤" type="number" v-model.number="listQuery.age" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="详细地址过滤" v-model="listQuery.address" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="过滤" v-model="listQuery.temp2" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="真实年龄过滤" v-model="listQuery.trueName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -176,7 +171,7 @@
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/userInfo'
+                prefixUrl: this.GLOBAL.baseUrl + 'userInfo'
             }
         },
         created() {

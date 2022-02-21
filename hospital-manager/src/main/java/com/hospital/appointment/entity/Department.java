@@ -23,7 +23,7 @@ public class Department extends Model<Department>{
 
     private String name;
 
-    private String desc;
+    private String descs;
 
     private Integer parentId;
 
@@ -47,12 +47,12 @@ public class Department extends Model<Department>{
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescs() {
+        return descs;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescs(String descs) {
+        this.descs = descs;
     }
 
     public Integer getParentId() {
