@@ -20,11 +20,14 @@
         <el-form-item label="科室id" label-width="105px" prop="dptId">
             <el-input type="number" placeholder="请输入科室id" v-model.number="dialogFormData.dptId"/>
         </el-form-item>
-        <el-form-item label="简介" label-width="105px" prop="desc">
+        <el-form-item label="简介" label-width="105px" prop="descs">
             <el-input placeholder="请输入简介" v-model="dialogFormData.descs"/>
         </el-form-item>
         <el-form-item label="头衔id" label-width="105px" prop="titleId">
             <el-input type="number" placeholder="请输入头衔id" v-model.number="dialogFormData.titleId"/>
+        </el-form-item>
+        <el-form-item label="手机号" label-width="105px" prop="phone">
+            <el-input placeholder="请输入手机号" v-model="dialogFormData.phone"/>
         </el-form-item>
         <el-form-item label="保留字段" label-width="105px" prop="temp1">
             <el-input placeholder="请输入保留字段" v-model="dialogFormData.temp1"/>
@@ -58,6 +61,7 @@
                     dptId: '',
                     descs: '',
                     titleId: '',
+                    phone: '',
                     temp1: '',
                 },
                 dialogVisible: false,
@@ -69,10 +73,13 @@
                     dptId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    desc: [
+                    descs: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     titleId: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    phone: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     temp1: [
@@ -112,6 +119,7 @@
                     dptId: '',
                     descs: '',
                     titleId: '',
+                    phone: '',
                     temp1: '',
                 }
 

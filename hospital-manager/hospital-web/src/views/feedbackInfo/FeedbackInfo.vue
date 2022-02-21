@@ -55,22 +55,15 @@
                             {{ scope.row.createTime  | timeFilter }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.temp1 }}
-                        </template>
-                    </el-table-column>
                     <el-table-column
                             label="操作"
                             align="center"
                             width="180"
                             class-name="small-padding fixed-width">
-                        <div slot-scope="scope" class="table-operate-box">
-                            <i class="zoeIconfont z_modifyEI_normal"
-                               @click="showDialog(scope.row)"></i>
-                            <i class="zoeIconfont z_delete_normal danger"
-                               @click="handleDelete(scope.row)"></i>
-                        </div>
+                      <template slot-scope="scope">
+                        <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
+                        <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                      </template>
                     </el-table-column>
                 </el-table>
 

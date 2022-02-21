@@ -70,7 +70,7 @@
                     name: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    desc: [
+                    descs: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     parentId: [

@@ -38,6 +38,11 @@
                             {{ scope.row.name }}
                         </template>
                     </el-table-column>
+                  <el-table-column label="手机号" show-overflow-tooltip style="width: 10%" align="center">
+                    <template slot-scope="scope">
+                      {{ scope.row.phone }}
+                    </template>
+                  </el-table-column>
                     <el-table-column label="科室id" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.dptId }}
@@ -63,12 +68,10 @@
                             align="center"
                             width="180"
                             class-name="small-padding fixed-width">
-                        <div slot-scope="scope" class="table-operate-box">
-                            <i class="zoeIconfont z_modifyEI_normal"
-                               @click="showDialog(scope.row)"></i>
-                            <i class="zoeIconfont z_delete_normal danger"
-                               @click="handleDelete(scope.row)"></i>
-                        </div>
+                      <template slot-scope="scope">
+                        <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
+                        <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                      </template>
                     </el-table-column>
                 </el-table>
 
@@ -132,6 +135,7 @@
                     descs: null,
                     titleId: null,
                     temp1: null,
+                    phone: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
