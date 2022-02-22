@@ -1,5 +1,8 @@
 package com.hospital.appointment.service;
+
 import com.hospital.appointment.entity.Department;
+
+import java.util.List;
 
 /**
  * <p>标题: 服务 - 业务逻辑层</p>
@@ -12,5 +15,5 @@ import com.hospital.appointment.entity.Department;
  * @date 2022-2-20
  */
 public interface DepartmentService extends BaseService<Department> {
-
+    List<Department> findAll();
 }
