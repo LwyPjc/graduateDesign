@@ -1,0 +1,27 @@
+.style{
+    margin-left: 20rpx;
+    margin-top: 50rpx;
+    flex: 1;
+    /* display: flex; */
+    font-size: medium;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+  .line{
+    width: 100%;
+    margin-top: 10rpx;
+    border-top: 1px #dbd8d8 solid; 
+  }
+  .title{
+    width: 200rpx;
+  }
+  .comm{
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    margin-top: 30rpx;
+    background: #ffffff;
+    height: auto;
+    background-position: center;
+    border-radius: 10rpx;
+  }

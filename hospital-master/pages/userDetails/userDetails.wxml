@@ -1,0 +1,64 @@
+<view wx:if="{{!isUserLogin}}" class="userDetails">
+    <view class="not_login">您还未登录，请先</view>
+    <view>
+        <button class="btn_login" bindtap="backToPrePage">登录</button>
+    </view>
+</view>
+<view wx:else class="comm">
+        <view class="style">
+            <view class="title"> 我的头像</view>
+            <image class="avatar-img2" src="{{userInfo.avatarUrl}}"></image>
+
+        </view>
+        <view class="line"></view>
+        <view class="style">
+            <view class="title"> 我的昵称</view>
+            <!-- <input type="text" class="txt" value="{{userInfo.nickName}}" name="nickName" /> -->
+            <view>{{userInfo.nickName}}</view>
+       </view>
+        <view class="line"></view>
+        <view class="style">
+            <view class="title"> 联系电话</view>
+            <!-- <input type="text" class="txt" value="{{userInfo.phoneNum}}" name="phoneNum" /> -->
+            <view>{{userInfo.phoneNum}}</view>
+        </view>
+        <view class="line"></view>
+        <view class="first base_info">🐱‍🚀基础信息</view>
+        <view class="line"></view>
+
+        <view class="style">
+            <view class="title">姓名</view>
+            <!-- <input type="text" class="txt" value="{{userInfo.trueName}}" name="trueName" /> -->
+        <view>{{userInfo.trueName}}</view>
+        </view>
+        <view class="line"></view>
+        <!--  -->
+        <view class="style">
+            <view class="title">身份证号</view>
+            <!-- <input type="text" class="txt" value="{{userInfo.idCard}}" name="idCard" /> -->
+            <view>{{userInfo.idCard}}</view>
+        </view>
+        <view class="line"></view>
+        <view class="style">
+            <view class="title">就诊卡</view>
+            <!-- <input type="text" class="txt" value="{{userInfo.medicareCard}}" name="medicareCard" /> -->
+            <view>{{userInfo.medicareCard}}</view>
+        </view>
+        <view class="line"></view>
+        <view class="style">
+            <view class="title">性别</view>
+            <!-- <input type="text" class="txt" value="{{userInfo.gender}}" name="gender" /> -->
+            <view>{{userInfo.gender}}</view>
+        </view>
+        <view class="line"></view>
+
+        <view class="style">
+            <view class="title">详细地址</view>
+            <!-- <input type="text" class="txt" value="{{userInfo.address}}" name="address" /> -->
+            <view>{{userInfo.address}}</view>
+        </view>
+        <view class="line"></view>
+        <!-- <view class="order"> -->
+        <!-- <button form-type="submit" type="primary" style="position: fixed;bottom: 0rpx; width: 95%;">保存</button> -->
+        <!-- </view> -->
+</view>

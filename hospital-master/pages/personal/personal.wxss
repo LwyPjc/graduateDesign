@@ -1,0 +1,67 @@
+/* pages/personal/personal.wxss */
+.userInfo{
+  background: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin: 80rpx 0 0;
+}
+.userInfo-login{
+  display: flex;
+}
+.contact-btn::after{
+    border: none;
+    /* border:darkgreen */
+    /* border:1px solid */
+}
+.contact-btn{
+  font-size: small;
+  text-align: left;
+  padding-left: 0;
+  background-color: #fff;
+}
+/* .avatar-wrapper {
+  background: #1b82d1;
+  padding: 25rpx 0;
+  height: 50px;
+} */
+ 
+.avatar-img {
+  width: 60px;
+  height: 60px;
+  margin: 10rpx;
+  border-radius: 50%;
+  /* text-align: center; */
+}
+/* .userinfo-avatar {
+  overflow: hidden;
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+} */
+.avatar-btn{
+  margin-left: 10rpx;
+  margin-right: 20rpx;
+  margin-top: 50rpx;
+}
+.avatar-unlogin{
+  font-weight: bold;
+}
+.userName{
+  padding: 20rpx 0;
+  font-size: 1rem;
+}
+.userName2{
+  padding: 20rpx 0;
+  font-size: 0.8rem;
+  color:#999;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+.show{
+  display: block;
+}
+.hidden{
+  display: none;
+}
