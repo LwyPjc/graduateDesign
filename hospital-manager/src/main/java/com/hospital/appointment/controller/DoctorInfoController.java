@@ -34,6 +34,11 @@ public class DoctorInfoController {
     @Autowired
     private SysUserService sysUserService;
 
+    @GetMapping("/getByDptId/{dptId}")
+    public List<DoctorInfo> getByDptId(@PathVariable String dptId){
+        return doctorInfoService.getByDptId(dptId);
+    }
+
     @GetMapping("/findList")
     public List<DoctorInfo> findList(DoctorInfo doctorInfo) {
         return doctorInfoService.findList(doctorInfo);
