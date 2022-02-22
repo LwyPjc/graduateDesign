@@ -33,16 +33,12 @@
           <image src="{{ item.imageurl }}"></image>
         </view>
         <view class='list-part-right'>
-          <view>
+        <view>
             <text class='doctor-name'>{{ item.name }}</text>
-            <view>
-              <text class="price {{show}}" bindtap="contactOnline">
-                在线咨询
+              <text class="price {{show}}" catchtap="contactOnline" >在线咨询
               </text>
             </view>
-
             <!-- <text class="haveNumber {{show}}" id="{{item.color}}">剩：{{item.SYHS}}</text> -->
-          </view>
           <view class='list-part-bottom {{show}}'>
             <label>手机号：{{item.phone}}</label>
             <text class='doctor-field'>{{item.descs}}</text>

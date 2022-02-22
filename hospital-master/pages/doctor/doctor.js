@@ -117,24 +117,24 @@ Page({
       sickName: userInfo.trueName,
       sickCard: userInfo.medicareCard,
     })
-    app.globalData.dayFun = {
-      dayFun: function (data) {
-        wx.showToast({
-          title: '只能续约当天挂号',
-          icon: "none"
-        })
-        return;
-        console.log("1111111", data)
-        var now = data.idx + 1
-        that.setData({
-          date: data.days[0].year + "-" + data.days[0].month + "-" + now
-        })
+    // app.globalData.dayFun = {
+    //   dayFun: function (data) {
+    //     wx.showToast({
+    //       title: '只能续约当天挂号',
+    //       icon: "none"
+    //     })
+    //     return;
+    //     console.log("1111111", data)
+    //     var now = data.idx + 1
+    //     that.setData({
+    //       date: data.days[0].year + "-" + data.days[0].month + "-" + now
+    //     })
 
-      }
-    }
+    //   }
+    // }
     console.log("选中的医生", doctor,"选中的时间", app.globalData.selectTime) ;
   },
-
+// 
   collecting:function(){
     wx.request({
       url: urlApi.getCollectingUrl(),

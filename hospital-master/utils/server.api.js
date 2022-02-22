@@ -3,8 +3,8 @@ const api = "5c26ecdc1e2c8e78ee4efbd9/hospital/";
 //const url ="http://frpgz1.idcfengye.com:10038/"
 const url = "https://devlops.huiwtech.com/";
 // const apiUrl = "http://localhost:8083/";
-// const apiUrl = "http://192.168.3.47:8083/";
-const apiUrl = "http://192.168.43.231:8083/";
+const apiUrl = "http://192.168.3.47:8083/";
+// const apiUrl = "http://192.168.43.231:8083/";
 
 
 
