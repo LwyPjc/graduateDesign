@@ -48,6 +48,11 @@
                             {{ scope.row.parentName }}
                         </template>
                     </el-table-column>
+                  <el-table-column label="电话" show-overflow-tooltip style="width: 10%" align="center">
+                    <template slot-scope="scope">
+                      {{ scope.row.phone }}
+                    </template>
+                  </el-table-column>
                     <el-table-column label="创建时间" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.createTime  | timeFilter }}
