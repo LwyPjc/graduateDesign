@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hospital.appointment.dao.HospitalInfoMapper">
-<select id="getHospitalInfo" resultType="com.hospital.appointment.entity.HospitalInfo">
-    select * from hospital_info where contact_phone is not null limit 1;
-</select>
-</mapper>

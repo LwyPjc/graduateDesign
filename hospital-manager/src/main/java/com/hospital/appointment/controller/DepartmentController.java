@@ -30,6 +30,12 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+    @GetMapping("/findAll")
+    public List<Department> findAll(){
+        return departmentService.findAll();
+    }
+
+
     @GetMapping("/findList")
     public List<Department> findList(Department department) {
         return departmentService.findList(department);

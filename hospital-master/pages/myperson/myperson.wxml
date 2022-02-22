@@ -1,0 +1,21 @@
+<!--pages/myperson/myperson.wxml-->
+<i-panel title="">
+    <view class='panel-p10'>
+      <i-cell-group>
+          <i-cell title="添加就诊人" label="还可以添加5人" is-link url="../addcard/addcard">
+            <i-icon slot="icon" type="add" color="#1498d9" size='36' />
+          </i-cell>
+      </i-cell-group>
+    </view>
+    <view class="sickArr"><text>就诊人列表</text></view>
+    <view class="wrapper" wx:for="{{sickList}}" wx:key="{{ item.id }}" bindtap='detailFun'>
+      <view>
+        <text>{{item.NAME}}</text>
+        <view>就诊卡：{{item.PATIENT_ID}}</view>
+      </view>
+      <view class="wrapperBottom">
+        <text>{{item.ADDRESS}}</text>
+        <view>身份证：{{item.IDCARD}}</view>
+      </view>
+    </view>
+</i-panel>

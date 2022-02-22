@@ -1,0 +1,8 @@
+<view>问题描述<text style="color: red;"> *</text></view>
+    <form bindsubmit="formSubmit">
+    
+    <textarea fixed='true' contenteditable="true" contenteditable="true" class='weui-textarea' name='reason'
+      placeholder='请描述您的问题，不超过200字' placeholder-style='font-size:40rpx;' maxlength='200'></textarea>
+
+      <button form-type="submit" type="primary" style="margin-top: 20px;">提交</button>
+</form>

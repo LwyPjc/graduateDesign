@@ -1,0 +1,19 @@
+<view class='panel-m20'>
+  <!-- <view class="personInfoTop">
+    {{name}}
+  </view> -->
+
+  <view class="wrapper">
+    <view>
+      <text>科室名称</text>
+      <text>{{name}}</text>
+    </view>
+    <view>
+      <text>科室电话</text>
+      <text>{{phone}}</text>
+    </view>
+  </view>
+  <view class='panel'><block style="color: #e2e2e2;">简介：</block>
+    {{info}}
+  </view>
+</view>

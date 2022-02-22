@@ -1,0 +1,48 @@
+@import "../../style/comm.wxss";
+.userDetails{
+    display: flex;
+    position: relative;
+    /* text-align: center; */
+    justify-content: center;
+}
+.not_login{
+   padding-top: 10px;
+}
+
+.btn_login {
+    margin: 0;
+    padding-left: 10rpx;
+    font-size: medium;
+    width: auto;
+    background-color: #fff;
+    position: static;
+
+}
+.btn_login:after {
+    content: none;
+} 
+.btn_login::after {
+    border: none;
+}
+
+  
+  .first{
+    /* overflow: hidden; */
+    margin-left: 20rpx;
+    padding-top: 30rpx;
+  }
+  .avatar-img2 {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    margin-top: 3px;
+    border-radius: 50%;
+  }
+  .txt{
+    width: 100px;
+    margin-right: 10px;
+  }
+  .base_info{
+    font-size: small;
+  }
+  

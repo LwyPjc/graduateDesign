@@ -41,6 +41,16 @@ public class Department extends Model<Department>{
         this.parentName = parentName;
     }
 
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -38,6 +38,9 @@ public class UserInfoController {
     @GetMapping("/{id}")
     public UserInfo getById(@PathVariable("id") String id) {
         UserInfo userInfo = userInfoService.getById(id);
+        if (userInfo==null){
+            return null;
+        }
         if ("1".equals(userInfo.getGender())){
             userInfo.setGender("女");
         }else if ("2".equals(userInfo.getGender())){

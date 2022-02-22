@@ -2,6 +2,8 @@ package com.hospital.appointment.service;
 
 import com.hospital.appointment.entity.DoctorInfo;
 
+import java.util.List;
+
 /**
  * <p>标题: 服务 - 业务逻辑层</p>
  * <p>描述: </p>
@@ -13,5 +15,5 @@ import com.hospital.appointment.entity.DoctorInfo;
  * @date 2022-2-21
  */
 public interface DoctorInfoService extends BaseService<DoctorInfo> {
-
+    List<DoctorInfo> getByDptId(String dptId);
 }
