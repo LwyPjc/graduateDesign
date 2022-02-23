@@ -16,14 +16,9 @@ Page({
     registration: "show",
     date: util.formatTime2(new Date()),
     doctor: "",
-    doctorId: "",
-    departments: "",
-    position: "",
+    userInfo:"",
     dateType: "week",
-    price: "",
-    sickName: "",
-    sickCard: "",
-    HM: null,
+    collectSuccess:false,
   },
 
   handleOpen2: function () {
@@ -66,9 +61,8 @@ Page({
     app.globalData.selectDoctor = doctor;
     var userInfo = app.globalData.userInfo
     this.setData({
-      doctor: doctor,
-      sickName: userInfo.trueName,
-      sickCard: userInfo.medicareCard,
+      doctor,
+      userInfo,
     })
     app.globalData.dayFun = {
       dayFun: function (data) {
@@ -197,11 +191,63 @@ Page({
   onShareAppMessage: function () {
 
   },
+  
+  collecting:function(){
+    if(this.checkUserIsNotLogin()){
+      return;
+    }
+    var that = this
+    var userInfo = this.data.userInfo
+    var doctor = this.data.doctor
+    wx.request({
+      url: urlApi.saveCollect(),
+      method: "post",
+      data: {
+        openid:userInfo.id,
+        dptName:doctor.dptName,
+        dptId:doctor.dptId,
+        docId:doctor.id,
+        docName:doctor.name
+      },
+      success: function (res) {
+        let statusCode = res.statusCode.toString();
+        if(statusCode.startsWith('2')){
+          wx.showToast({
+            title: '收藏成功',
+            icon: "success",
+            duration:2000
+          })
+          that.setData({
+            collectSuccess:true,
+          })
+        } else {
 
+        }
+      }
+    })
+  },
+checkUserIsNotLogin(){
+  var userInfo = app.globalData.userInfo
+  if(util.checkIsNull(userInfo)||util.checkIsNull(userInfo.medicareCard)){
+    wx.showToast({
+      title: '请先绑定信息',
+      icon:'error',
+      duration:2000
+    })
+    return true;
+  }
+  return false;
+},
   //页面跳转
   confirmReg: function (e) {
-    var userInfo = app.globalData.userInfo
+    if(this.checkUserIsNotLogin()){
+      this.setData({
+        visible2: false
+      });
+      return ;
+    }
     var doctorInfo = this.data.doctor
+    var userInfo = this.data.userInfo
     console.log('doctor--confirmReg--date-',this.data.date)
     var that = this
     wx.request({

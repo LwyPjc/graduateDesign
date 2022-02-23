@@ -6,6 +6,7 @@
         "pages/common/footbar/footbar",
         "pages/logs/logs",
         "pages/myContact/myContact",
+        "pages/collect/collect",
         "pages/personal/personal",
         "pages/userDetails/userDetails",
         "pages/feedbackFun/feedbackFun",

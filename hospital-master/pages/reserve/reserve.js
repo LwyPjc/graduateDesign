@@ -80,25 +80,7 @@ Page({
         dptId: options.id
       })
     }
-    var that = this;
-    // app.globalData.dayFun = {
-    //   dayFun:function(data){
-    //     wx.showToast({
-    //       title: '只能续约当天挂号',
-    //       icon:"none"
-    //     })
-    //     return;
-    //     var now = data.idx + 1
-    //     that.setData({
-    //       day: data.days[0].year + "-" + data.days[0].month + "-" + now
-    //     })
-    //     console.log("根据日期获取医生列表",that.data.day);
-    //     that.getDoctorList()    
-    //   }
-    // }
     this.getDoctorList();
-    //this.doctorList();
-    //this.doctorList(Number(options.id))
   },
 
   /**
@@ -300,7 +282,7 @@ Page({
     getfather() {
       // this.triggerEvent('parent', '子组件的数据')
       // var header = this.selectComponent('#header')
-      console.log("子调用父", header.data.msg)
+      console.log("组件调用", header.data.msg)
     }
   },
 
