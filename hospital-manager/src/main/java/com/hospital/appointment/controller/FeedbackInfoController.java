@@ -20,7 +20,7 @@ import java.util.List;
 import static com.hospital.appointment.utils.CommUtils.getTimestamp;
 
 /**
- * <p>标题: 服务 - 请求控制层</p>
+ * <p>标题: 意见反馈表 - 请求控制层</p>
  * <p>描述: </p>
  * <p>版权: Copyright (c) 2022</p>
  * <p></p>
@@ -53,6 +53,7 @@ public class FeedbackInfoController {
             queryWrapper.gt("create_time", feedbackInfo.getDateStartWithDate());
             queryWrapper.le("create_time", feedbackInfo.getDateEndWithDate());
         }
+        // 表中查出的是openid 需要替换为真实姓名
         Page<FeedbackInfo> pageInfo = feedbackInfoService.page(page, queryWrapper);
         HashMap<String, String> nameMap = new HashMap<>();
         if (pageInfo != null) {
@@ -73,6 +74,7 @@ public class FeedbackInfoController {
                         UserInfo userInfo1 = list.get(0);
                         String trueName = userInfo1.getTrueName();
                         String nickName = userInfo1.getNickName();
+                        // openid替换为名字
                         if (StringUtils.isNotBlank(trueName)) {
                             order.setOpenid(trueName);
                         } else {
