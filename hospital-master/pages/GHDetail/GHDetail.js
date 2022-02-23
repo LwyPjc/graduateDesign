@@ -16,24 +16,23 @@ Page({
     doctor: "",
     doctorId: "",
     date: "",
-    price: "",
     departments: "",
     sickName:"",
     sickCard:"",
+    aptRecord:'',
+    userInfo:'',
   },
 
-  payDom: function (){
-    this.setData({
-      sickName: app.globalData.sickName,
-      sickCard: app.globalData.sickCard,
-    })
-  },
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function() {
-    this.payDom();
+  onLoad: function(options) {
+    var aptRecord = JSON.parse(options.aptRecord)
+    this.setData({
+      aptRecord,
+      userInfo:app.globalData.userInfo
+    })
   },
 
   /**

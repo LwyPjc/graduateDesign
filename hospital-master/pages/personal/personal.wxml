@@ -8,7 +8,7 @@
     <!-- <view class='userAvatar'> -->
     <block wx:if="{{firstLogin && !btnClicked}}" class="userInfo-login">
       <image class="avatar-img" src="{{avatarUrl}}"></image>
-      <view class="avatar-btn avatar-unlogin" bindtap="bindGetUserInfo">授权登录</view>
+      <view class="avatar-btn avatar-unlogin" bindtap="bindGetUserInfo">患者登录</view>
     </block>
     <block class="userInfo-login" wx:else>
       <image class="avatar-img" src="{{userInfo.avatarUrl}}"> </image>
@@ -30,11 +30,20 @@
 
 <view class='panel-m20'>
   <i-cell-group>
-    <i-cell>
-    <button class='contact-btn' open-type="contact" bindcontact="handleContact" session-from="sessionFrom">在线咨询</button>
-    <!-- <i-cell title="在线咨询" is-link url="../feedbackDetails/feedbackDetails?type=0"> -->
+    <!-- <i-cell> -->
+
+      <!-- <button class='contact-btn' open-type="contact" bindcontact="handleContact" session-from="sessionFrom">
+        在线解答
+      </button> -->
+      <!-- <i-icon slot="icon" type="collection_fill" size="28" color="#1498d9" /> -->
+
+    <!-- </i-cell> -->
+      <i-cell title="我的咨询"  bindtap="myContact" >
+          <i-icon slot="icon" type="collection_fill" size="28" color="#1498d9" />
+      
+    </i-cell>
+    <!-- <i-cell title="医生登录">
     
-      <i-icon slot="icon" type="collection_fill" size="28" color="#1498d9" />
-      </i-cell>
+    </i-cell> -->
   </i-cell-group>
 </view>

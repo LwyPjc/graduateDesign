@@ -86,6 +86,13 @@
                     "name": "",
                     "pathName": "pages/reserve/reserve",
                     "query": "id=4",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/registerSuccess/registerSuccess",
+                    "query": "",
                     "scene": null,
                     "launchMode": "default"
                 }

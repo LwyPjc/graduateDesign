@@ -9,7 +9,7 @@ import com.graduation.warning.entity.SysUser;
  *
  * @version: 1.0
  * @author: mic
- * @date 2022-2-4
+ * @date 2022-2-21
  */
 public interface SysUserService extends BaseService<SysUser> {
 

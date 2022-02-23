@@ -5,7 +5,7 @@
       <el-col :span="16" class="headerlogo">
         <div class="grid-content bg-purple" style="padding: 8px">
           <p style="font-size: 22px ;color: white">
-            医院后台管理系统
+            在线咨询医院系统后台
           </p>
         </div>
       </el-col>

@@ -15,7 +15,7 @@ import java.util.Date;
  *
  * @version: 1.0
  * @author: mic
- * @date 2022-2-4
+ * @date 2022-2-21
  */
 public class SysUser extends Model<SysUser>{
 
