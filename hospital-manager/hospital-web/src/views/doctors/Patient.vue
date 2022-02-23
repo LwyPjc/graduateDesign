@@ -34,44 +34,20 @@
                             {{ scope.$index }}
                         </template>
                     </el-table-column>
-                  <el-table-column label="真实姓名" show-overflow-tooltip style="width: 10%" align="center">
+                  <el-table-column label="姓名" show-overflow-tooltip style="width: 10%" align="center">
                     <template slot-scope="scope">
                       {{ scope.row.trueName }}
                     </template>
                   </el-table-column>
-                    <el-table-column label="微信名称" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.nickName }}
-                        </template>
-                    </el-table-column>
                     <el-table-column label="电话号码" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.phoneNum }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="性别" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.gender }}
-                        </template>
-                    </el-table-column>
-                    <!--<el-table-column label="身份证号码" show-overflow-tooltip style="width: 10%" align="center">-->
-                        <!--<template slot-scope="scope">-->
-                            <!--{{ scope.row.idCard }}-->
-                        <!--</template>-->
-                    <!--</el-table-column>-->
-                    <el-table-column label="年龄" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.age }}
-                        </template>
-                    </el-table-column>
-                    <!--<el-table-column label="详细地址" show-overflow-tooltip style="width: 10%" align="center">-->
-                        <!--<template slot-scope="scope">-->
-                            <!--{{ scope.row.address }}-->
-                        <!--</template>-->
-                    <!--</el-table-column>-->
-
+                  <el-table-column label="聊天" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-button size="medium" @click="showDialog(scope.row)" type="danger">聊天</el-button>
+                  </el-table-column>
                 </el-table>
-
                 <pagination v-show="total>0" :total="total"
                     :page.sync="listQuery.current"
                     :limit.sync="listQuery.size"

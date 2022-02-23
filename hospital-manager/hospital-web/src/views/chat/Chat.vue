@@ -18,8 +18,8 @@ export default {
   },
   data () {
     return {
-      sourceAvatar: 'https://gitee.com/run27017/assets/raw/master/avatars/girl.jpg',
-      targetAvatar: 'https://gitee.com/run27017/assets/raw/master/avatars/bear.jpg'
+      sourceAvatar: '张三',
+      targetAvatar: '王五'
     }
   },
   methods: {

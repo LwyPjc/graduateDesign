@@ -1,5 +1,13 @@
 <template>
+  <el-dialog
+    :title="聊天"
+    :visible.sync="dialogVisible"
+    :close-on-click-modal="false"
+    :before-close="handleClose"
+    width="683px"
+  >
   <div class="container">
+
     <div class="content-container" ref="contentContainer">
       <div ref="content">
         <InfiniteLoading direction="top" @infinite="loadMoreHistory">
@@ -16,8 +24,12 @@
           </div>
           <div class="message-cell" 
             :style="{ flexDirection: message.direction === 'received' ? 'row' : 'row-reverse' }" >
-            <van-image width="32" height="32" 
-              :src="message.direction === 'received' ? targetAvatar : sourceAvatar" />
+            <!--<van-field width="32" height="32"-->
+              <!--:src="message.direction === 'received' ? targetAvatar : sourceAvatar" />-->
+            <v-tag width="32" height="32"
+                       :name="message.direction === 'received' ? targetAvatar : sourceAvatar"
+            >
+            {{message.direction === 'received' ? targetAvatar : sourceAvatar}}</v-tag>
             <van-button type="default" size="small" round>{{ message.text }}</van-button>
           </div>
         </div>
@@ -30,7 +42,9 @@
         </template>
       </van-field>
     </div>
+
   </div>
+  </el-dialog>
 </template>
 
 <script>
@@ -91,6 +105,7 @@ export default {
   },
   data () {
     return {
+      dialogVisible: true,
       messages: [],
       typingText: '',
       scrolledToBottom: false
@@ -112,6 +127,12 @@ export default {
     }
   },
   methods: {
+    /**
+     * 关闭对话框操作
+     */
+    handleClose(done) {
+      this.dialogVisible = false
+    },
     sendText () {
       const message = this.sendMessage({ text: this.typingText })
       this.typingText = ''
