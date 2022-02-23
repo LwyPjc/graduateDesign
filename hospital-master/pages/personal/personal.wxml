@@ -39,9 +39,11 @@
 
     <!-- </i-cell> -->
       <i-cell title="我的咨询"  bindtap="myContact" >
-          <i-icon slot="icon" type="collection_fill" size="28" color="#1498d9" />
-      
+          <i-icon slot="icon" type="interactive_fill" size="28" color="#1498d9" />
     </i-cell>
+    <i-cell title="我的收藏" is-link url="../collect/collect">
+          <i-icon slot="icon" type="collection_fill" size="28" color="#1498d9" />
+      </i-cell>
     <!-- <i-cell title="医生登录">
     
     </i-cell> -->

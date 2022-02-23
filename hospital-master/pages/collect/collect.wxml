@@ -3,11 +3,10 @@
 
 <view>
   <view>
-    <i-swipeout wx:for="{{ doctors }}" wx:key="{{ item.id }}"  i-class="i-swipeout-demo-item" actions="{{actions}}" data-id="{{item.YSID}}" bindchange="handlerCloseButton">
+    <i-swipeout wx:for="{{ doctors }}" wx:key="{{ item.id }}"  i-class="i-swipeout-demo-item" actions="{{actions}}" data-id="{{item.id}}" bindchange="handlerCloseButton" bindtap='toShowDoctorDetails' data-doctor='{{item}}'>
       <view slot="content">
         <view class="iconWrap"><image src='../../images/doctor.jpg'></image></view>
-        <i-cell i-class="i-cell-padding" title="{{item.YS}}" label="{{item.KSMC}},{{ item.ZC }}">
-          
+        <i-cell i-class="i-cell-padding" title="{{item.name}}" label="{{item.dptName}},{{ item.descs }}">
         </i-cell>
       </view>
     </i-swipeout>

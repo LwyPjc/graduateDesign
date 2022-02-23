@@ -80,7 +80,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.doctorList(Number(options.id))
+    this.doctorList()
+    this.setData({
+      userInfo:app.globalData.userInfo,
+    })
   },
 
   /**
@@ -92,58 +95,52 @@ Page({
 
   //按人亲求医生列表
   doctorList: function (){
-    var that = this;
-    wx.request({
-      url: urlApi.getCollectingListUrl(),
-      data: {
-        WID: app.globalData.openid,
-        BRID: app.globalData.BRID,
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (response) {
-        if(response.data.LIST.length>0){
-          for (var i of response.data.LIST){
-            if (i.BRID == app.globalData.BRID){
-              var arr = i.IDS.split(",");
-              for(var j of arr){
-                that.getDoctorList(j);
-              }
-            }
-          }
-        }
-      }
-    })
+    // var that = this;
+    // wx.request({
+    //   url: urlApi.getdoctorListByDptId() + 4,
+    //   method: "GET",
+     
+    //   success: function (res) {
+    //     var data = res.data
+    //     if(util.checkIsNotNull(data)){
+    //       for (var i of data){
+    //         // if (i.BRID == app.globalData.BRID){
+    //           // var arr = i.IDS.split(",");
+    //           for(var j of arr){
+    //             that.getDoctorList(j);
+    //           }
+    //         // }
+    //       }
+    //     }
+    //   }
+    // })
+    this.getDoctorList();
   },
 
   getDoctorList:function(id){
-    if(id == "")return;
+    // if(id == "")return;
     var that = this;
     wx.request({
-      url: urlApi.queryRelatives(),
-      method: "post",
+      url: urlApi.getdoctorListByDptId() + 4,
+      method: "GET",
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      data: {
-        YSID: id,
-      },
-      success: function (response) {
+      // data: {
+      //   YSID: id,
+      // },
+      success: function (res) {
         var doctorArr = new Array();
-        var doctorList = response.data.DATAPARAM.GROUP.HBLIST.HB
+        var doctorList = res.data
         var list = doctorList instanceof Array ? doctorList : [doctorList];
         list.map(i => {
           i.imageurl = "../../images/doctor2.jpg";
-          i.price = i.PRICE == "" ? 3 : i.PRICE == undefined ? 3 : i.PRICE;
-          i.type = 0;
-          i.SYHS = i.SYHS == "" ? 0 : i.SYHS;
           i.color = i.SYHS == 0 ? "color2" : "color";
         })
         console.log("医生列表", list)
         that.setData({
           doctors: list,
-          show: "hidden",
+          show: "show",
         });
       }
     })

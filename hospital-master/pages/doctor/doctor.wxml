@@ -7,9 +7,12 @@
       <view class='doctorName'>{{doctor.name}}</view>
       <view>{{doctor.dptName}}</view>
     </view>
+    <view>
+      <i-icon size='30' type="collection" bindtap='collecting' />
+    </view>
   </view>
   <view class='doctorBt'>
-  {{position}}
+  <!-- 占位符 -->
   </view>
 </view>
 <view>
@@ -51,8 +54,8 @@
             </view>
         </view>
         <view class='list-part-bottom'>
-          <text class='doctor-name1'>就诊人：{{sickName}}</text> 
-          <text class='doctor-name2'>就诊卡：{{sickCard}}</text> 
+          <text class='doctor-name1'>就诊人：{{userInfo.trueName}}</text> 
+          <text class='doctor-name2'>就诊卡：{{userInfo.medicareCard}}</text> 
         </view>
         
     </view>

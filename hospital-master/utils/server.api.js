@@ -3,9 +3,8 @@ const api = "5c26ecdc1e2c8e78ee4efbd9/hospital/";
 //const url ="http://frpgz1.idcfengye.com:10038/"
 const url = "https://devlops.huiwtech.com/";
 // const apiUrl = "http://localhost:8083/";
-// const apiUrl = "http://192.168.3.47:8083/";
-const apiUrl = "http://192.168.43.231:8083/";
-//const url = "https://server1.huiwtech.com:10001"
+const apiUrl = "http://192.168.3.47:8083/";
+// const apiUrl = "http://192.168.43.231:8083/";
 const type = {
   user: "UserManager/",
   data: "Information/",
@@ -163,10 +162,7 @@ const getMZnotPayLog = function () {
   return url + "Weixin/Pay/Receipt/Array";
 }
 
-//收藏功能
-const getCollectingUrl = function () {
-  return url + "Micro/Doctor/Favorites/Save";
-}
+
 
 //删除收藏的医生
 const getCollectingDeleteUrl = function () {
@@ -238,6 +234,10 @@ const getdoctorListByDptId = function(){
 const saveRegisterInfo=function(){
   return apiUrl+'aptRecord/save'
 }
+//收藏功能
+const saveCollect = function () {
+  return apiUrl + "collectInfo/save";
+}
 // todo
 module.exports = {
   getPensorInfoUrl: getPensorInfoUrl,
@@ -250,9 +250,10 @@ module.exports = {
   getDepartmentInfoById:getDepartmentInfoById,
   getdoctorListByDptId:getdoctorListByDptId,
   saveRegisterInfo:saveRegisterInfo,
-  
+  saveCollect:saveCollect,
+
+
   getInHosptalUrl: getInHosptalUrl,
-  getCollectingUrl: getCollectingUrl,
   getCollectingListUrl: getCollectingListUrl,
   getRegisterUrl: getRegisterUrl,
   getTableList: getTableList,
