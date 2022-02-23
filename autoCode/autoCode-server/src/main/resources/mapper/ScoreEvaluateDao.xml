@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduation.warning.dao.ScoreEvaluateDao">
+
+    <resultMap id="baseInfo" type="ScoreEvaluate">
+                <id column="ID" property="id"/>
+                <result column="student_id" property="studentId" />
+                <result column="teacher_id" property="teacherId" />
+                <result column="open_course_id" property="openCourseId" />
+                <result column="score" property="score" />
+    </resultMap>
+
+</mapper>

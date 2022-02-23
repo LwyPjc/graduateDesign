@@ -17,8 +17,8 @@
         <el-form-item label="科室名称" label-width="105px" prop="name">
             <el-input placeholder="请输入科室名称" v-model="dialogFormData.name"/>
         </el-form-item>
-        <el-form-item label="科室简介" label-width="105px" prop="desc">
-            <el-input placeholder="请输入科室简介" v-model="dialogFormData.desc"/>
+        <el-form-item label="科室简介" label-width="105px" prop="descs">
+            <el-input placeholder="请输入科室简介" v-model="dialogFormData.descs"/>
         </el-form-item>
         <el-form-item label="父科室id" label-width="105px" prop="parentId">
             <el-input type="number" placeholder="请输入父科室id" v-model.number="dialogFormData.parentId"/>
@@ -32,6 +32,9 @@
                 type="date"
                 placeholder="选择创建时间">
             </el-date-picker>
+        </el-form-item>
+        <el-form-item label="父科室名称" label-width="105px" prop="parentName">
+            <el-input placeholder="请输入父科室名称" v-model="dialogFormData.parentName"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -59,10 +62,11 @@
                 dialogFormData: {
                     id: '',
                     name: '',
-                    desc: '',
+                    descs: '',
                     parentId: '',
                     deleteFlg: '',
                     createTime: '',
+                    parentName: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -70,7 +74,7 @@
                     name: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    desc: [
+                    descs: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     parentId: [
@@ -80,6 +84,9 @@
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     createTime: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    parentName: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -113,10 +120,11 @@
                 this.dialogFormData = {
                     id: '',
                     name: '',
-                    desc: '',
+                    descs: '',
                     parentId: '',
                     deleteFlg: '',
                     createTime: '',
+                    parentName: '',
                 }
 
             },

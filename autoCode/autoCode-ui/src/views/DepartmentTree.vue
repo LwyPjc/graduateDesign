@@ -34,7 +34,7 @@
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
                                 placeholder="科室简介过滤"
-                                v-model="listQuery.desc"
+                                v-model="listQuery.descs"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -56,6 +56,12 @@
                                 v-model="listQuery.createTime"
                                 value-format="timestamp"
                                 type="datetime"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="父科室名称过滤"
+                                v-model="listQuery.parentName"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -105,7 +111,7 @@
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.desc }}
+                                    {{ scope.row.descs }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -133,6 +139,15 @@
                                     align="center">
                                 <template slot-scope="scope">
                                     {{ scope.row.createTime  | timeFilter }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="父科室名称"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.parentName }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -215,10 +230,11 @@
                     size: 10,
                     query: '',
                     name: null,
-                    desc: null,
+                    descs: null,
                     parentId: null,
                     deleteFlg: null,
                     createTime: null,
+                    parentName: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',

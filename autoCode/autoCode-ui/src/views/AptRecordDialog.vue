@@ -37,8 +37,8 @@
                 placeholder="选择预约创建时间">
             </el-date-picker>
         </el-form-item>
-        <el-form-item label="保留字段" label-width="105px" prop="temp1">
-            <el-input placeholder="请输入保留字段" v-model="dialogFormData.temp1"/>
+        <el-form-item label="保留字段" label-width="105px" prop="status">
+            <el-input type="number" placeholder="请输入保留字段" v-model.number="dialogFormData.status"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -70,7 +70,7 @@
                     docId: '',
                     aptTime: '',
                     createTime: '',
-                    temp1: '',
+                    status: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -90,7 +90,7 @@
                     createTime: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    temp1: [
+                    status: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -128,7 +128,7 @@
                     docId: '',
                     aptTime: '',
                     createTime: '',
-                    temp1: '',
+                    status: '',
                 }
 
             },

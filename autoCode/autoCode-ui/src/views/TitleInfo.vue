@@ -49,12 +49,10 @@
                             align="center"
                             width="180"
                             class-name="small-padding fixed-width">
-                        <div slot-scope="scope" class="table-operate-box">
-                            <i class="zoeIconfont z_modifyEI_normal"
-                               @click="showDialog(scope.row)"></i>
-                            <i class="zoeIconfont z_delete_normal danger"
-                               @click="handleDelete(scope.row)"></i>
-                        </div>
+                    <template slot-scope="scope">
+                      <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
+                      <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                    </template>
                     </el-table-column>
                 </el-table>
 
@@ -96,7 +94,7 @@
             },
             timeFilter(time) {
                 if (time) {
-                    return new Date(time).Format('yyyy-MM-dd hh:mm:ss')
+                    return new Date(time).toLocaleDateString().split('/').join('-')
                 } else {
                     return ''
                 }

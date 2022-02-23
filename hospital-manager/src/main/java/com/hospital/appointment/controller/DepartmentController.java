@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>标题: 服务 - 请求控制层</p>
+ * <p>标题: 科室 - 请求控制层</p>
  * <p>描述: </p>
  * <p>版权: Copyright (c) 2022</p>
  * <p></p>

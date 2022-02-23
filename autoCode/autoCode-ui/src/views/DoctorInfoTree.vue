@@ -41,7 +41,7 @@
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
                                 placeholder="简介过滤"
-                                v-model="listQuery.desc"
+                                v-model="listQuery.descs"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -53,8 +53,20 @@
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
+                                placeholder="手机号过滤"
+                                v-model="listQuery.phone"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
                                 placeholder="保留字段过滤"
                                 v-model="listQuery.temp1"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="科室名称过滤"
+                                v-model="listQuery.dptName"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -113,7 +125,7 @@
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.desc }}
+                                    {{ scope.row.descs }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -126,12 +138,30 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
+                                    label="手机号"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.phone }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
                                     label="保留字段"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
                                     {{ scope.row.temp1 }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="科室名称"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.dptName }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -215,9 +245,11 @@
                     query: '',
                     name: null,
                     dptId: null,
-                    desc: null,
+                    descs: null,
                     titleId: null,
+                    phone: null,
                     temp1: null,
+                    dptName: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',

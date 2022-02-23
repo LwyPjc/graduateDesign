@@ -5,9 +5,11 @@
             <el-col :span="24" class="filter-container">
                     <el-input placeholder="医生姓名过滤" v-model="listQuery.name" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="科室id过滤" type="number" v-model.number="listQuery.dptId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="简介过滤" v-model="listQuery.desc" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="简介过滤" v-model="listQuery.descs" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="头衔id过滤" type="number" v-model.number="listQuery.titleId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="手机号过滤" v-model="listQuery.phone" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="保留字段过滤" v-model="listQuery.temp1" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="科室名称过滤" v-model="listQuery.dptName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -49,7 +51,7 @@
                     </el-table-column>
                     <el-table-column label="简介" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.desc }}
+                            {{ scope.row.descs }}
                         </template>
                     </el-table-column>
                     <el-table-column label="头衔id" show-overflow-tooltip style="width: 10%" align="center">
@@ -57,9 +59,19 @@
                             {{ scope.row.titleId }}
                         </template>
                     </el-table-column>
+                    <el-table-column label="手机号" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.phone }}
+                        </template>
+                    </el-table-column>
                     <el-table-column label="保留字段" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.temp1 }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="科室名称" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.dptName }}
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -67,12 +79,10 @@
                             align="center"
                             width="180"
                             class-name="small-padding fixed-width">
-                        <div slot-scope="scope" class="table-operate-box">
-                            <i class="zoeIconfont z_modifyEI_normal"
-                               @click="showDialog(scope.row)"></i>
-                            <i class="zoeIconfont z_delete_normal danger"
-                               @click="handleDelete(scope.row)"></i>
-                        </div>
+                    <template slot-scope="scope">
+                      <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
+                      <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                    </template>
                     </el-table-column>
                 </el-table>
 
@@ -114,7 +124,7 @@
             },
             timeFilter(time) {
                 if (time) {
-                    return new Date(time).Format('yyyy-MM-dd hh:mm:ss')
+                    return new Date(time).toLocaleDateString().split('/').join('-')
                 } else {
                     return ''
                 }
@@ -133,9 +143,11 @@
                     query: '',
                     name: null,
                     dptId: null,
-                    desc: null,
+                    descs: null,
                     titleId: null,
+                    phone: null,
                     temp1: null,
+                    dptName: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',

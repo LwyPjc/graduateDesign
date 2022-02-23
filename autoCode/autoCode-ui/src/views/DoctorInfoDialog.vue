@@ -20,14 +20,20 @@
         <el-form-item label="科室id" label-width="105px" prop="dptId">
             <el-input type="number" placeholder="请输入科室id" v-model.number="dialogFormData.dptId"/>
         </el-form-item>
-        <el-form-item label="简介" label-width="105px" prop="desc">
-            <el-input placeholder="请输入简介" v-model="dialogFormData.desc"/>
+        <el-form-item label="简介" label-width="105px" prop="descs">
+            <el-input placeholder="请输入简介" v-model="dialogFormData.descs"/>
         </el-form-item>
         <el-form-item label="头衔id" label-width="105px" prop="titleId">
             <el-input type="number" placeholder="请输入头衔id" v-model.number="dialogFormData.titleId"/>
         </el-form-item>
+        <el-form-item label="手机号" label-width="105px" prop="phone">
+            <el-input placeholder="请输入手机号" v-model="dialogFormData.phone"/>
+        </el-form-item>
         <el-form-item label="保留字段" label-width="105px" prop="temp1">
             <el-input placeholder="请输入保留字段" v-model="dialogFormData.temp1"/>
+        </el-form-item>
+        <el-form-item label="科室名称" label-width="105px" prop="dptName">
+            <el-input placeholder="请输入科室名称" v-model="dialogFormData.dptName"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -56,9 +62,11 @@
                     id: '',
                     name: '',
                     dptId: '',
-                    desc: '',
+                    descs: '',
                     titleId: '',
+                    phone: '',
                     temp1: '',
+                    dptName: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -69,13 +77,19 @@
                     dptId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    desc: [
+                    descs: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     titleId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
+                    phone: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
                     temp1: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    dptName: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -110,9 +124,11 @@
                     id: '',
                     name: '',
                     dptId: '',
-                    desc: '',
+                    descs: '',
                     titleId: '',
+                    phone: '',
                     temp1: '',
+                    dptName: '',
                 }
 
             },

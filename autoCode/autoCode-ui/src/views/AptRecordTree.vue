@@ -64,7 +64,8 @@
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
                                 placeholder="保留字段过滤"
-                                v-model="listQuery.temp1"
+                                type="number"
+                                v-model.number="listQuery.status "
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -150,7 +151,7 @@
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.temp1 }}
+                                    {{ scope.row.status }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -237,7 +238,7 @@
                     docId: null,
                     aptTime: null,
                     createTime: null,
-                    temp1: null,
+                    status: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',

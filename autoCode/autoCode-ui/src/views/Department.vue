@@ -4,7 +4,7 @@
         <el-row>
             <el-col :span="24" class="filter-container">
                     <el-input placeholder="科室名称过滤" v-model="listQuery.name" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="科室简介过滤" v-model="listQuery.desc" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="科室简介过滤" v-model="listQuery.descs" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="父科室id过滤" type="number" v-model.number="listQuery.parentId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="假删除 1删除，0否过滤" v-model="listQuery.deleteFlg" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-date-picker
@@ -15,6 +15,7 @@
                         size="small"
                         class="filter-item">
                     </el-date-picker>
+                    <el-input placeholder="父科室名称过滤" v-model="listQuery.parentName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -51,7 +52,7 @@
                     </el-table-column>
                     <el-table-column label="科室简介" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.desc }}
+                            {{ scope.row.descs }}
                         </template>
                     </el-table-column>
                     <el-table-column label="父科室id" show-overflow-tooltip style="width: 10%" align="center">
@@ -69,17 +70,20 @@
                             {{ scope.row.createTime  | timeFilter }}
                         </template>
                     </el-table-column>
+                    <el-table-column label="父科室名称" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.parentName }}
+                        </template>
+                    </el-table-column>
                     <el-table-column
                             label="操作"
                             align="center"
                             width="180"
                             class-name="small-padding fixed-width">
-                        <div slot-scope="scope" class="table-operate-box">
-                            <i class="zoeIconfont z_modifyEI_normal"
-                               @click="showDialog(scope.row)"></i>
-                            <i class="zoeIconfont z_delete_normal danger"
-                               @click="handleDelete(scope.row)"></i>
-                        </div>
+                    <template slot-scope="scope">
+                      <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
+                      <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                    </template>
                     </el-table-column>
                 </el-table>
 
@@ -121,7 +125,7 @@
             },
             timeFilter(time) {
                 if (time) {
-                    return new Date(time).Format('yyyy-MM-dd hh:mm:ss')
+                    return new Date(time).toLocaleDateString().split('/').join('-')
                 } else {
                     return ''
                 }
@@ -139,10 +143,11 @@
                     size: 10,
                     query: '',
                     name: null,
-                    desc: null,
+                    descs: null,
                     parentId: null,
                     deleteFlg: null,
                     createTime: null,
+                    parentName: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
