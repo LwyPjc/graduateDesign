@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :title="聊天"
+    title="聊天"
     :visible.sync="dialogVisible"
     :close-on-click-modal="false"
     :before-close="handleClose"
@@ -24,12 +24,12 @@
           </div>
           <div class="message-cell" 
             :style="{ flexDirection: message.direction === 'received' ? 'row' : 'row-reverse' }" >
-            <!--<van-field width="32" height="32"-->
-              <!--:src="message.direction === 'received' ? targetAvatar : sourceAvatar" />-->
-            <v-tag width="32" height="32"
-                       :name="message.direction === 'received' ? targetAvatar : sourceAvatar"
-            >
-            {{message.direction === 'received' ? targetAvatar : sourceAvatar}}</v-tag>
+            <van-image width="32" height="32"
+              :src="message.direction === 'received' ? targetAvatar : sourceAvatar" />
+            <!--<v-tag width="32" height="32"-->
+                       <!--:name="message.direction === 'received' ? targetAvatar : sourceAvatar"-->
+            <!--&gt;-->
+            <!--{{message.direction === 'received' ? targetAvatar : sourceAvatar}}</v-tag>-->
             <van-button type="default" size="small" round>{{ message.text }}</van-button>
           </div>
         </div>
@@ -105,7 +105,7 @@ export default {
   },
   data () {
     return {
-      dialogVisible: true,
+      dialogVisible: false,
       messages: [],
       typingText: '',
       scrolledToBottom: false
@@ -127,6 +127,10 @@ export default {
     }
   },
   methods: {
+    init() {
+      this.dialogVisible = true
+      console.log('执行了此方法')
+    },
     /**
      * 关闭对话框操作
      */

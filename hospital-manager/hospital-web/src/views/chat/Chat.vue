@@ -18,7 +18,7 @@ export default {
   },
   data () {
     return {
-      sourceAvatar: '张三',
+      sourceAvatar: 'https://gitee.com/run27017/assets/raw/master/avatars/bear.jpg',
       targetAvatar: '王五'
     }
   },

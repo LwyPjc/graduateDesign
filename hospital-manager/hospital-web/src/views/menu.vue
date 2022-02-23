@@ -121,7 +121,7 @@
                   },
                     {
                         name: "聊天",
-                        id: 6,
+                        id: 7,
                         icon: "el-icon-collection-tag",
                         url: "/chat",
                         children: []

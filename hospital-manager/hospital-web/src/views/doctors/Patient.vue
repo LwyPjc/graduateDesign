@@ -45,7 +45,9 @@
                         </template>
                     </el-table-column>
                   <el-table-column label="聊天" show-overflow-tooltip style="width: 10%" align="center">
-                    <el-button size="medium" @click="showDialog(scope.row)" type="danger">聊天</el-button>
+                    <template slot-scope="scope">
+                      <el-button size="medium" @click="showDialog(scope.row)" type="danger">聊天</el-button>
+                    </template>
                   </el-table-column>
                 </el-table>
                 <pagination v-show="total>0" :total="total"
@@ -55,16 +57,21 @@
                     @pagination="fetchData"/>
             </el-col>
         </el-row>
-        <handle-dialog ref="dlg" @refreshDataList="fetchData"></handle-dialog>
+      <ChatBox ref="chat"
+               :sourceAvatar="sourceAvatar" :targetAvatar="targetAvatar"
+               :loadHistory="loadHistory" :sendMessage="sendMessage" />
 </div>
 </template>
 
 <script>
+    import '@/utils/chat.css'
+    import ChatBox from '@/views/chat/ChatBox'
     import request from '@/utils/request'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
-            Pagination
+            Pagination,
+            ChatBox
         },
         filters: {
             statusFilter(status) {
@@ -92,6 +99,8 @@
         },
         data() {
             return {
+                sourceAvatar: 'https://gitee.com/run27017/assets/raw/master/avatars/bear.jpg',
+                targetAvatar: '王五',
                 tableKey: 0,//表格key值
                 list: null, //表格对象
                 listLoading: true, //表格加载框
@@ -123,6 +132,33 @@
             this.fetchData()
         },
         methods: {
+          // 定义加载历史消息的方式，该函数应该返回一个对象（`{ messages, hasMore }`），或者是返回该对象的 Promise （异步）。
+          loadHistory () {
+            return {
+              // 消息数据，字段如下，应以时间的倒序给出。
+              messages: [
+                { text: "Really cute!", time: new Date(2020, 8, 4), direction: 'sent' },
+                { text: "Hey, I'm a bear!", time: new Date(2020, 7, 4), direction: 'received' },
+                { text: 'Hello, who are you?', time: new Date(2020, 7, 4), direction: 'sent' },
+              ],
+              // 定义是否还有历史消息，如果为 false，将停止加载。读者可将其改为 true 演示一下自动滚动更新的效果。
+              hasMore: false
+            }
+          },
+
+          // 定义发送消息的方式。如果发送成功，应该返回成功发送的消息数据，或者 Promise.
+          sendMessage ({ text }) {
+            return {
+              text,
+              time: new Date(),
+              direction: 'sent'
+            }
+          },
+
+          // 该函数演示如何加载新消息（一般通过 WebSocket 实时收取）
+          receiveMessage (message) {
+            this.$refs.chat.appendNew(message)
+          },
             /**
              * 获取表格数据
              */
@@ -160,8 +196,10 @@
             /**
              * 显示修改编辑框
              */
-            showDialog(data) {
-                this.$refs.dlg.init(data)
+            showDialog(row) {
+              console.log('data is', row);
+              this.targetAvatar = row.avatarUrl;
+                this.$refs.chat.init()
             },
             /**
              * 搜索过滤
@@ -205,5 +243,6 @@
               });
             },
         }
+
     }
 </script>
