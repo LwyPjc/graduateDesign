@@ -132,10 +132,10 @@ Page({
   },
 
   //记录查询
-  registerLog: function (e) {
+  registerLog: function () {
     var info = JSON.stringify(this.data.userInfo);
     wx.navigateTo({
-      url: '/pages/registerLog/registerLog?type=' + e.currentTarget.dataset.type + '&userInfo=' + info
+      url: '/pages/registerLog/registerLog?userInfo=' + info
     })
   },
 

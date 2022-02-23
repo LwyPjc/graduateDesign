@@ -7,11 +7,6 @@
       <view class='doctorName'>{{doctor.name}}</view>
       <view>{{doctor.dptName}}</view>
     </view>
-    <view>
-      <i-icon size='20' type="collection" bindtap='collecting' />
-      <i-icon size='20' type="share" />
-      <text class="price {{show}}" bindtap="contactOnline">在线咨询</text>
-    </view>
   </view>
   <view class='doctorBt'>
   {{position}}
@@ -32,28 +27,27 @@
   <view class="calendar-wrap">
     <template is="calendar" data="{{...calendar}}"/>
     <i-cell-group>
-      <i-cell bindtap='handleOpen2' title="只显示箭头" value="{{price}}￥" is-link></i-cell>
+      <i-cell bindtap='handleOpen2' title="确认预约" value="" is-link></i-cell>
     </i-cell-group>
   </view>
 </view>
 <view class='{{introduce}}'>
   <i-cell-group>
-      <i-cell title="擅长" label="斯蒂芬斯蒂芬"></i-cell>
-      <i-cell title="介绍" label="高房价和国际法"></i-cell>
+      <i-cell title="介绍" label="{{doctor.descs}}"></i-cell>
   </i-cell-group>
 </view>
 <view>
-  <i-action-sheet visible="{{ visible2 }}" show-cancel bind:cancel="handleCancel2" bind:click="handleClickItem2" mask-closable="{{ false }}">
+  <i-action-sheet visible="{{ visible2 }}" show-cancel bind:cancel="handleCancel2"  mask-closable="{{ false }}">
     <view class='top' slot="header" style="padding: 16px">
       <view class='list-part-top'>
             <view class='list-part-left'>
-                <image src="../../images/doctor.jpg"></image>
+                <image src="{{doctor.imageurl}}"></image>
             </view>
             <view class='list-part-right'>
-                <text class='doctor-name'>医生：{{doctor}}</text> 
-                <text class='doctor-name'>科室：妇产科</text> 
-                <text class='doctor-name'>费用：￥{{price}}</text> 
-                <text class='doctor-name'>时间：{{date}}</text> 
+                <text class='doctor-name'>医生：{{doctor.name}}</text> 
+                <text class='doctor-name'>科室: {{doctor.dptName}}</text> 
+                <text class='doctor-name'></text> 
+                <text class='doctor-name'>预约时间：{{date}}</text> 
             </view>
         </view>
         <view class='list-part-bottom'>
@@ -62,7 +56,7 @@
         </view>
         
     </view>
-    <view class='bottomYes' bindtap='goPay' slot="header" style="padding: 16px">
+    <view class='bottomYes' bindtap='confirmReg' slot="header" style="padding: 16px">
         <view style="color: #fff;font-size: 16px">确定</view>
     </view>
   </i-action-sheet>

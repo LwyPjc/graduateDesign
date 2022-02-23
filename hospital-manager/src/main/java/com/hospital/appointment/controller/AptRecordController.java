@@ -11,6 +11,8 @@ import com.hospital.appointment.service.AptRecordService;
 import java.io.Serializable;
 import java.util.List;
 
+import static com.hospital.appointment.utils.CommUtils.getTimestamp;
+
 /**
  * <p>标题: 服务 - 请求控制层</p>
  * <p>描述: </p>
@@ -50,7 +52,8 @@ public class AptRecordController {
     }
 
     @PostMapping("/save")
-    public Serializable save(AptRecord aptRecord) {
+    public Serializable save(@RequestBody AptRecord aptRecord) {
+        aptRecord.setCreateTime(getTimestamp());
         aptRecordService.save(aptRecord);
         return aptRecord.getId();
     }

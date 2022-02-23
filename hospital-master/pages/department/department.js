@@ -55,12 +55,10 @@ Page({
   onLoad: function (options) {
     this.branchList();
     var type = Number(options.type);
-    console.log('department--onload--type--', type)
     var clickType = type == 0 ? "toShowPayDoctorList" : type == 1 ? "toShowBranchInfo" : type == 2 ? "toShowDoctorList" : "toShowPayDoctorList";
     this.setData({
       clickType: clickType
     })
-    console.log("事件", this.data.clickType)
   },
 
   /**
@@ -114,9 +112,7 @@ Page({
    * 跳转 - 科室简介
    */
   toShowBranchInfo: function (e) {
-    console.log('department-toshowBranchInfo--e--', e)
     for (var k of this.data.departments) {
-      console.log('toShowBranchInfo-k-', k)
       if (k.id === e.currentTarget.dataset.department.id) {
         wx.navigateTo({
           url: '/pages/branchInfo/branchInfo?dptInfo=' + JSON.stringify(k)

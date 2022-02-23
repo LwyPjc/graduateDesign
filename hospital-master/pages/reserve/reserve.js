@@ -49,14 +49,10 @@ Page({
         console.log('reserve-getdoctorList--res-', res)
         var data = res.data
         if (util.checkIsNotNull(data)) {
-          var doctorArr = new Array();
           var list = data instanceof Array ? data : [data];
           console.log('reserve--success--list--', list)
           list.map(i => {
             i.imageurl = "../../images/doctor2.jpg";
-            // i.price = i.DJ == "" ? 3 : i.DJ == undefined ? 3 : i.DJ;
-            // i.type = 0;
-            // i.SYHS = i.SYHS == "" ? 0 : i.SYHS;
             i.color = "color";
           })
           console.log("医生列表", list)
@@ -316,18 +312,13 @@ Page({
   },
   //页面跳转
   toShowDoctorDetails: function (e) {
+    console.log('去医生详情页：',e)
     var obj = e.currentTarget.dataset.doctor
     console.log("去医生详情页面", obj);
-    if (obj.SYHS != 0) {
       obj.selectTime = this.data.day;
       wx.navigateTo({
         url: '/pages/doctor/doctor?doctor=' + JSON.stringify(obj)
       })
-    } else {
-      wx.showToast({
-        title: '当前医生无号请重新选择',
-        icon: "none"
-      })
-    }
+    
   }
 })

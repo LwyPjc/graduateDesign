@@ -1,5 +1,6 @@
 var urlApi = require("../../utils/server.api.js")
 var util = require("../../utils/util.js")
+var app = getApp()
 Page({
 
     /**
