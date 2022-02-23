@@ -5,31 +5,18 @@
   <view class='flexRow'>
     <view>{{day}}</view>
     <view id='bookingWrapper'>
-      <!-- <i-button type="primary" bind:click="switchView"  size="small">按日期预约</i-button>
-      <i-button bind:click="doctorList" size="small">按医生预约</i-button> -->
       <i-tabs current="{{ current }}" bindchange="handleChange">
-        <!-- <i-tab key="tab1" title="按日期预约" bind:click="switchView"></i-tab> -->
         <i-tab key="tab1" title="预约"></i-tab>
       </i-tabs>
-
     </view>
   </view>
-  <!-- <view class="calendar-wrap" class="{{dateShow}}" bind:myevent="getfather">
-    <view>
-      <i-button size="small" bind:click="switchView">切换周月</i-button>
-    </view>
-    <template is="calendar" data="{{...calendar}}" />
-  </view> -->
-
   <view>
     <view wx:if="{{isDoctorNull}}" style="text-align: center; margin-top: 30px;">
       暂时没有可挂号的医生，请咨询科室
     </view>
-    <view wx:for="{{ doctors }}" wx:key="{{ item.ID }}" data-HM='{{ item.HM }}' data-doctor='{{ item }}' bindtap='toShowDoctorDetails' class='list-with-graphic'>
+    <view wx:for="{{ doctors }}" wx:key="{{ item.id }}"  data-doctor='{{ item }}' bindtap='toShowDoctorDetails' class='list-with-graphic'>
       <view class='list-part-top'>
         <view class='list-part-left {{show}}'>
-          <!-- <view class='list-part-left show'> -->
-
           <image src="{{ item.imageurl }}"></image>
         </view>
         <view class='list-part-right'>
@@ -37,8 +24,7 @@
             <text class='doctor-name'>{{ item.name }}</text>
               <text class="price {{show}}" catchtap="contactOnline" >在线咨询
               </text>
-            </view>
-            <!-- <text class="haveNumber {{show}}" id="{{item.color}}">剩：{{item.SYHS}}</text> -->
+            </view>        
           <view class='list-part-bottom {{show}}'>
             <label>手机号：{{item.phone}}</label>
             <text class='doctor-field'>{{item.descs}}</text>

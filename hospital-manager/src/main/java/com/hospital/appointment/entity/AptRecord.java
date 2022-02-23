@@ -27,11 +27,29 @@ public class AptRecord extends Model<AptRecord>{
 
     private Integer docId;
 
-    private Date aptTime;
+    private String aptTime;
 
     private Date createTime;
 
     private Integer status;
+    private String dptName;
+    private String docName;
+
+    public String getDptName() {
+        return dptName;
+    }
+
+    public void setDptName(String dptName) {
+        this.dptName = dptName;
+    }
+
+    public String getDocName() {
+        return docName;
+    }
+
+    public void setDocName(String docName) {
+        this.docName = docName;
+    }
 
     public Integer getId() {
         return id;
@@ -65,11 +83,11 @@ public class AptRecord extends Model<AptRecord>{
         this.docId = docId;
     }
 
-    public Date getAptTime() {
+    public String getAptTime() {
         return aptTime;
     }
 
-    public void setAptTime(Date aptTime) {
+    public void setAptTime(String aptTime) {
         this.aptTime = aptTime;
     }
 

@@ -113,7 +113,11 @@ Page({
       url: '/pages/registerLog/registerLog?type=' + e.currentTarget.dataset.type
     })
   },
-
+  myContact(e){
+    wx.navigateTo({
+      url: '../myContact/myContact',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -150,14 +154,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // console.log("firstShow:", this.data.firstShow);
-    // console.log('--personal-show-userinfo--', app.globalData.userInfo);
-    // if (this.data.firstShow) {
-    //   this.setData({
-    //     userInfo: app.globalData.userInfo,
-    //     // firstShow:false
-    //   })
-    // }
+   
   },
 
   /**

@@ -88,7 +88,8 @@
 }
 .doctor-name1{
   float: left;
-  width: 45%;
+  width: 50%;
+  /* width: auto; */
   display: block;
   font-size: 16px;
   overflow: hidden;
@@ -97,7 +98,7 @@
 }
 .doctor-name2{
   float: left;
-  width: 55%;
+  width: 50%;
   text-align: left;
   display: block;
   font-size: 16px;

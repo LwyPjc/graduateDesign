@@ -3,13 +3,8 @@ const api = "5c26ecdc1e2c8e78ee4efbd9/hospital/";
 //const url ="http://frpgz1.idcfengye.com:10038/"
 const url = "https://devlops.huiwtech.com/";
 // const apiUrl = "http://localhost:8083/";
-const apiUrl = "http://192.168.3.47:8083/";
-// const apiUrl = "http://192.168.43.231:8083/";
-
-
-
-
-
+// const apiUrl = "http://192.168.3.47:8083/";
+const apiUrl = "http://192.168.43.231:8083/";
 //const url = "https://server1.huiwtech.com:10001"
 const type = {
   user: "UserManager/",
@@ -17,7 +12,6 @@ const type = {
   MZ: "OutPatient/",
   YJ: "Hospitalization/",
   MT: "MedicalTechnology/"
-
 }
 
 //绑定卡
@@ -241,6 +235,9 @@ const getDepartmentInfoById=function(){
 const getdoctorListByDptId = function(){
   return apiUrl+'doctorInfo/getByDptId/'
 }
+const saveRegisterInfo=function(){
+  return apiUrl+'aptRecord/save'
+}
 // todo
 module.exports = {
   getPensorInfoUrl: getPensorInfoUrl,
@@ -252,7 +249,8 @@ module.exports = {
   getDepartmentInfo:getDepartmentInfo,
   getDepartmentInfoById:getDepartmentInfoById,
   getdoctorListByDptId:getdoctorListByDptId,
-
+  saveRegisterInfo:saveRegisterInfo,
+  
   getInHosptalUrl: getInHosptalUrl,
   getCollectingUrl: getCollectingUrl,
   getCollectingListUrl: getCollectingListUrl,

@@ -11,20 +11,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    current:'tab1',
+    current: 'tab1',
     introduce: "hidden",
     registration: "show",
-    date: "",
-    doctor:"",
-    doctorId:"",
-    departments:"",
-    position:"",
-    dateType:"week",
-    price:"",
-    sickList: [],
-    sickName:"",
-    sickCard:"",
-    HM:null,
+    date: util.formatTime2(new Date()),
+    doctor: "",
+    doctorId: "",
+    departments: "",
+    position: "",
+    dateType: "week",
+    price: "",
+    sickName: "",
+    sickCard: "",
+    HM: null,
   },
 
   handleOpen2: function () {
@@ -38,71 +37,25 @@ Page({
       visible2: false
     });
   },
-
-  lockModify: function () {
-    var that = this;
-    app.globalData.JQM = "wx" + app.globalData.BRID + util.getRandom(1,1000000)
-    wx.request({
-      url: urlApi.getLockModify(), 
-      method: "post",
-      data: {
-        HM: that.data.HM,
-        YYSJ: that.data.date,
-        JQM: app.globalData.JQM,
-        CZ: 1
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        if (res.data.DATAPARAM.HX){
-          var info = {
-            doctor: that.data.doctor,
-            doctorId: that.data.doctorId,
-            date: that.data.date,
-            price: that.data.price,
-            departments: that.data.departments,
-            HISID: res.data.DATAPARAM.HX
-          }
-          app.globalData.HX = res.data.DATAPARAM.HX;
-          wx.navigateTo({
-            url: '/pages/pay/pay?info=' + JSON.stringify(info)
-          })
-        }else{
-          wx.showToast({
-            title: '请重新选择',
-            icon:"none",
-            complete: function () {
-              setTimeout(function () {
-                that.handleCancel2();
-              }, 1000)
-            }
-          })
-        }
-        
-      }
-    })
-  },
-
-  handleChange: function({ detail }) {
+  handleChange: function ({ detail }) {
     this.setData({
       current: detail.key
     });
   },
   switchView: function () {
     console.log("1111111")
-    if (this.data.dateType == "week"){
+    if (this.data.dateType == "week") {
       this.setData({
         dateType: "month"
       })
       switchView('month');
-    }else{
+    } else {
       this.setData({
         dateType: "week"
       })
       switchView('week');
     }
-    
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -111,53 +64,23 @@ Page({
     var that = this;
     var doctor = JSON.parse(options.doctor);
     app.globalData.selectDoctor = doctor;
-    var userInfo=app.globalData.userInfo
+    var userInfo = app.globalData.userInfo
     this.setData({
       doctor: doctor,
       sickName: userInfo.trueName,
       sickCard: userInfo.medicareCard,
     })
-    // app.globalData.dayFun = {
-    //   dayFun: function (data) {
-    //     wx.showToast({
-    //       title: '只能续约当天挂号',
-    //       icon: "none"
-    //     })
-    //     return;
-    //     console.log("1111111", data)
-    //     var now = data.idx + 1
-    //     that.setData({
-    //       date: data.days[0].year + "-" + data.days[0].month + "-" + now
-    //     })
-
-    //   }
-    // }
-    console.log("选中的医生", doctor,"选中的时间", app.globalData.selectTime) ;
-  },
-// 
-  collecting:function(){
-    wx.request({
-      url: urlApi.getCollectingUrl(),
-      method: "post",
-      data: {
-        WID: app.globalData.openid,
-        ID: app.globalData.selectDoctor.YSID,
-        BRID: app.globalData.BRID,
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        if (res.data.BRID) {
-          wx.showToast({
-            title: '收藏成功',
-            icon: "success",
-          })
-        } else {
-
-        }
+    app.globalData.dayFun = {
+      dayFun: function (data) {
+        var idx = data.idx
+        var month = data.days[idx].month;
+        var day = data.days[idx].day;
+        that.setData({
+          date: data.days[idx].year.toString() + "-" +util.formatNumber(month)+'-'+util.formatNumber(day)
+        })
       }
-    })
+    }
+    console.log('onload--date--',this.data.date)
   },
 
   /**
@@ -213,7 +136,7 @@ Page({
     }
     initCalendar(conf); // 使用默认配置初始化日历
     switchView('week');
-    
+
   },
 
   //tabs切换
@@ -237,7 +160,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
@@ -276,8 +199,42 @@ Page({
   },
 
   //页面跳转
-  goPay: function (e) {
-    this.lockModify();
-    
+  confirmReg: function (e) {
+    var userInfo = app.globalData.userInfo
+    var doctorInfo = this.data.doctor
+    console.log('doctor--confirmReg--date-',this.data.date)
+    var that = this
+    wx.request({
+      url: urlApi.saveRegisterInfo(),
+      method: 'POST',
+      data: {
+        openid: userInfo.id,
+        dptId: doctorInfo.dptId,
+        dptName:doctorInfo.dptName,
+        docName:doctorInfo.name,
+        docId: doctorInfo.id,
+        aptTime: this.data.date
+      },
+      success(res) {
+        let statusCode = res.statusCode.toString();
+        console.log('doctor--confirm--res-',res)
+        if (statusCode.startsWith('2')) {
+          wx.navigateTo({
+            url: '../registerSuccess/registerSuccess',
+          })
+        } else {
+          wx.showToast({
+            title: '预约失败,重试',
+            icon: 'error',
+            duration: 2000
+          })
+          that.setData({
+            visible2: false
+          });
+        }
+      }
+    })
+    // this.lockModify();
+
   }
 })
