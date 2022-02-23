@@ -3,17 +3,18 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="科室名称过滤" v-model="listQuery.name" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="电话号码过滤" v-model="listQuery.phoneNum" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="姓名过滤" v-model="listQuery.trueName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
                             size="small"
                             @click="handleFilter">搜索</el-button>
-                    <el-button
-                            icon="el-icon-circle-plus-outline"
-                            size="small"
-                            @click="showDialog()"
-                    >新增</el-button>
+<!--                    <el-button-->
+<!--                            icon="el-icon-circle-plus-outline"-->
+<!--                            size="small"-->
+<!--                            @click="showDialog()"-->
+<!--                    >新增</el-button>-->
             </el-col>
         </el-row>
         <!-- 表格list -->
@@ -33,41 +34,42 @@
                             {{ scope.$index }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="科室名称" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.name }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="科室简介" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.descs }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="父科室" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.parentName }}
-                        </template>
-                    </el-table-column>
-                  <el-table-column label="电话" show-overflow-tooltip style="width: 10%" align="center">
+                  <el-table-column label="真实姓名" show-overflow-tooltip style="width: 10%" align="center">
                     <template slot-scope="scope">
-                      {{ scope.row.phone }}
+                      {{ scope.row.trueName }}
                     </template>
                   </el-table-column>
-                    <el-table-column label="创建时间" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="微信名称" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.createTime  | timeFilter }}
+                            {{ scope.row.nickName }}
                         </template>
                     </el-table-column>
-                    <el-table-column
-                            label="操作"
-                            align="center"
-                            width="180"
-                            class-name="small-padding fixed-width">
-                      <template slot-scope="scope">
-                        <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
-                        <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
-                      </template>
+                    <el-table-column label="电话号码" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.phoneNum }}
+                        </template>
                     </el-table-column>
+                    <el-table-column label="性别" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.gender }}
+                        </template>
+                    </el-table-column>
+                    <!--<el-table-column label="身份证号码" show-overflow-tooltip style="width: 10%" align="center">-->
+                        <!--<template slot-scope="scope">-->
+                            <!--{{ scope.row.idCard }}-->
+                        <!--</template>-->
+                    <!--</el-table-column>-->
+                    <el-table-column label="年龄" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.age }}
+                        </template>
+                    </el-table-column>
+                    <!--<el-table-column label="详细地址" show-overflow-tooltip style="width: 10%" align="center">-->
+                        <!--<template slot-scope="scope">-->
+                            <!--{{ scope.row.address }}-->
+                        <!--</template>-->
+                    <!--</el-table-column>-->
+
                 </el-table>
 
                 <pagination v-show="total>0" :total="total"
@@ -83,11 +85,9 @@
 
 <script>
     import request from '@/utils/request'
-    import HandleDialog from './DepartmentDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
-            HandleDialog,
             Pagination
         },
         filters: {
@@ -108,7 +108,7 @@
             },
             timeFilter(time) {
                 if (time) {
-                    return new Date(time).toLocaleDateString().split('/').join('-')
+                    return new Date(time).Format('yyyy-MM-dd hh:mm:ss')
                 } else {
                     return ''
                 }
@@ -125,44 +125,28 @@
                     current: 1,
                     size: 10,
                     query: '',
-                    name: null,
-                    descs: null,
-                    parentId: null,
-                    deleteFlg: null,
-                    createTime: null,
+                    avatarUrl: null,
+                    nickName: null,
+                    phoneNum: null,
+                    medicareCard: null,
+                    gender: null,
+                    idCard: null,
+                    age: null,
+                    address: null,
+                    temp2: null,
+                    trueName: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                departmentList: [],
-                prefixUrl: this.GLOBAL.baseUrl + 'department'
+                prefixUrl: this.GLOBAL.baseUrl + 'userInfo'
             }
         },
         created() {
-            this.fetchData();
-            this.getInitData();
+            this.fetchData()
         },
         methods: {
-          /**
-           * 请求所有初始化数据
-           */
-          getInitData() {
-            request({
-              url: `${this.GLOBAL.baseUrl}/department/findList`,
-              method: 'get',
-            }).then(res=>{
-              this.departmentList = res;
-            }).catch(error => {
-              this.$message({
-                message: error,
-                type: 'error',
-                duration: 1500,
-                onClose: () => {
-                }
-              })
-            });
-          },
             /**
              * 获取表格数据
              */
@@ -174,6 +158,17 @@
                     params: this.listQuery
                 }).then(res => {
                   this.list = res.records
+
+                  this.list.forEach(l=>{
+                    if(0 === l.gender){
+                      l.gender = "未知"
+                    }else if(l.gender === 1){
+                      l.gender = "男"
+                    }else {
+                      l.gender = "女";
+                    }
+                  })
+
                   this.total = res.total
                   this.listLoading = false
                 }).catch(error => {
@@ -190,11 +185,7 @@
              * 显示修改编辑框
              */
             showDialog(data) {
-              if(data === undefined){
-                data = {};
-              }
-              data["departmentList"] = this.departmentList;
-              this.$refs.dlg.init(data)
+                this.$refs.dlg.init(data)
             },
             /**
              * 搜索过滤

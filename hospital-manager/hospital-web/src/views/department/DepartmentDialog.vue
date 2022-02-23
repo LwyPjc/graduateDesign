@@ -20,6 +20,9 @@
         <el-form-item label="科室简介" label-width="105px" prop="desc">
             <el-input placeholder="请输入科室简介" v-model="dialogFormData.descs"/>
         </el-form-item>
+      <el-form-item label="科室电话" label-width="105px" prop="desc">
+        <el-input placeholder="请输入科室电话" v-model="dialogFormData.phone"/>
+      </el-form-item>
       <el-form-item label="父科室" label-width="105px" prop="openCourseId">
         <el-select v-model="dialogFormData.parentId" placeholder="请选择父科室" style="width: 220%">
           <el-option
@@ -64,6 +67,7 @@
                     parentName:'',
                     deleteFlg: '',
                     createTime: '',
+                    phone: '',
                     departmentList: [],
                 },
                 dialogVisible: false,
@@ -117,6 +121,7 @@
                     parentId: '',
                     deleteFlg: '',
                     createTime: '',
+                    phone:'',
                   departmentList:[]
                 }
 

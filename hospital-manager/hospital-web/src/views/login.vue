@@ -68,7 +68,7 @@
                                 this.$router.push({path: '/feedbackInfo'});
                             } else {
                               // 医生
-                              this.$router.push({path: '/studentEvaluate'});
+                              this.$router.push({path: '/patient'});
                             }
                         } else {
                             this.$message({message: res.msg, type: 'error', duration: 1500});
