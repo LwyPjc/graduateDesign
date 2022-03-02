@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hospital.appointment.entity.SysUser;
 import com.hospital.appointment.service.SysUserService;
+import com.hospital.appointment.utils.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,11 +56,20 @@ public class SysUserController {
 
     /**
      * 修改密码
+     *
      * @return
      */
     @PostMapping("/editPassword")
-    public boolean editPassword(String stuCode,String password) {
-        return sysUserService.updatePasswordByUserName(stuCode,password);
+    public ResultMap editPassword(String stuCode, String password, String oldPassword) {
+        ResultMap resultMap = new ResultMap();
+        resultMap.setSuccss("成功");
+        try {
+            sysUserService.updatePasswordByUserName(stuCode, password, oldPassword);
+        } catch (RuntimeException runtimeException) {
+            resultMap.setError(runtimeException.getMessage());
+            return resultMap;
+        }
+        return resultMap;
     }
 
     @GetMapping("/delete/{id}")
