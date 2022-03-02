@@ -1,7 +1,7 @@
 package com.hospital.appointment.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.hospital.appointment.entity.AptRecord;
+import com.hospital.appointment.entity.ChatInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,10 +11,10 @@ import org.apache.ibatis.annotations.Mapper;
  * <p></p>
  *
  * @version: 1.0
- * @author: kknight
- * @date 2022-2-20
+ * @author: mic
+ * @date 2022-3-2
  */
 @Mapper
-public interface AptRecordMapper extends BaseMapper<AptRecord> {
+public interface ChatInfoMapper extends BaseMapper<ChatInfo> {
 
 }

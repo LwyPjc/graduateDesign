@@ -1,5 +1,5 @@
 package com.hospital.appointment.service;
-import com.hospital.appointment.entity.AptRecord;
+import com.hospital.appointment.entity.ChatInfo;
 
 /**
  * <p>标题: 服务 - 业务逻辑层</p>
@@ -8,9 +8,9 @@ import com.hospital.appointment.entity.AptRecord;
  * <p></p>
  *
  * @version: 1.0
- * @author: kknight
- * @date 2022-2-20
+ * @author: mic
+ * @date 2022-3-2
  */
-public interface AptRecordService extends BaseService<AptRecord> {
+public interface ChatInfoService extends BaseService<ChatInfo> {
 
 }

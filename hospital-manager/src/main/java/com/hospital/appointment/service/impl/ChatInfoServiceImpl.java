@@ -2,9 +2,9 @@ package com.hospital.appointment.service.impl;
 
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hospital.appointment.entity.AptRecord;
-import com.hospital.appointment.dao.AptRecordMapper;
-import com.hospital.appointment.service.AptRecordService;
+import com.hospital.appointment.entity.ChatInfo;
+import com.hospital.appointment.dao.ChatInfoMapper;
+import com.hospital.appointment.service.ChatInfoService;
 
 /**
  * <p>标题: 服务 - 业务逻辑层</p>
@@ -13,10 +13,10 @@ import com.hospital.appointment.service.AptRecordService;
  * <p></p>
  *
  * @version: 1.0
- * @author: kknight
- * @date 2022-2-20
+ * @author: mic
+ * @date 2022-3-2
  */
 @Service
-public class AptRecordServiceImpl extends ServiceImpl<AptRecordMapper, AptRecord> implements AptRecordService {
+public class ChatInfoServiceImpl extends ServiceImpl<ChatInfoMapper, ChatInfo> implements ChatInfoService {
 
 }
