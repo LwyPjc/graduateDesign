@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 
 import com.hospital.appointment.entity.ChatInfo;
+import com.hospital.appointment.service.ChatInfoService;
 import com.hospital.appointment.websocket.handler.ChatWsHandler;
 import com.hospital.appointment.websocket.handler.KfWsHandler;
 import com.hospital.appointment.websocket.handler.WsHandler;
@@ -14,6 +15,7 @@ import com.hospital.appointment.websocket.store.WsUser;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -26,7 +28,8 @@ import java.util.Map;
 public class WebsocketServerEndpoint {
 
     private static final Logger log = LoggerFactory.getLogger(WebsocketServerEndpoint.class);
-
+@Autowired
+private ChatInfoService chatInfoService;
 //    private static Map<String, WsHandler> wsHandler = Maps.newConcurrentMap();
 //
 //    static {
@@ -56,6 +59,8 @@ public class WebsocketServerEndpoint {
             respMsg(session, WsRespPayLoad.ofError("Type is null.").toJson());
             return;
         }
+        //save to db
+        chatInfoService.save(chatInfo);
 
 //        WsUser wsUser = WsStore.get(session.getId());
 //        if (null == wsUser || StringUtils.isBlank(wsUser.getUsername())) {
