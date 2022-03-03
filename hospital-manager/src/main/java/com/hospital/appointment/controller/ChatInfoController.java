@@ -61,9 +61,7 @@ public class ChatInfoController {
             chatInfoDo.setDocId(info.getDocId());
             chatInfoDo.setSendFrom(info.getSendFrom());
             chatInfoDo.setTrueName(info.getTrueName());
-            Date createTime = info.getCreateTime();
-            // todo 时间转换
-//            chatInfoDo.setCreateTime();
+            chatInfoDo.setCreateTime(date2String(info.getCreateTime()));
             return chatInfoDo;
         }).collect(Collectors.toList());
         return list;
