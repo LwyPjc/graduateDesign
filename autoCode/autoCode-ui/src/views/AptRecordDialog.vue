@@ -24,11 +24,7 @@
             <el-input type="number" placeholder="请输入预约医生id" v-model.number="dialogFormData.docId"/>
         </el-form-item>
         <el-form-item label="预约时间" label-width="105px" prop="aptTime">
-            <el-date-picker
-                v-model="dialogFormData.aptTime"
-                type="date"
-                placeholder="选择预约时间">
-            </el-date-picker>
+            <el-input placeholder="请输入预约时间" v-model="dialogFormData.aptTime"/>
         </el-form-item>
         <el-form-item label="预约创建时间" label-width="105px" prop="createTime">
             <el-date-picker
@@ -39,6 +35,12 @@
         </el-form-item>
         <el-form-item label="保留字段" label-width="105px" prop="status">
             <el-input type="number" placeholder="请输入保留字段" v-model.number="dialogFormData.status"/>
+        </el-form-item>
+        <el-form-item label="科室名称" label-width="105px" prop="dptName">
+            <el-input placeholder="请输入科室名称" v-model="dialogFormData.dptName"/>
+        </el-form-item>
+        <el-form-item label="医生名称" label-width="105px" prop="docName">
+            <el-input placeholder="请输入医生名称" v-model="dialogFormData.docName"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -71,6 +73,8 @@
                     aptTime: '',
                     createTime: '',
                     status: '',
+                    dptName: '',
+                    docName: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -91,6 +95,12 @@
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     status: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    dptName: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    docName: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -129,6 +139,8 @@
                     aptTime: '',
                     createTime: '',
                     status: '',
+                    dptName: '',
+                    docName: '',
                 }
 
             },

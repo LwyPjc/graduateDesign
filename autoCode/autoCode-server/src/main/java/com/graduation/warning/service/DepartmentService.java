@@ -9,7 +9,7 @@ import com.graduation.warning.entity.Department;
  *
  * @version: 1.0
  * @author: mic
- * @date 2022-2-21
+ * @date 2022-3-3
  */
 public interface DepartmentService extends BaseService<Department> {
 

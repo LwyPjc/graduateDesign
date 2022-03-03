@@ -15,7 +15,7 @@ import java.util.Date;
  *
  * @version: 1.0
  * @author: mic
- * @date 2022-2-21
+ * @date 2022-3-3
  */
 public class Department extends Model<Department>{
 
@@ -33,5 +33,7 @@ public class Department extends Model<Department>{
     private Date createTime;
 
     private String parentName;
+
+    private String phone;
 
 }

@@ -36,6 +36,9 @@
         <el-form-item label="父科室名称" label-width="105px" prop="parentName">
             <el-input placeholder="请输入父科室名称" v-model="dialogFormData.parentName"/>
         </el-form-item>
+        <el-form-item label="科室电话" label-width="105px" prop="phone">
+            <el-input placeholder="请输入科室电话" v-model="dialogFormData.phone"/>
+        </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
         <el-button size="small" @click.native="dialogVisible = false">取消</el-button>
@@ -67,6 +70,7 @@
                     deleteFlg: '',
                     createTime: '',
                     parentName: '',
+                    phone: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -87,6 +91,9 @@
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     parentName: [
+                        { required: true, message: '参数不能为空', trigger: 'blur' }
+                    ],
+                    phone: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -125,6 +132,7 @@
                     deleteFlg: '',
                     createTime: '',
                     parentName: '',
+                    phone: '',
                 }
 
             },

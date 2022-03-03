@@ -15,7 +15,7 @@ import java.util.Date;
  *
  * @version: 1.0
  * @author: mic
- * @date 2022-2-21
+ * @date 2022-3-3
  */
 public class AptRecord extends Model<AptRecord>{
 
@@ -28,10 +28,14 @@ public class AptRecord extends Model<AptRecord>{
 
     private Integer docId;
 
-    private Date aptTime;
+    private String aptTime;
 
     private Date createTime;
 
     private Integer status;
+
+    private String dptName;
+
+    private String docName;
 
 }

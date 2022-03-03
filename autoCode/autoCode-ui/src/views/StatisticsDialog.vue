@@ -17,17 +17,18 @@
         <el-form-item label="医生姓名" label-width="105px" prop="doctorName">
             <el-input placeholder="请输入医生姓名" v-model="dialogFormData.doctorName"/>
         </el-form-item>
-        <el-form-item label="患者姓名" label-width="105px" prop="patientName">
-            <el-input placeholder="请输入患者姓名" v-model="dialogFormData.patientName"/>
-        </el-form-item>
         <el-form-item label="医生id" label-width="105px" prop="doctorId">
             <el-input type="number" placeholder="请输入医生id" v-model.number="dialogFormData.doctorId"/>
         </el-form-item>
-        <el-form-item label="患者ids" label-width="105px" prop="patientIds">
-            <el-input placeholder="请输入患者ids" v-model="dialogFormData.patientIds"/>
+        <el-form-item label="时间" label-width="105px" prop="createTime">
+            <el-date-picker
+                v-model="dialogFormData.createTime"
+                type="date"
+                placeholder="选择时间">
+            </el-date-picker>
         </el-form-item>
-        <el-form-item label="次数" label-width="105px" prop="cnt">
-            <el-input type="number" placeholder="请输入次数" v-model.number="dialogFormData.cnt"/>
+        <el-form-item label="患者id" label-width="105px" prop="patientIds">
+            <el-input placeholder="请输入患者id" v-model="dialogFormData.patientIds"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -55,10 +56,9 @@
                 dialogFormData: {
                     id: '',
                     doctorName: '',
-                    patientName: '',
                     doctorId: '',
+                    createTime: '',
                     patientIds: '',
-                    cnt: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
@@ -66,16 +66,13 @@
                     doctorName: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    patientName: [
-                        { required: true, message: '参数不能为空', trigger: 'blur' }
-                    ],
                     doctorId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    patientIds: [
+                    createTime: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    cnt: [
+                    patientIds: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -109,10 +106,9 @@
                 this.dialogFormData = {
                     id: '',
                     doctorName: '',
-                    patientName: '',
                     doctorId: '',
+                    createTime: '',
                     patientIds: '',
-                    cnt: '',
                 }
 
             },

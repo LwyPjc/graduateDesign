@@ -49,8 +49,6 @@
                         <el-input
                                 placeholder="预约时间过滤"
                                 v-model="listQuery.aptTime"
-                                value-format="timestamp"
-                                type="datetime"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -66,6 +64,18 @@
                                 placeholder="保留字段过滤"
                                 type="number"
                                 v-model.number="listQuery.status "
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="科室名称过滤"
+                                v-model="listQuery.dptName"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="医生名称过滤"
+                                v-model="listQuery.docName"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -133,7 +143,7 @@
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.aptTime  | timeFilter }}
+                                    {{ scope.row.aptTime }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -152,6 +162,24 @@
                                     align="center">
                                 <template slot-scope="scope">
                                     {{ scope.row.status }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="科室名称"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.dptName }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="医生名称"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.docName }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -239,6 +267,8 @@
                     aptTime: null,
                     createTime: null,
                     status: null,
+                    dptName: null,
+                    docName: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',

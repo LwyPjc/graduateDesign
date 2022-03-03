@@ -1,7 +1,7 @@
-package com.graduation.warning.dao;
+package com.hospital.appointment.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.graduation.warning.entity.AptRecord;
+import com.hospital.appointment.entity.Statistics;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -15,6 +15,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2022-3-3
  */
 @Mapper
-public interface AptRecordMapper extends BaseMapper<AptRecord> {
+public interface StatisticsMapper extends BaseMapper<Statistics> {
 
 }

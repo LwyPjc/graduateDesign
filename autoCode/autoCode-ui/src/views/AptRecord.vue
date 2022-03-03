@@ -6,14 +6,7 @@
                     <el-input placeholder="用户openid过滤" v-model="listQuery.openid" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="预约科室id过滤" type="number" v-model.number="listQuery.dptId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="预约医生id过滤" type="number" v-model.number="listQuery.docId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-date-picker
-                        v-model="listQuery.aptTime"
-                        value-format="timestamp"
-                        type="datetime"
-                        placeholder="选择日期时间"
-                        size="small"
-                        class="filter-item">
-                    </el-date-picker>
+                    <el-input placeholder="预约时间过滤" v-model="listQuery.aptTime" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-date-picker
                         v-model="listQuery.createTime"
                         value-format="timestamp"
@@ -23,6 +16,8 @@
                         class="filter-item">
                     </el-date-picker>
                     <el-input placeholder="保留字段过滤" type="number" v-model.number="listQuery.status" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="科室名称过滤" v-model="listQuery.dptName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="医生名称过滤" v-model="listQuery.docName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -69,7 +64,7 @@
                     </el-table-column>
                     <el-table-column label="预约时间" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.aptTime  | timeFilter }}
+                            {{ scope.row.aptTime }}
                         </template>
                     </el-table-column>
                     <el-table-column label="预约创建时间" show-overflow-tooltip style="width: 10%" align="center">
@@ -80,6 +75,16 @@
                     <el-table-column label="保留字段" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.status }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="科室名称" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.dptName }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="医生名称" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.docName }}
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -155,6 +160,8 @@
                     aptTime: null,
                     createTime: null,
                     status: null,
+                    dptName: null,
+                    docName: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',

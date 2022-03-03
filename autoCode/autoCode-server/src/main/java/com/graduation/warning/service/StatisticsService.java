@@ -9,7 +9,7 @@ import com.graduation.warning.entity.Statistics;
  *
  * @version: 1.0
  * @author: mic
- * @date 2022-2-21
+ * @date 2022-3-3
  */
 public interface StatisticsService extends BaseService<Statistics> {
 

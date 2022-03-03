@@ -15,7 +15,7 @@ import java.util.Date;
  *
  * @version: 1.0
  * @author: mic
- * @date 2022-2-21
+ * @date 2022-3-3
  */
 public class Statistics extends Model<Statistics>{
 
@@ -24,12 +24,10 @@ public class Statistics extends Model<Statistics>{
 
     private String doctorName;
 
-    private String patientName;
-
     private Integer doctorId;
 
-    private String patientIds;
+    private Date createTime;
 
-    private Integer cnt;
+    private String patientIds;
 
 }
