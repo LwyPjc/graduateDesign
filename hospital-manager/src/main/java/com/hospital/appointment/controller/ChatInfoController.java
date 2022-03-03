@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import static com.hospital.appointment.utils.CommUtils.date2String;
 
 /**
- * <p>标题: 服务 - 请求控制层</p>
+ * <p>标题: 聊天 - 请求控制层</p>
  * <p>描述: </p>
  * <p>版权: Copyright (c) 2022</p>
  * <p></p>
@@ -28,6 +28,7 @@ import static com.hospital.appointment.utils.CommUtils.date2String;
  * @author: mic
  * @date 2022-3-2
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/chatInfo")
 public class ChatInfoController {

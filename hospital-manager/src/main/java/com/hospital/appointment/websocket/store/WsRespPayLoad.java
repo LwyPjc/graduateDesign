@@ -59,7 +59,7 @@ public class WsRespPayLoad {
     }
 
     public static WsRespPayLoad ok() {
-        return of("ok");
+        return of("open");
     }
 
     public String toJson() {

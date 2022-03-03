@@ -2,11 +2,11 @@ const domain = "https://www.easy-mock.com/mock/";
 const api = "5c26ecdc1e2c8e78ee4efbd9/hospital/";
 //const url ="http://frpgz1.idcfengye.com:10038/"
 const url = "https://devlops.huiwtech.com/";
-// const apiUrl = "http://localhost:8083/";
+const apiUrl = "http://localhost:8083/";
 // const apiUrl = "http://192.168.3.47:8083/";
 // const apiUrl = "http://192.168.43.231:8083/";
-const apiUrl = "http://192.168.0.102:8083/";
-const wsUrl = "ws://192.168.0.102:8083/ws";
+// const apiUrl = "http://192.168.0.102:8083/";
+const wsUrl = "ws://localhost:8083/ws";
 
 
 const type = {

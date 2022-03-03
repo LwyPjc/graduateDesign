@@ -91,10 +91,11 @@ public class SysUser extends Model<SysUser> {
     @Override
     public String toString() {
         return "SysUser{" +
-        "id=" + id +
-        ", username=" + username +
-        ", password=" + password +
-        ", role=" + role +
-        "}";
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", docId=" + docId +
+                '}';
     }
 }
