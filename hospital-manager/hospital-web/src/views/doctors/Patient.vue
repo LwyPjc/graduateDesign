@@ -142,14 +142,23 @@
 
           // 定义加载历史消息的方式，该函数应该返回一个对象（`{ messages, hasMore }`），或者是返回该对象的 Promise （异步）。
           loadHistory () {
+            //创建websocket对象
             // let ws = new websocket("ws://localhost:8083/ws");
+
+            //开启websocket连接
             // ws.onopen = function(evt) {
             //   console.log("Connection open ...");
+
+            //主动发送消息
             //   ws.send("Hello WebSockets!");
             // };
             //
+
+            //接收服务端推送的消息
             // ws.onmessage = function(evt) {
             //   console.log( "Received Message: " + evt.data);
+
+            //
             //   ws.close();
             // };
             //
