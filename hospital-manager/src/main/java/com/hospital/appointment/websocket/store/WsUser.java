@@ -8,8 +8,8 @@ public class WsUser {
     private String id;
 
     private Session session;
+    private String userId;
     private String username;
-    private String avatar;
 
     public String getId() {
         return id;
@@ -35,21 +35,20 @@ public class WsUser {
         this.username = username;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
-
 
     public static final class WsUserBuilder {
         // sessionId
         private String id;
         private Session session;
         private String username;
-        private String avatar;
+        private String userId;
 
         private WsUserBuilder() {
         }
@@ -73,8 +72,8 @@ public class WsUser {
             return this;
         }
 
-        public WsUserBuilder avatar(String avatar) {
-            this.avatar = avatar;
+        public WsUserBuilder userId(String userId) {
+            this.userId = userId;
             return this;
         }
 
@@ -83,7 +82,7 @@ public class WsUser {
             wsUser.setId(id);
             wsUser.setSession(session);
             wsUser.setUsername(username);
-            wsUser.setAvatar(avatar);
+            wsUser.setUserId(userId);
             return wsUser;
         }
     }

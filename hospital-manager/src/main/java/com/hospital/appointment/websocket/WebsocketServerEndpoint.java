@@ -3,6 +3,7 @@ package com.hospital.appointment.websocket;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 
+import com.hospital.appointment.entity.ChatInfo;
 import com.hospital.appointment.websocket.handler.ChatWsHandler;
 import com.hospital.appointment.websocket.handler.KfWsHandler;
 import com.hospital.appointment.websocket.handler.WsHandler;
@@ -26,53 +27,55 @@ public class WebsocketServerEndpoint {
 
     private static final Logger log = LoggerFactory.getLogger(WebsocketServerEndpoint.class);
 
-    private static Map<String, WsHandler> wsHandler = Maps.newConcurrentMap();
-
-    static {
-        wsHandler.put("robot", new KfWsHandler());
-        wsHandler.put("chat", new ChatWsHandler());
-    }
+//    private static Map<String, WsHandler> wsHandler = Maps.newConcurrentMap();
+//
+//    static {
+//        wsHandler.put("robot", new KfWsHandler());
+//        wsHandler.put("chat", new ChatWsHandler());
+//    }
 
     @OnOpen
     public void onOpen(Session session) {
         log.info("New ws connection {} ", session.getId());
-        WsStore.put(session.getId(), WsUser.WsUserBuilder.aWsUser().id(session.getId()).session(session).build());
+//        WsStore.put(session.getId(), WsUser.WsUserBuilder.aWsUser().id(session.getId()).session(session).build());
         respMsg(session, WsRespPayLoad.ok().toJson());
     }
 
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
-        WsStore.remove(session.getId());
+//        WsStore.remove(session.getId());
         log.warn("ws closed，reason:{}", closeReason);
     }
 
     @OnMessage
     public void onMessage(String message, Session session) {
         log.info("accept client messages: {}" + message);
-        WsReqPayLoad payLoad = JSON.parseObject(message, WsReqPayLoad.class);
-        if (StringUtils.isBlank(payLoad.getType())) {
+//        WsReqPayLoad payLoad = JSON.parseObject(message, WsReqPayLoad.class);
+        ChatInfo chatInfo = JSON.parseObject(message, ChatInfo.class);
+        if (StringUtils.isBlank(chatInfo.getSendFrom())) {
             respMsg(session, WsRespPayLoad.ofError("Type is null.").toJson());
             return;
         }
-        WsUser wsUser = WsStore.get(session.getId());
-        if (null == wsUser || StringUtils.isBlank(wsUser.getUsername())) {
-            WsStore.put(session.getId(), WsUser.WsUserBuilder.aWsUser()
-                    .id(session.getId())
-                    .username(payLoad.getUsername())
-                    .avatar(payLoad.getAvatar())
-                    .session(session)
-                    .build()
-            );
-        }
-        WsHandler handler = wsHandler.get(payLoad.getType());
-        if (null != handler) {
-            WsRespPayLoad resp = handler.onMessage(session, payLoad);
-            if (null != resp) {
-                respMsg(session, resp.toJson());
-            }
-        } else {
-            respMsg(session, WsRespPayLoad.ok().toJson());
-        }
+
+//        WsUser wsUser = WsStore.get(session.getId());
+//        if (null == wsUser || StringUtils.isBlank(wsUser.getUsername())) {
+//            String sendFrom = chatInfo.getSendFrom();
+//            WsStore.put(session.getId(), WsUser.WsUserBuilder.aWsUser()
+//                    .id(session.getId())
+//                    .userId("0".equals(sendFrom) ? chatInfo.getOpenid() : String.valueOf(chatInfo.getDocId()))
+//                    .username("0".equals(sendFrom) ? chatInfo.getTrueName() : chatInfo.getDocName())
+//                    .build());
+//        }
+        respMsg(session, chatInfo.toJson());
+//        WsHandler handler = wsHandler.get(payLoad.getType());
+//        if (null != handler) {
+//            WsRespPayLoad resp = handler.onMessage(session, payLoad);
+//            if (null != resp) {
+//                respMsg(session, resp.toJson());
+//            }
+//        } else {
+//            respMsg(session, WsRespPayLoad.ok().toJson());
+//        }
     }
 
     @OnError

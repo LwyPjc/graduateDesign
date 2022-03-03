@@ -3,8 +3,12 @@ const api = "5c26ecdc1e2c8e78ee4efbd9/hospital/";
 //const url ="http://frpgz1.idcfengye.com:10038/"
 const url = "https://devlops.huiwtech.com/";
 // const apiUrl = "http://localhost:8083/";
-const apiUrl = "http://192.168.3.47:8083/";
+// const apiUrl = "http://192.168.3.47:8083/";
 // const apiUrl = "http://192.168.43.231:8083/";
+const apiUrl = "http://192.168.0.102:8083/";
+const wsUrl = "ws://192.168.0.102:8083/ws";
+
+
 const type = {
   user: "UserManager/",
   data: "Information/",
@@ -208,51 +212,58 @@ const saveUserInfo = function () {
   return apiUrl + 'userInfo/save';
 }
 //更新用户信息
-const updateUserInfo=function(){
-  return apiUrl+'userInfo/edit'
+const updateUserInfo = function () {
+  return apiUrl + 'userInfo/edit'
 }
 //添加反馈信息
-const saveFeedBackInfo=function(){
-  return apiUrl+'feedbackInfo/save'
+const saveFeedBackInfo = function () {
+  return apiUrl + 'feedbackInfo/save'
 }
 //获取医院的简介
 const getHospitalInfo = function () {
-  return apiUrl+'hospitalInfo/getInfo';
+  return apiUrl + 'hospitalInfo/getInfo';
 }
-const checkIdCardIsExist=function(){
-  return apiUrl+'userInfo/getByIdCard/'
+const checkIdCardIsExist = function () {
+  return apiUrl + 'userInfo/getByIdCard/'
 }
-const getDepartmentInfo=function(){
-  return apiUrl+'department/findAll'
+const getDepartmentInfo = function () {
+  return apiUrl + 'department/findAll'
 }
-const getDepartmentInfoById=function(){
-  return apiUrl+'department/'
+const getDepartmentInfoById = function () {
+  return apiUrl + 'department/'
 }
-const getdoctorListByDptId = function(){
-  return apiUrl+'doctorInfo/getByDptId/'
+const getdoctorListByDptId = function () {
+  return apiUrl + 'doctorInfo/getByDptId/'
 }
-const saveRegisterInfo=function(){
-  return apiUrl+'aptRecord/save'
+const saveRegisterInfo = function () {
+  return apiUrl + 'aptRecord/save'
 }
 //收藏功能
 const saveCollect = function () {
   return apiUrl + "collectInfo/save";
+}
+//
+const getHistoryChatInfo = function () {
+  return apiUrl + "chatInfo/findByDoubleIds"
+}
+const connectWs = function(){
+  return wsUrl;
 }
 // todo
 module.exports = {
   getPensorInfoUrl: getPensorInfoUrl,
   saveUserInfo: saveUserInfo,
   updateUserInfo: updateUserInfo,
-  saveFeedBackInfo:saveFeedBackInfo,
+  saveFeedBackInfo: saveFeedBackInfo,
   getHospitalInfo: getHospitalInfo,
-  checkIdCardIsExist:checkIdCardIsExist,
-  getDepartmentInfo:getDepartmentInfo,
-  getDepartmentInfoById:getDepartmentInfoById,
-  getdoctorListByDptId:getdoctorListByDptId,
-  saveRegisterInfo:saveRegisterInfo,
-  saveCollect:saveCollect,
-
-
+  checkIdCardIsExist: checkIdCardIsExist,
+  getDepartmentInfo: getDepartmentInfo,
+  getDepartmentInfoById: getDepartmentInfoById,
+  getdoctorListByDptId: getdoctorListByDptId,
+  saveRegisterInfo: saveRegisterInfo,
+  saveCollect: saveCollect,
+  getHistoryChatInfo: getHistoryChatInfo,
+  connectWs:connectWs,
   getInHosptalUrl: getInHosptalUrl,
   getCollectingListUrl: getCollectingListUrl,
   getRegisterUrl: getRegisterUrl,

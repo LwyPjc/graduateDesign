@@ -38,6 +38,16 @@ public class ChatInfoController {
         QueryWrapper<ChatInfo> queryWrapper = new QueryWrapper<>(chatInfo);
         return chatInfoService.page(page, queryWrapper);
     }
+    @GetMapping("/findByDoubleIds")
+    public List<ChatInfo> findByOpenidAndDocId(@RequestParam String openid,@RequestParam String docId){
+        QueryWrapper<ChatInfo> queryWrapper = new QueryWrapper<>();
+        Integer docId1 = Integer.parseInt(docId);
+        queryWrapper.eq("openid",openid);
+        queryWrapper.eq("doc_id",docId1);
+        queryWrapper.orderByDesc("create_time");
+        return  chatInfoService.list(queryWrapper);
+
+    }
 
     @GetMapping("/{id}")
     public ChatInfo getById(@PathVariable String id) {

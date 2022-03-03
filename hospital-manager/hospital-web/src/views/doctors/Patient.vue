@@ -132,8 +132,48 @@
             this.fetchData()
         },
         methods: {
+          openWs(){
+            let ws = new websocket("ws://localhost:8083/ws");
+            ws.onopen = function(evt) {
+              console.log("Connection open ...");
+              ws.send("Hello WebSockets!");
+            };
+          },
+
           // 定义加载历史消息的方式，该函数应该返回一个对象（`{ messages, hasMore }`），或者是返回该对象的 Promise （异步）。
           loadHistory () {
+            // let ws = new websocket("ws://localhost:8083/ws");
+            // ws.onopen = function(evt) {
+            //   console.log("Connection open ...");
+            //   ws.send("Hello WebSockets!");
+            // };
+            //
+            // ws.onmessage = function(evt) {
+            //   console.log( "Received Message: " + evt.data);
+            //   ws.close();
+            // };
+            //
+            // ws.onclose = function(evt) {
+            //   console.log("Connection closed.");
+            // };
+            this.listLoading = true
+            request({
+              url: `${this.prefixUrl}/findListByPage`,
+              method: 'get',
+              params: this.listQuery
+            }).then(res => {
+              this.list = res.records
+              this.total = res.total
+              this.listLoading = false
+            }).catch(error => {
+              this.$message({
+                message: error,
+                type: 'error',
+                duration: 1500,
+                onClose: () => {
+                }
+              })
+            })
             return {
               // 消息数据，字段如下，应以时间的倒序给出。
               messages: [

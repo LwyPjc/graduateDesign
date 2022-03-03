@@ -174,11 +174,10 @@ Page({
     })
   },
   contactOnline(e) {
-    wx.showToast({
-      title: '该医生未开通在线咨询',
-      icon: 'none',
-      duration: 1000
-    })
+    console.log('contactOnline-e--',e)
+   wx.navigateTo({
+     url: '/pages/chat/chat?doctorInfo='+JSON.stringify(e.currentTarget.dataset.doctor)
+   })
   },
   //按日期请求医生列表
   doctorListDate: function (date) {
