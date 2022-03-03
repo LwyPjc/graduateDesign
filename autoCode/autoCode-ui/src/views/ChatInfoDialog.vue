@@ -21,11 +21,7 @@
             <el-input placeholder="请输入用户真实姓名" v-model="dialogFormData.trueName"/>
         </el-form-item>
         <el-form-item label="医生id" label-width="105px" prop="docId">
-<<<<<<< HEAD
-            <el-input sendFrom="number" placeholder="请输入医生id" v-model.number="dialogFormData.docId"/>
-=======
             <el-input type="number" placeholder="请输入医生id" v-model.number="dialogFormData.docId"/>
->>>>>>> origin/hospital-manager
         </el-form-item>
         <el-form-item label="医生姓名" label-width="105px" prop="docName">
             <el-input placeholder="请输入医生姓名" v-model="dialogFormData.docName"/>
@@ -36,11 +32,7 @@
         <el-form-item label="发送时间" label-width="105px" prop="createTime">
             <el-date-picker
                 v-model="dialogFormData.createTime"
-<<<<<<< HEAD
-                sendFrom="date"
-=======
                 type="date"
->>>>>>> origin/hospital-manager
                 placeholder="选择发送时间">
             </el-date-picker>
         </el-form-item>
@@ -51,11 +43,7 @@
     <div slot="footer" class="dialog-footer">
         <el-button size="small" @click.native="dialogVisible = false">取消</el-button>
         <el-button
-<<<<<<< HEAD
-                sendFrom="primary"
-=======
                 type="primary"
->>>>>>> origin/hospital-manager
                 :loading="dialogLoading"
                 size="small"
                 @click.native="dialogSubmit"
@@ -167,11 +155,7 @@
                   }).then(res => {
                     this.$message({
                       message: '操作成功',
-<<<<<<< HEAD
-                      sendFrom: 'success',
-=======
                       type: 'success',
->>>>>>> origin/hospital-manager
                       duration: 1500,
                       onClose: () => {
                         this.dialogVisible = false
@@ -181,11 +165,7 @@
                   }).catch(error => {
                     this.$message({
                       message: error,
-<<<<<<< HEAD
-                      sendFrom: 'error',
-=======
                       type: 'error',
->>>>>>> origin/hospital-manager
                       duration: 1500,
                       onClose: () => {
                       }

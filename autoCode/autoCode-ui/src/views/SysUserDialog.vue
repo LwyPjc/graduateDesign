@@ -14,13 +14,8 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-<<<<<<< HEAD
-        <el-form-item label="用户名" label-width="105px" prop="trueName">
-            <el-input placeholder="请输入用户名" v-model="dialogFormData.trueName"/>
-=======
         <el-form-item label="用户名" label-width="105px" prop="username">
             <el-input placeholder="请输入用户名" v-model="dialogFormData.username"/>
->>>>>>> origin/hospital-manager
         </el-form-item>
         <el-form-item label="密码" label-width="105px" prop="password">
             <el-input placeholder="请输入密码" v-model="dialogFormData.password"/>
@@ -28,21 +23,14 @@
         <el-form-item label="角色 2管理员" label-width="105px" prop="role">
             <el-input placeholder="请输入角色 2管理员" v-model="dialogFormData.role"/>
         </el-form-item>
-<<<<<<< HEAD
-=======
         <el-form-item label="医生id" label-width="105px" prop="docId">
             <el-input type="number" placeholder="请输入医生id" v-model.number="dialogFormData.docId"/>
         </el-form-item>
->>>>>>> origin/hospital-manager
     </el-form>
     <div slot="footer" class="dialog-footer">
         <el-button size="small" @click.native="dialogVisible = false">取消</el-button>
         <el-button
-<<<<<<< HEAD
-                sendFrom="primary"
-=======
                 type="primary"
->>>>>>> origin/hospital-manager
                 :loading="dialogLoading"
                 size="small"
                 @click.native="dialogSubmit"
@@ -63,25 +51,15 @@
                 prefixUrl: this.GLOBAL.baseUrl + '/sysUser',
                 dialogFormData: {
                     id: '',
-<<<<<<< HEAD
-                    trueName: '',
-                    password: '',
-                    role: '',
-=======
                     username: '',
                     password: '',
                     role: '',
                     docId: '',
->>>>>>> origin/hospital-manager
                 },
                 dialogVisible: false,
                 dialogLoading: false,
                 dialogFormRules: {
-<<<<<<< HEAD
-                    trueName: [
-=======
                     username: [
->>>>>>> origin/hospital-manager
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                     password: [
@@ -90,12 +68,9 @@
                     role: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-<<<<<<< HEAD
-=======
                     docId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
->>>>>>> origin/hospital-manager
                 }
             }
         },
@@ -126,16 +101,10 @@
             resetModel() {
                 this.dialogFormData = {
                     id: '',
-<<<<<<< HEAD
-                    trueName: '',
-                    password: '',
-                    role: '',
-=======
                     username: '',
                     password: '',
                     role: '',
                     docId: '',
->>>>>>> origin/hospital-manager
                 }
 
             },
@@ -158,11 +127,7 @@
                   }).then(res => {
                     this.$message({
                       message: '操作成功',
-<<<<<<< HEAD
-                      sendFrom: 'success',
-=======
                       type: 'success',
->>>>>>> origin/hospital-manager
                       duration: 1500,
                       onClose: () => {
                         this.dialogVisible = false
@@ -172,11 +137,7 @@
                   }).catch(error => {
                     this.$message({
                       message: error,
-<<<<<<< HEAD
-                      sendFrom: 'error',
-=======
                       type: 'error',
->>>>>>> origin/hospital-manager
                       duration: 1500,
                       onClose: () => {
                       }
