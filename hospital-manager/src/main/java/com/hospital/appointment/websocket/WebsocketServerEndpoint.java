@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 
 import com.hospital.appointment.entity.ChatInfo;
 import com.hospital.appointment.service.ChatInfoService;
+import com.hospital.appointment.service.SendMessageService;
 import com.hospital.appointment.websocket.handler.ChatWsHandler;
 import com.hospital.appointment.websocket.handler.KfWsHandler;
 import com.hospital.appointment.websocket.handler.WsHandler;
@@ -28,8 +29,12 @@ import java.util.Map;
 public class WebsocketServerEndpoint {
 
     private static final Logger log = LoggerFactory.getLogger(WebsocketServerEndpoint.class);
-@Autowired
-private ChatInfoService chatInfoService;
+
+    private static SendMessageService sendMessageSercice;
+    @Autowired
+    public void setSendMessageSercice(SendMessageService sendMessageSercice){
+        this.sendMessageSercice = sendMessageSercice;
+    }
 //    private static Map<String, WsHandler> wsHandler = Maps.newConcurrentMap();
 //
 //    static {
@@ -60,7 +65,7 @@ private ChatInfoService chatInfoService;
             return;
         }
         //save to db
-        chatInfoService.save(chatInfo);
+        sendMessageSercice.saveChatInfo(chatInfo);
 
 //        WsUser wsUser = WsStore.get(session.getId());
 //        if (null == wsUser || StringUtils.isBlank(wsUser.getUsername())) {
