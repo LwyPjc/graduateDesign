@@ -44,7 +44,7 @@ public class ChatInfoController {
         Integer docId1 = Integer.parseInt(docId);
         queryWrapper.eq("openid",openid);
         queryWrapper.eq("doc_id",docId1);
-        queryWrapper.orderByDesc("create_time");
+        queryWrapper.orderByAsc("create_time");
         return  chatInfoService.list(queryWrapper);
 
     }
