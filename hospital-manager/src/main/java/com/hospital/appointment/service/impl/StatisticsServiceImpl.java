@@ -1,10 +1,11 @@
-package com.graduation.warning.service.impl;
+package com.hospital.appointment.service.impl;
 
+import com.hospital.appointment.dao.StatisticsMapper;
+import com.hospital.appointment.entity.Statistics;
+import com.hospital.appointment.service.StatisticsService;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.graduation.warning.entity.Statistics;
-import com.graduation.warning.dao.StatisticsMapper;
-import com.graduation.warning.service.StatisticsService;
+
 
 /**
  * <p>标题: 服务 - 业务逻辑层</p>

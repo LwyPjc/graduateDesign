@@ -65,6 +65,12 @@
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="科室电话过滤"
+                                v-model="listQuery.phone"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
                         <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -148,6 +154,15 @@
                                     align="center">
                                 <template slot-scope="scope">
                                     {{ scope.row.parentName }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="科室电话"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.phone }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -235,6 +250,7 @@
                     deleteFlg: null,
                     createTime: null,
                     parentName: null,
+                    phone: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',

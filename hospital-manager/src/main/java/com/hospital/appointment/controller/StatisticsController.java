@@ -1,21 +1,18 @@
-package com.graduation.warning.controller;
+package com.hospital.appointment.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hospital.appointment.entity.Statistics;
+import com.hospital.appointment.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.graduation.warning.entity.Statistics;
-import com.graduation.warning.service.StatisticsService;
 
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * <p>标题: 服务 - 请求控制层</p>
- * <p>描述: </p>
- * <p>版权: Copyright (c) 2022</p>
- * <p></p>
+ * <p>标题: 统计 - 请求控制层</p>
  *
  * @version: 1.0
  * @author: mic
@@ -23,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/statistics")
+@CrossOrigin
 public class StatisticsController {
 
     @Autowired

@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
  *
  * @version: 1.0
  * @author: mic
- * @date 2022-2-21
+ * @date 2022-3-3
  */
 @Mapper
 public interface UserInfoMapper extends BaseMapper<UserInfo> {

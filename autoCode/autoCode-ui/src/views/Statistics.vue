@@ -4,10 +4,16 @@
         <el-row>
             <el-col :span="24" class="filter-container">
                     <el-input placeholder="医生姓名过滤" v-model="listQuery.doctorName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="患者姓名过滤" v-model="listQuery.patientName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="医生id过滤" type="number" v-model.number="listQuery.doctorId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="患者ids过滤" v-model="listQuery.patientIds" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="次数过滤" type="number" v-model.number="listQuery.cnt" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-date-picker
+                        v-model="listQuery.createTime"
+                        value-format="timestamp"
+                        type="datetime"
+                        placeholder="选择日期时间"
+                        size="small"
+                        class="filter-item">
+                    </el-date-picker>
+                    <el-input placeholder="患者id过滤" v-model="listQuery.patientIds" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -42,24 +48,19 @@
                             {{ scope.row.doctorName }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="患者姓名" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.patientName }}
-                        </template>
-                    </el-table-column>
                     <el-table-column label="医生id" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.doctorId }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="患者ids" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="时间" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.patientIds }}
+                            {{ scope.row.createTime  | timeFilter }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="次数" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="患者id" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.cnt }}
+                            {{ scope.row.patientIds }}
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -130,10 +131,9 @@
                     size: 10,
                     query: '',
                     doctorName: null,
-                    patientName: null,
                     doctorId: null,
+                    createTime: null,
                     patientIds: null,
-                    cnt: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
