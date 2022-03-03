@@ -7,7 +7,9 @@ import com.hospital.appointment.entity.SysUser;
 import com.hospital.appointment.service.DoctorInfoService;
 import com.hospital.appointment.service.SysUserService;
 import com.hospital.appointment.utils.Constant;
+import com.hospital.appointment.utils.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -35,7 +37,7 @@ public class DoctorInfoController {
     private SysUserService sysUserService;
 
     @GetMapping("/getByDptId/{dptId}")
-    public List<DoctorInfo> getByDptId(@PathVariable String dptId){
+    public List<DoctorInfo> getByDptId(@PathVariable String dptId) {
         return doctorInfoService.getByDptId(dptId);
     }
 
@@ -56,20 +58,44 @@ public class DoctorInfoController {
     }
 
     @PostMapping("/save")
-    public Serializable save(DoctorInfo doctorInfo) {
+    public ResultMap save(DoctorInfo doctorInfo) {
+        ResultMap resultMap = new ResultMap();
+        resultMap.setSuccss("成功");
+        // 校验手机号唯一
+        QueryWrapper<DoctorInfo> doctorInfoQueryWrapper = new QueryWrapper<>();
+        doctorInfoQueryWrapper.eq("phone", doctorInfo.getPhone());
+        List<DoctorInfo> list = doctorInfoService.list(doctorInfoQueryWrapper);
+        if (!CollectionUtils.isEmpty(list)) {
+            resultMap.setError("此手机号已存在");
+            return resultMap;
+        }
+        // 保存医生信息
         doctorInfoService.save(doctorInfo);
         // 添加医生登录信息
         SysUser sysUser = new SysUser();
         sysUser.setUsername(doctorInfo.getPhone());
         sysUser.setPassword(Constant.DEFAULT_PASSWORD);
         sysUser.setRole("1");
+        sysUser.setDocId(doctorInfo.getId());
         sysUserService.save(sysUser);
-        return doctorInfo.getId();
+        return resultMap;
     }
 
     @PostMapping("/edit")
-    public boolean edit(DoctorInfo doctorInfo) {
-        return doctorInfoService.updateById(doctorInfo);
+    public ResultMap edit(DoctorInfo doctorInfo) {
+        ResultMap resultMap = new ResultMap();
+        resultMap.setSuccss("成功");
+        // 校验手机号唯一
+        QueryWrapper<DoctorInfo> doctorInfoQueryWrapper = new QueryWrapper<>();
+        doctorInfoQueryWrapper.eq("phone", doctorInfo.getPhone());
+        List<DoctorInfo> list = doctorInfoService.list(doctorInfoQueryWrapper);
+        if (!CollectionUtils.isEmpty(list)) {
+            resultMap.setError("此手机号已存在");
+            return resultMap;
+        }
+        doctorInfoService.updateById(doctorInfo);
+        return resultMap;
+
     }
 
     @GetMapping("/delete/{id}")

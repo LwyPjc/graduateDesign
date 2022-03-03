@@ -38,6 +38,18 @@ public class SysUser extends Model<SysUser> {
      */
     private String role;
 
+    /**
+     * 医生id
+     */
+    private Integer docId;
+
+    public Integer getDocId() {
+        return docId;
+    }
+
+    public void setDocId(Integer docId) {
+        this.docId = docId;
+    }
 
     public Integer getId() {
         return id;

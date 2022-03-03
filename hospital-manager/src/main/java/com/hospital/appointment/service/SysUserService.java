@@ -26,5 +26,5 @@ public interface SysUserService extends BaseService<SysUser> {
     /**
      * 根据用户名更新密码
      */
-    boolean updatePasswordByUserName(String userName,String pwd);
+    boolean updatePasswordByUserName(String userName,String pwd,String oldPassword);
 }

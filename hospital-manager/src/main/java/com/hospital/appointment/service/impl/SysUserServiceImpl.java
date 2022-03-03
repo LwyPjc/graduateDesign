@@ -24,7 +24,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public SysUser findByUserName(String userName) {
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
         //设置username = 参数
-        queryWrapper.eq(Constant.USER_NAME,userName);
+        queryWrapper.eq(Constant.USER_NAME, userName);
         //查询并获取第一个结果
         return this.getOne(queryWrapper);
     }
@@ -32,17 +32,24 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public boolean removeByUserName(String userName) {
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(Constant.USER_NAME,userName);
+        queryWrapper.eq(Constant.USER_NAME, userName);
         return this.remove(queryWrapper);
     }
 
     @Override
-    public boolean updatePasswordByUserName(String userName,String pwd) {
+    public boolean updatePasswordByUserName(String userName, String pwd, String oldPassword) {
+        UpdateWrapper<SysUser> updateWrapperCheckOldPassword = new UpdateWrapper<>();
+        updateWrapperCheckOldPassword.eq(Constant.USER_NAME, userName);
+        updateWrapperCheckOldPassword.eq(Constant.PASSWORD, oldPassword);
+        SysUser one = this.getOne(updateWrapperCheckOldPassword);
+        if (one == null) {
+            throw new RuntimeException("旧密码不正确");
+        }
         UpdateWrapper<SysUser> updateWrapper = new UpdateWrapper<>();
         //设置过滤条件
-        updateWrapper.eq(Constant.USER_NAME,userName);
+        updateWrapper.eq(Constant.USER_NAME, userName);
         //设置修改后的值
-        updateWrapper.set(Constant.PASSWORD,pwd);
+        updateWrapper.set(Constant.PASSWORD, pwd);
         return this.update(updateWrapper);
     }
 }
