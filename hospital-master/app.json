@@ -5,7 +5,6 @@
         "pages/info/info",
         "pages/common/footbar/footbar",
         "pages/logs/logs",
-        "pages/myContact/myContact",
         "pages/collect/collect",
         "pages/personal/personal",
         "pages/userDetails/userDetails",
@@ -20,7 +19,9 @@
         "pages/doctorList/doctorList",
         "pages/hospitalInfo/hospitalInfo",
         "pages/GHDetail/GHDetail",
-        "pages/dayLog/dayLog"
+        "pages/dayLog/dayLog",
+        "pages/myContact/myContact",
+        "pages/chat/chat"
     ],
     "tabBar": {
         "color": "#7A7068",

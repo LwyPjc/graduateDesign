@@ -22,7 +22,7 @@
         <view class='list-part-right'>
         <view>
             <text class='doctor-name'>{{ item.name }}</text>
-              <text class="price {{show}}" catchtap="contactOnline" >在线咨询
+              <text class="price {{show}}" data-doctor="{{item}}" catchtap="contactOnline" >在线咨询
               </text>
             </view>        
           <view class='list-part-bottom {{show}}'>

@@ -1,5 +1,6 @@
 package com.hospital.appointment.entity;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -99,5 +100,9 @@ public class ChatInfo extends Model<ChatInfo> {
 
     public void setSendFrom(String sendFrom) {
         this.sendFrom = sendFrom;
+    }
+
+    public String toJson() {
+        return JSONObject.toJSONString(this);
     }
 }
