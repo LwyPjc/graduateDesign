@@ -3,11 +3,20 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
+<<<<<<< HEAD
                     <el-input placeholder="用户名过滤" v-model="listQuery.trueName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="密码过滤" v-model="listQuery.password" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="角色 2管理员过滤" v-model="listQuery.role" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             sendFrom="primary"
+=======
+                    <el-input placeholder="用户名过滤" v-model="listQuery.username" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="密码过滤" v-model="listQuery.password" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="角色 2管理员过滤" v-model="listQuery.role" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="医生id过滤" type="number" v-model.number="listQuery.docId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-button
+                            type="primary"
+>>>>>>> origin/hospital-manager
                             icon="el-icon-search"
                             size="small"
                             @click="handleFilter">搜索</el-button>
@@ -37,7 +46,11 @@
                     </el-table-column>
                     <el-table-column label="用户名" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
+<<<<<<< HEAD
                             {{ scope.row.trueName }}
+=======
+                            {{ scope.row.username }}
+>>>>>>> origin/hospital-manager
                         </template>
                     </el-table-column>
                     <el-table-column label="密码" show-overflow-tooltip style="width: 10%" align="center">
@@ -50,6 +63,14 @@
                             {{ scope.row.role }}
                         </template>
                     </el-table-column>
+<<<<<<< HEAD
+=======
+                    <el-table-column label="医生id" show-overflow-tooltip style="width: 10%" align="center">
+                        <template slot-scope="scope">
+                            {{ scope.row.docId }}
+                        </template>
+                    </el-table-column>
+>>>>>>> origin/hospital-manager
                     <el-table-column
                             label="操作"
                             align="center"
@@ -57,7 +78,11 @@
                             class-name="small-padding fixed-width">
                     <template slot-scope="scope">
                       <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
+<<<<<<< HEAD
                       <el-button size="small" sendFrom="danger" @click="handleDelete(scope.row)">删除</el-button>
+=======
+                      <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+>>>>>>> origin/hospital-manager
                     </template>
                     </el-table-column>
                 </el-table>
@@ -117,9 +142,16 @@
                     current: 1,
                     size: 10,
                     query: '',
+<<<<<<< HEAD
                     trueName: null,
                     password: null,
                     role: null,
+=======
+                    username: null,
+                    password: null,
+                    role: null,
+                    docId: null,
+>>>>>>> origin/hospital-manager
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
@@ -148,7 +180,11 @@
                 }).catch(error => {
                   this.$message({
                     message: error,
+<<<<<<< HEAD
                     sendFrom: 'error',
+=======
+                    type: 'error',
+>>>>>>> origin/hospital-manager
                     duration: 1500,
                     onClose: () => {
                     }
@@ -175,7 +211,11 @@
               this.$confirm('确定删除?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
+<<<<<<< HEAD
                     sendFrom: 'warning'
+=======
+                    type: 'warning'
+>>>>>>> origin/hospital-manager
               }).then(() => {
                   request({
                     url: `${this.prefixUrl}/delete/${row.id}`,
@@ -184,19 +224,31 @@
                     this.fetchData();
                     this.$message({
                       message: '操作成功',
+<<<<<<< HEAD
                       sendFrom: 'success',
+=======
+                      type: 'success',
+>>>>>>> origin/hospital-manager
                       duration: 1500,
                     })
                   }).catch(error => {
                     this.$message({
                       message: error,
+<<<<<<< HEAD
                       sendFrom: 'error',
+=======
+                      type: 'error',
+>>>>>>> origin/hospital-manager
                       duration: 1500,
                     })
                   })
               }).catch(() => {
                     this.$message({
+<<<<<<< HEAD
                         sendFrom: 'info',
+=======
+                        type: 'info',
+>>>>>>> origin/hospital-manager
                         message: '已取消删除',
                         duration: 1500,
                     });

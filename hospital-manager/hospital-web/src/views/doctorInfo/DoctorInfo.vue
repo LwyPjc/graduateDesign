@@ -145,7 +145,7 @@
            */
           getInitData() {
             request({
-              url: `${this.GLOBAL.baseUrl}/department/findList`,
+              url: `${this.GLOBAL.baseUrl}/department/findListForDoc`,
               method: 'get',
             }).then(res=>{
               this.departmentList = res;

@@ -40,7 +40,11 @@
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
                                 placeholder="医生id过滤"
+<<<<<<< HEAD
                                 sendFrom="number"
+=======
+                                type="number"
+>>>>>>> origin/hospital-manager
                                 v-model.number="listQuery.docId "
                                 size="small"
                                 class="filter-item"
@@ -61,7 +65,11 @@
                                 placeholder="发送时间过滤"
                                 v-model="listQuery.createTime"
                                 value-format="timestamp"
+<<<<<<< HEAD
                                 sendFrom="datetime"
+=======
+                                type="datetime"
+>>>>>>> origin/hospital-manager
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -72,7 +80,11 @@
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-button
+<<<<<<< HEAD
                             sendFrom="primary"
+=======
+                            type="primary"
+>>>>>>> origin/hospital-manager
                             icon="el-icon-search"
                             size="small"
                             @click="handleFilter"
@@ -305,7 +317,11 @@
               }).catch(error => {
                 this.$message({
                   message: error,
+<<<<<<< HEAD
                   sendFrom: 'error',
+=======
+                  type: 'error',
+>>>>>>> origin/hospital-manager
                   duration: 1500,
                   onClose: () => {
                   }
@@ -335,7 +351,11 @@
               }).then(res => {
                 this.$message({
                   message: '操作成功',
+<<<<<<< HEAD
                   sendFrom: 'success',
+=======
+                  type: 'success',
+>>>>>>> origin/hospital-manager
                   duration: 1500,
                   onClose: () => {
                     this.fetchData()
@@ -344,7 +364,11 @@
               }).catch(error => {
                 this.$message({
                   message: error,
+<<<<<<< HEAD
                   sendFrom: 'error',
+=======
+                  type: 'error',
+>>>>>>> origin/hospital-manager
                   duration: 1500,
                   onClose: () => {
                   }

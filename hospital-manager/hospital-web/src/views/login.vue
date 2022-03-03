@@ -62,11 +62,13 @@
                         if (res.status === "200") {
                             sessionStorage.setItem('username', res.msg.username);
                             sessionStorage.setItem('role', res.msg.role);
+
                             // sessionStorage.setItem('name', res.msg.name);
                             // 管理员
                             if (res.msg.role === "2") {
                                 this.$router.push({path: '/feedbackInfo'});
                             } else {
+                              sessionStorage.setItem('docId', res.msg.docId);
                               // 医生
                               this.$router.push({path: '/patient'});
                             }

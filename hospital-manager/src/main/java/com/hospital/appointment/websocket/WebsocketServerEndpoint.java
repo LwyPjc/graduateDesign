@@ -45,7 +45,7 @@ public class WebsocketServerEndpoint {
     @OnOpen
     public void onOpen(Session session) {
         log.info("New ws connection {} ", session.getId());
-//        WsStore.put(session.getId(), WsUser.WsUserBuilder.aWsUser().id(session.getId()).session(session).build());
+        WsStore.put(session.getId(), WsUser.WsUserBuilder.aWsUser().id(session.getId()).session(session).build());
         respMsg(session, WsRespPayLoad.ok().toJson());
     }
 

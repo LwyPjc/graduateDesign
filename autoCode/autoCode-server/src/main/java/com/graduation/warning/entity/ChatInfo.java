@@ -8,7 +8,7 @@ import com.zoe.optimus.core.base.entity.BaseEntity;
 import java.util.Date;
 
 /**
- * <p>标题: statistics实体</p>
+ * <p>标题: chat_info实体</p>
  * <p>描述: </p>
  * <p>版权: Copyright (c) 2022</p>
  * <p></p>
@@ -17,19 +17,23 @@ import java.util.Date;
  * @author: mic
  * @date 2022-3-3
  */
-public class Statistics extends Model<Statistics>{
+public class ChatInfo extends Model<ChatInfo>{
 
     @TableId(value = "ID", type = IdType.AUTO)
     private Integer id;
 
-    private String doctorName;
+    private String openid;
 
-    private Integer doctorId;
+    private String trueName;
+
+    private Integer docId;
+
+    private String docName;
+
+    private String content;
 
     private Date createTime;
 
-    private String patientIds;
-
-    private Integer value;
+    private String sendFrom;
 
 }

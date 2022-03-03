@@ -50,11 +50,11 @@ export default new Router({
           name: 'Patient',
           component: () => import('@/views/doctors/Patient')
         },
-        // {
-        //   path: '/statistics',
-        //   name: 'Statistics',
-        //   component: () => import('@/views/statistics/Statistics')
-        // },
+        {
+          path: '/statistics',
+          name: 'Statistics',
+          component: () => import('@/views/statistics/Statistics')
+        },
       ]
     }
   ]

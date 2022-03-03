@@ -5,20 +5,20 @@
             <el-col :span="24" class="filter-container">
                     <el-input placeholder="用户openid过滤" v-model="listQuery.openid" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="用户真实姓名过滤" v-model="listQuery.trueName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="医生id过滤" sendFrom="number" v-model.number="listQuery.docId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="医生id过滤" type="number" v-model.number="listQuery.docId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="医生姓名过滤" v-model="listQuery.docName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-input placeholder="聊天内容过滤" v-model="listQuery.content" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-date-picker
                         v-model="listQuery.createTime"
                         value-format="timestamp"
-                        sendFrom="datetime"
+                        type="datetime"
                         placeholder="选择日期时间"
                         size="small"
                         class="filter-item">
                     </el-date-picker>
                     <el-input placeholder="0表示user，1表示doctor过滤" v-model="listQuery.sendFrom" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
-                            sendFrom="primary"
+                            type="primary"
                             icon="el-icon-search"
                             size="small"
                             @click="handleFilter">搜索</el-button>
@@ -88,7 +88,7 @@
                             class-name="small-padding fixed-width">
                     <template slot-scope="scope">
                       <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
-                      <el-button size="small" sendFrom="danger" @click="handleDelete(scope.row)">删除</el-button>
+                      <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
                     </template>
                     </el-table-column>
                 </el-table>
@@ -183,7 +183,7 @@
                 }).catch(error => {
                   this.$message({
                     message: error,
-                    sendFrom: 'error',
+                    type: 'error',
                     duration: 1500,
                     onClose: () => {
                     }
@@ -210,7 +210,7 @@
               this.$confirm('确定删除?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
-                    sendFrom: 'warning'
+                    type: 'warning'
               }).then(() => {
                   request({
                     url: `${this.prefixUrl}/delete/${row.id}`,
@@ -219,19 +219,19 @@
                     this.fetchData();
                     this.$message({
                       message: '操作成功',
-                      sendFrom: 'success',
+                      type: 'success',
                       duration: 1500,
                     })
                   }).catch(error => {
                     this.$message({
                       message: error,
-                      sendFrom: 'error',
+                      type: 'error',
                       duration: 1500,
                     })
                   })
               }).catch(() => {
                     this.$message({
-                        sendFrom: 'info',
+                        type: 'info',
                         message: '已取消删除',
                         duration: 1500,
                     });

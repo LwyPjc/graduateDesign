@@ -1,27 +1,31 @@
 <template>
     <div class="app-container">
-        <!-- 表头 查询与新增 -->
+        <!-- 表头 -->
         <el-row>
-            <el-col :span="24" class="filter-container">
-                    <el-input placeholder="学生ID过滤" type="number" v-model.number="listQuery.studentId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="教师ID过滤" type="number" v-model.number="listQuery.teacherId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="课程ID过滤" type="number" v-model.number="listQuery.openCourseId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="评价信息过滤" v-model="listQuery.evalution" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="学生姓名过滤" v-model="listQuery.studentName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="教师姓名过滤" v-model="listQuery.teacherName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="课程名称过滤" v-model="listQuery.courseName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-button
-                            type="primary"
-                            icon="el-icon-search"
-                            size="small"
-                            @click="handleFilter">搜索</el-button>
-                    <el-button
-                            icon="el-icon-circle-plus-outline"
-                            size="small"
-                            @click="showDialog()"
-                    >新增</el-button>
-            </el-col>
-        </el-row>
+        <el-col :span="24" class="filter-container">
+          请选择时间范围:
+          <el-date-picker
+            v-model="date"
+            type="daterange"
+            range-separator="-"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            value-format="yyyy-MM-dd"
+            format="yyyy-MM-dd"
+            :picker-options="pickerOptions1">
+          </el-date-picker>
+          <el-button
+            type="primary"
+            icon="el-icon-search"
+            size="small"
+            @click="handleFilter">搜索</el-button>
+          <!--                    <el-button-->
+          <!--                            icon="el-icon-circle-plus-outline"-->
+          <!--                            size="small"-->
+          <!--                            @click="showDialog()"-->
+          <!--                    >新增</el-button>-->
+        </el-col>
+      </el-row>
         <!-- 表格list -->
         <el-row>
             <el-col :span="24">
@@ -39,52 +43,20 @@
                             {{ scope.$index }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="学生ID" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="医生姓名" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.studentId }}
+                            {{ scope.row.doctorName }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="教师ID" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="时间" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.teacherId }}
+                            {{ scope.row.createTime  | timeFilter }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="课程ID" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="统计值" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.openCourseId }}
+                            {{ scope.row.value }}
                         </template>
-                    </el-table-column>
-                    <el-table-column label="评价信息" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.evalution }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="学生姓名" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.studentName }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="教师姓名" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.teacherName }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="课程名称" show-overflow-tooltip style="width: 10%" align="center">
-                        <template slot-scope="scope">
-                            {{ scope.row.courseName }}
-                        </template>
-                    </el-table-column>
-                    <el-table-column
-                            label="操作"
-                            align="center"
-                            width="180"
-                            class-name="small-padding fixed-width">
-                        <div slot-scope="scope" class="table-operate-box">
-                            <i class="zoeIconfont z_modifyEI_normal"
-                               @click="showDialog(scope.row)"></i>
-                            <i class="zoeIconfont z_delete_normal danger"
-                               @click="handleDelete(scope.row)"></i>
-                        </div>
                     </el-table-column>
                 </el-table>
 
@@ -101,11 +73,9 @@
 
 <script>
     import request from '@/utils/request'
-    import HandleDialog from './StudentEvaluateDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
-            HandleDialog,
             Pagination
         },
         filters: {
@@ -126,7 +96,7 @@
             },
             timeFilter(time) {
                 if (time) {
-                    return new Date(time).Format('yyyy-MM-dd hh:mm:ss')
+                    return new Date(time).toLocaleDateString().split('/').join('-')
                 } else {
                     return ''
                 }
@@ -139,23 +109,35 @@
                 listLoading: true, //表格加载框
                 total: 0, //分页总数
                 tableHeight: window.innerHeight - 240, //表格高度
+              date: null,
                 listQuery: { //表格查询对象
                     current: 1,
                     size: 10,
                     query: '',
-                    studentId: null,
-                    teacherId: null,
-                    openCourseId: null,
-                    evalution: null,
-                    studentName: null,
-                    teacherName: null,
-                    courseName: null,
+                    doctorName: null,
+                    doctorId: null,
+                    createTime: null,
+                    patientIds: null,
+                    value: null,
+                  dateStart: null,
+                  dateEnd: null,
+                  endTime:null,
                 },
+              pickerOptions1:{
+                onPick: (obj) => {
+                  this.listQuery.dateStart = new Date(obj.minDate).getTime();
+                  this.listQuery.dateEnd = new Date(obj.maxDate).getTime();
+                  console.log('时间',obj)
+                  console.log('时间 date', this.date)
+                },
+                disabledDate:(time)=> {
+                }
+              },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/studentEvaluate'
+                prefixUrl: this.GLOBAL.baseUrl + '/statistics'
             }
         },
         created() {

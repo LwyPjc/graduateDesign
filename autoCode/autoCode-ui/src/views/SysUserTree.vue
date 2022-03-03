@@ -28,7 +28,11 @@
                     <el-col :span="24" class="filter-container">
                         <el-input
                                 placeholder="用户名过滤"
+<<<<<<< HEAD
                                 v-model="listQuery.trueName"
+=======
+                                v-model="listQuery.username"
+>>>>>>> origin/hospital-manager
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -44,8 +48,20 @@
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
+<<<<<<< HEAD
                         <el-button
                             sendFrom="primary"
+=======
+                        <el-input
+                                placeholder="医生id过滤"
+                                type="number"
+                                v-model.number="listQuery.docId "
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-button
+                            type="primary"
+>>>>>>> origin/hospital-manager
                             icon="el-icon-search"
                             size="small"
                             @click="handleFilter"
@@ -81,7 +97,11 @@
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
+<<<<<<< HEAD
                                     {{ scope.row.trueName }}
+=======
+                                    {{ scope.row.username }}
+>>>>>>> origin/hospital-manager
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -103,6 +123,18 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
+<<<<<<< HEAD
+=======
+                                    label="医生id"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.docId }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+>>>>>>> origin/hospital-manager
                                     label="操作"
                                     align="center"
                                     width="180"
@@ -181,9 +213,16 @@
                     current: 1,
                     size: 10,
                     query: '',
+<<<<<<< HEAD
                     trueName: null,
                     password: null,
                     role: null,
+=======
+                    username: null,
+                    password: null,
+                    role: null,
+                    docId: null,
+>>>>>>> origin/hospital-manager
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
@@ -238,7 +277,11 @@
               }).catch(error => {
                 this.$message({
                   message: error,
+<<<<<<< HEAD
                   sendFrom: 'error',
+=======
+                  type: 'error',
+>>>>>>> origin/hospital-manager
                   duration: 1500,
                   onClose: () => {
                   }
@@ -268,7 +311,11 @@
               }).then(res => {
                 this.$message({
                   message: '操作成功',
+<<<<<<< HEAD
                   sendFrom: 'success',
+=======
+                  type: 'success',
+>>>>>>> origin/hospital-manager
                   duration: 1500,
                   onClose: () => {
                     this.fetchData()
@@ -277,7 +324,11 @@
               }).catch(error => {
                 this.$message({
                   message: error,
+<<<<<<< HEAD
                   sendFrom: 'error',
+=======
+                  type: 'error',
+>>>>>>> origin/hospital-manager
                   duration: 1500,
                   onClose: () => {
                   }

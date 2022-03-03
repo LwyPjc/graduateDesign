@@ -10,6 +10,7 @@ import com.hospital.appointment.service.DepartmentService;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @GetMapping("/findAll")
-    public List<Department> findAll(){
+    public List<Department> findAll() {
         return departmentService.findAll();
     }
 
@@ -40,6 +41,15 @@ public class DepartmentController {
     public List<Department> findList(Department department) {
         return departmentService.findList(department);
     }
+
+    @GetMapping("/findListForDoc")
+    public List<Department> findListForDoc(Department department) {
+        List<Department> list = departmentService.findList(department);
+        // parentId 为null的不能给医生当作科室
+        list.removeIf(next -> next.getParentId() == null);
+        return list;
+    }
+
 
     @GetMapping("/findListByPage")
     public Page<Department> findListByPage(Department department, Page page) {
