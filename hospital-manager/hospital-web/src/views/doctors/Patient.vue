@@ -165,24 +165,26 @@
             // ws.onclose = function(evt) {
             //   console.log("Connection closed.");
             // };
-            this.listLoading = true
-            request({
-              url: `${this.prefixUrl}/findListByPage`,
-              method: 'get',
-              params: this.listQuery
-            }).then(res => {
-              this.list = res.records
-              this.total = res.total
-              this.listLoading = false
-            }).catch(error => {
-              this.$message({
-                message: error,
-                type: 'error',
-                duration: 1500,
-                onClose: () => {
-                }
-              })
-            })
+
+            // 获取历史消息
+            // this.listLoading = true
+            // request({
+            //   url: ``,
+            //   method: 'get',
+            //   params: this.listQuery
+            // }).then(res => {
+            //   this.list = res.records
+            //   this.total = res.total
+            //   this.listLoading = false
+            // }).catch(error => {
+            //   this.$message({
+            //     message: error,
+            //     type: 'error',
+            //     duration: 1500,
+            //     onClose: () => {
+            //     }
+            //   })
+            // })
             return {
               // 消息数据，字段如下，应以时间的倒序给出。
               messages: [
