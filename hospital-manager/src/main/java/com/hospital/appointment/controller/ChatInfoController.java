@@ -2,6 +2,7 @@ package com.hospital.appointment.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hospital.appointment.entity.dto.ChatInfoDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +10,11 @@ import com.hospital.appointment.entity.ChatInfo;
 import com.hospital.appointment.service.ChatInfoService;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.hospital.appointment.utils.CommUtils.date2String;
 
 /**
  * <p>标题: 服务 - 请求控制层</p>
@@ -44,7 +49,17 @@ public class ChatInfoController {
         Integer docId1 = Integer.parseInt(docId);
         queryWrapper.eq("openid",openid);
         queryWrapper.eq("doc_id",docId1);
-        queryWrapper.orderByDesc("create_time");
+        queryWrapper.orderByAsc("create_time");
+        List<ChatInfoDo> list = chatInfoService.list(queryWrapper).stream().map(info->{
+            ChatInfoDo infoDo =
+        }).collect(Collectors.toList());
+
+
+ChatInfoDo infoDo ;
+        for(ChatInfo info:chatInfoService.list(queryWrapper)){
+            infoDo = new ChatInfoDo();
+        }
+
         return  chatInfoService.list(queryWrapper);
 
     }
