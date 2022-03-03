@@ -14,21 +14,17 @@
              size="small"
              ref="dialogForm"
              label-position="right">
-        <el-form-item label="医生姓名" label-width="105px" prop="doctorName">
-            <el-input placeholder="请输入医生姓名" v-model="dialogFormData.doctorName"/>
+        <el-form-item label="用户名" label-width="105px" prop="username">
+            <el-input placeholder="请输入用户名" v-model="dialogFormData.username"/>
         </el-form-item>
-        <el-form-item label="医生id" label-width="105px" prop="doctorId">
-            <el-input type="number" placeholder="请输入医生id" v-model.number="dialogFormData.doctorId"/>
+        <el-form-item label="密码" label-width="105px" prop="password">
+            <el-input placeholder="请输入密码" v-model="dialogFormData.password"/>
         </el-form-item>
-        <el-form-item label="时间" label-width="105px" prop="createTime">
-            <el-date-picker
-                v-model="dialogFormData.createTime"
-                type="date"
-                placeholder="选择时间">
-            </el-date-picker>
+        <el-form-item label="角色 2管理员" label-width="105px" prop="role">
+            <el-input placeholder="请输入角色 2管理员" v-model="dialogFormData.role"/>
         </el-form-item>
-        <el-form-item label="患者id" label-width="105px" prop="patientIds">
-            <el-input placeholder="请输入患者id" v-model="dialogFormData.patientIds"/>
+        <el-form-item label="医生id" label-width="105px" prop="docId">
+            <el-input type="number" placeholder="请输入医生id" v-model.number="dialogFormData.docId"/>
         </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -48,31 +44,31 @@
 <script>
   import request from '@/utils/request'
     export default {
-        name: "StatisticsAddOrUpdate",
+        name: "SysUserAddOrUpdate",
         data () {
             return {
                 visible: false,
-                prefixUrl: this.GLOBAL.baseUrl + '/statistics',
+                prefixUrl: this.GLOBAL.baseUrl + '/sysUser',
                 dialogFormData: {
                     id: '',
-                    doctorName: '',
-                    doctorId: '',
-                    createTime: '',
-                    patientIds: '',
+                    username: '',
+                    password: '',
+                    role: '',
+                    docId: '',
                 },
                 dialogVisible: false,
                 dialogLoading: false,
                 dialogFormRules: {
-                    doctorName: [
+                    username: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    doctorId: [
+                    password: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    createTime: [
+                    role: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
-                    patientIds: [
+                    docId: [
                         { required: true, message: '参数不能为空', trigger: 'blur' }
                     ],
                 }
@@ -105,10 +101,10 @@
             resetModel() {
                 this.dialogFormData = {
                     id: '',
-                    doctorName: '',
-                    doctorId: '',
-                    createTime: '',
-                    patientIds: '',
+                    username: '',
+                    password: '',
+                    role: '',
+                    docId: '',
                 }
 
             },

@@ -3,13 +3,20 @@
         <!-- 表头 查询与新增 -->
         <el-row>
             <el-col :span="24" class="filter-container">
-                    <el-input placeholder="学生ID过滤" type="number" v-model.number="listQuery.studentId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="教师ID过滤" type="number" v-model.number="listQuery.teacherId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="课程ID过滤" type="number" v-model.number="listQuery.openCourseId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="评价信息过滤" v-model="listQuery.evalution" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="学生姓名过滤" v-model="listQuery.studentName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="教师姓名过滤" v-model="listQuery.teacherName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
-                    <el-input placeholder="课程名称过滤" v-model="listQuery.courseName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="用户openid过滤" v-model="listQuery.openid" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="用户真实姓名过滤" v-model="listQuery.trueName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="医生id过滤" type="number" v-model.number="listQuery.docId" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="医生姓名过滤" v-model="listQuery.docName" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-input placeholder="聊天内容过滤" v-model="listQuery.content" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
+                    <el-date-picker
+                        v-model="listQuery.createTime"
+                        value-format="timestamp"
+                        type="datetime"
+                        placeholder="选择日期时间"
+                        size="small"
+                        class="filter-item">
+                    </el-date-picker>
+                    <el-input placeholder="0表示user，1表示doctor过滤" v-model="listQuery.sendFrom" size="small" class="filter-item" @keyup.enter.native="handleFilter"/>
                     <el-button
                             type="primary"
                             icon="el-icon-search"
@@ -39,39 +46,39 @@
                             {{ scope.$index }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="学生ID" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="用户openid" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.studentId }}
+                            {{ scope.row.openid }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="教师ID" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="用户真实姓名" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.teacherId }}
+                            {{ scope.row.trueName }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="课程ID" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="医生id" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.openCourseId }}
+                            {{ scope.row.docId }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="评价信息" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="医生姓名" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.evalution }}
+                            {{ scope.row.docName }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="学生姓名" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="聊天内容" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.studentName }}
+                            {{ scope.row.content }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="教师姓名" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="发送时间" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.teacherName }}
+                            {{ scope.row.createTime  | timeFilter }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="课程名称" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="0表示user，1表示doctor" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
-                            {{ scope.row.courseName }}
+                            {{ scope.row.sendFrom }}
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -79,12 +86,10 @@
                             align="center"
                             width="180"
                             class-name="small-padding fixed-width">
-                        <div slot-scope="scope" class="table-operate-box">
-                            <i class="zoeIconfont z_modifyEI_normal"
-                               @click="showDialog(scope.row)"></i>
-                            <i class="zoeIconfont z_delete_normal danger"
-                               @click="handleDelete(scope.row)"></i>
-                        </div>
+                    <template slot-scope="scope">
+                      <el-button size="small" @click="showDialog(scope.row)">编辑</el-button>
+                      <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                    </template>
                     </el-table-column>
                 </el-table>
 
@@ -101,7 +106,7 @@
 
 <script>
     import request from '@/utils/request'
-    import HandleDialog from './StudentEvaluateDialog'
+    import HandleDialog from './ChatInfoDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -126,7 +131,7 @@
             },
             timeFilter(time) {
                 if (time) {
-                    return new Date(time).Format('yyyy-MM-dd hh:mm:ss')
+                    return new Date(time).toLocaleDateString().split('/').join('-')
                 } else {
                     return ''
                 }
@@ -143,19 +148,19 @@
                     current: 1,
                     size: 10,
                     query: '',
-                    studentId: null,
-                    teacherId: null,
-                    openCourseId: null,
-                    evalution: null,
-                    studentName: null,
-                    teacherName: null,
-                    courseName: null,
+                    openid: null,
+                    trueName: null,
+                    docId: null,
+                    docName: null,
+                    content: null,
+                    createTime: null,
+                    sendFrom: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: this.GLOBAL.baseUrl + '/studentEvaluate'
+                prefixUrl: this.GLOBAL.baseUrl + '/chatInfo'
             }
         },
         created() {

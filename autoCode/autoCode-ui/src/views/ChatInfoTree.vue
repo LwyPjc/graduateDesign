@@ -27,20 +27,38 @@
                 <el-row>
                     <el-col :span="24" class="filter-container">
                         <el-input
-                                placeholder="医生姓名过滤"
-                                v-model="listQuery.doctorName"
+                                placeholder="用户openid过滤"
+                                v-model="listQuery.openid"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="用户真实姓名过滤"
+                                v-model="listQuery.trueName"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
                                 placeholder="医生id过滤"
                                 type="number"
-                                v-model.number="listQuery.doctorId "
+                                v-model.number="listQuery.docId "
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
-                                placeholder="时间过滤"
+                                placeholder="医生姓名过滤"
+                                v-model="listQuery.docName"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="聊天内容过滤"
+                                v-model="listQuery.content"
+                                size="small"
+                                class="filter-item"
+                                @keyup.enter.native="handleFilter"/>
+                        <el-input
+                                placeholder="发送时间过滤"
                                 v-model="listQuery.createTime"
                                 value-format="timestamp"
                                 type="datetime"
@@ -48,8 +66,8 @@
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
                         <el-input
-                                placeholder="患者id过滤"
-                                v-model="listQuery.patientIds"
+                                placeholder="0表示user，1表示doctor过滤"
+                                v-model="listQuery.sendFrom"
                                 size="small"
                                 class="filter-item"
                                 @keyup.enter.native="handleFilter"/>
@@ -85,12 +103,21 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="医生姓名"
+                                    label="用户openid"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.doctorName }}
+                                    {{ scope.row.openid }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="用户真实姓名"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.trueName }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -99,11 +126,29 @@
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.doctorId }}
+                                    {{ scope.row.docId }}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="时间"
+                                    label="医生姓名"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.docName }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="聊天内容"
+                                    show-overflow-tooltip
+                                    style="width: 10%"
+                                    align="center">
+                                <template slot-scope="scope">
+                                    {{ scope.row.content }}
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="发送时间"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
@@ -112,12 +157,12 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="患者id"
+                                    label="0表示user，1表示doctor"
                                     show-overflow-tooltip
                                     style="width: 10%"
                                     align="center">
                                 <template slot-scope="scope">
-                                    {{ scope.row.patientIds }}
+                                    {{ scope.row.sendFrom }}
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -150,7 +195,7 @@
 
 <script>
     import request from '@/utils/request';
-    import HandleDialog from './StatisticsDialog'
+    import HandleDialog from './ChatInfoDialog'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
     export default {
         components: {
@@ -199,16 +244,19 @@
                     current: 1,
                     size: 10,
                     query: '',
-                    doctorName: null,
-                    doctorId: null,
+                    openid: null,
+                    trueName: null,
+                    docId: null,
+                    docName: null,
+                    content: null,
                     createTime: null,
-                    patientIds: null,
+                    sendFrom: null,
                 },
                 statusOptions: { //有效无效下拉框
                     '1': '有效',
                     '0': '无效'
                 },
-                prefixUrl: '/statistics'
+                prefixUrl: '/chatInfo'
             }
         },
         watch: {
