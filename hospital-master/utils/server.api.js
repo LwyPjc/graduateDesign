@@ -242,12 +242,22 @@ const saveRegisterInfo = function () {
 const saveCollect = function () {
   return apiUrl + "collectInfo/save";
 }
+//我的收藏
+const getCollectInfos = function(){
+  return apiUrl+'collectInfo/findByOpenid';
+}
+const getSingleCollectInfo = function(){
+  return apiUrl+'collectInfo/findByDoubleIds'
+}
 //
 const getHistoryChatInfo = function () {
   return apiUrl + "chatInfo/findByDoubleIds"
 }
 const connectWs = function(){
   return wsUrl;
+}
+const updateCollectInfo = function(){
+  return apiUrl+'collectInfo/edit'
 }
 // todo
 module.exports = {
@@ -264,6 +274,10 @@ module.exports = {
   saveCollect: saveCollect,
   getHistoryChatInfo: getHistoryChatInfo,
   connectWs:connectWs,
+  getCollectInfos:getCollectInfos,
+  getSingleCollectInfo:getSingleCollectInfo,
+  updateCollectInfo:updateCollectInfo,
+
   getInHosptalUrl: getInHosptalUrl,
   getCollectingListUrl: getCollectingListUrl,
   getRegisterUrl: getRegisterUrl,

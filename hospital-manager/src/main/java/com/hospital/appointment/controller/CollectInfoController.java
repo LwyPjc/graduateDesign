@@ -41,6 +41,20 @@ public class CollectInfoController {
         return collectInfoService.page(page, queryWrapper);
     }
 
+    @GetMapping("/findByOpenid")
+    public List<CollectInfo> findByOpenid(@RequestParam String openid) {
+        QueryWrapper<CollectInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("openid", openid);
+        queryWrapper.eq("delete_flg","0");
+        return collectInfoService.list(queryWrapper);
+    }
+    @GetMapping("/findByDoubleIds")
+    public CollectInfo findByDoubleIds(@RequestParam String openid,@RequestParam String docId){
+        QueryWrapper<CollectInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("openid",openid);
+        queryWrapper.eq("doc_id",docId);
+        return collectInfoService.getOne(queryWrapper);
+    }
     @GetMapping("/{id}")
     public CollectInfo getById(@PathVariable String id) {
         return collectInfoService.getById(id);
@@ -54,7 +68,7 @@ public class CollectInfoController {
     }
 
     @PostMapping("/edit")
-    public boolean edit(CollectInfo collectInfo) {
+    public boolean edit(@RequestBody CollectInfo collectInfo) {
         return collectInfoService.updateById(collectInfo);
     }
 

@@ -175,6 +175,15 @@ Page({
   },
   contactOnline(e) {
     console.log('contactOnline-e--',e)
+    var userInfo = app.globalData.userInfo
+    if(util.checkIsNull(userInfo.trueName)){
+      wx.showToast({
+        title: '请先绑定就诊卡',
+        icon:'error',
+        duration:2000
+      })
+      return ;
+    }
    wx.navigateTo({
      url: '/pages/chat/chat?doctorInfo='+JSON.stringify(e.currentTarget.dataset.doctor)
    })

@@ -16,7 +16,7 @@ Page({
     doctors: [],
     current: 'tab1',
     current_scroll: 'tab1',
-    show:"hidden",
+    show: "hidden",
     actions: [
       {
         name: '删除',
@@ -39,10 +39,10 @@ Page({
   handlerCloseButton(e) {
     var type = e.detail.index;
     var id = e.currentTarget.dataset.id;
-    console.log("类型", type,"医生ID", id)
-    if (type == 0){
+    console.log("类型", type, "医生ID", id)
+    if (type == 0) {
       this.deleteDoctor(id);
-    }else{
+    } else {
       console.log("返回")
       this.setData({
         toggle2: this.data.toggle2 ? false : true
@@ -53,7 +53,7 @@ Page({
   //根据id删除收藏额医生
   deleteDoctor: function (id) {
     var that = this;
-    var res = util.isInObject(this.data.doctors,id,"YSID");
+    var res = util.isInObject(this.data.doctors, id, "YSID");
     var arr = this.data.doctors;
     arr.splice(res.position, 1)
     console.log("删除返回", arr);
@@ -65,7 +65,7 @@ Page({
       data: {
         WID: app.globalData.openid,
         BRID: app.globalData.BRID,
-        ID:id
+        ID: id
       },
       header: {
         'content-type': 'application/json'
@@ -80,9 +80,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.doctorList()
+    var userInfo = app.globalData.userInfo
+    if (util.checkIsNull(userInfo)) {
+      wx.showToast({
+        title: '您还未登录，请先登录',
+        duration: 2000
+      })
+      return;
+    }
+
+    this.getDoctorList();
     this.setData({
-      userInfo:app.globalData.userInfo,
+      userInfo: app.globalData.userInfo,
     })
   },
 
@@ -93,53 +102,35 @@ Page({
 
   },
 
-  //按人亲求医生列表
-  doctorList: function (){
-    // var that = this;
-    // wx.request({
-    //   url: urlApi.getdoctorListByDptId() + 4,
-    //   method: "GET",
-     
-    //   success: function (res) {
-    //     var data = res.data
-    //     if(util.checkIsNotNull(data)){
-    //       for (var i of data){
-    //         // if (i.BRID == app.globalData.BRID){
-    //           // var arr = i.IDS.split(",");
-    //           for(var j of arr){
-    //             that.getDoctorList(j);
-    //           }
-    //         // }
-    //       }
-    //     }
-    //   }
-    // })
-    this.getDoctorList();
-  },
 
-  getDoctorList:function(id){
-    // if(id == "")return;
+  getDoctorList: function () {
+    var userInfo = app.globalData.userInfo
     var that = this;
+    console.log('getDoctorList--userinfo-', userInfo.id)
     wx.request({
-      url: urlApi.getdoctorListByDptId() + 4,
-      method: "GET",
+      url: urlApi.getCollectInfos(),
+      method: "get",
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      // data: {
-      //   YSID: id,
-      // },
+      data: {
+        openid: userInfo.id
+      },
       success: function (res) {
-        var doctorArr = new Array();
         var doctorList = res.data
-        var list = doctorList instanceof Array ? doctorList : [doctorList];
-        list.map(i => {
-          i.imageurl = "../../images/doctor2.jpg";
-          i.color = i.SYHS == 0 ? "color2" : "color";
+        console.log('collect--getDoctorList--res-', res)
+        that.data.doctors = []
+        doctorList.map(item => {
+          that.data.doctors.push({
+            imageurl: "../../images/doctor2.jpg",
+            color: "color",
+            name: item.docName,
+            dptName: item.dptName,
+
+          })
         })
-        console.log("医生列表", list)
         that.setData({
-          doctors: list,
+          doctors: that.data.doctors,
           show: "show",
         });
       }
@@ -148,13 +139,13 @@ Page({
 
   handleChange({ detail }) {
     var type = detail.key;
-    if(type === "1"){
+    if (type === "1") {
       this.doctorList();
-    }else if(type === "0"){
+    } else if (type === "0") {
       this.doctorList();
       //this.doctorListDate();
     }
-    
+
     this.setData({
       current: detail.key
     });
@@ -191,7 +182,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.showLoading({
+      title: '刷新中...'
+    })
+    this.getDoctorList();
 
+    wx.hideLoading()
+    wx.hideNavigationBarLoading() 
+    wx.stopPullDownRefresh()
   },
 
   /**
@@ -209,7 +207,7 @@ Page({
   },
   //页面跳转
   toShowDoctorDetails: function (e) {
-    console.log("选中的医生",e);
+    console.log("选中的医生", e);
     wx.navigateTo({
       url: '/pages/doctor/doctor?doctor=' + JSON.stringify(e.currentTarget.dataset.doctor)
         + '&departmentName=' + this.data.department.name

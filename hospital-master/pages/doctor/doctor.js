@@ -16,9 +16,10 @@ Page({
     registration: "show",
     date: util.formatTime2(new Date()),
     doctor: "",
-    userInfo:"",
+    userInfo: "",
     dateType: "week",
-    collectSuccess:false,
+    collectSuccess: false,
+    isCollected:'',
   },
 
   handleOpen2: function () {
@@ -56,6 +57,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+   
     var that = this;
     var doctor = JSON.parse(options.doctor);
     app.globalData.selectDoctor = doctor;
@@ -64,19 +66,59 @@ Page({
       doctor,
       userInfo,
     })
+    this.checkIsCollected().then(res=>{
+      if(util.checkIsNotNull(res)){
+        this.setData({
+          isCollected:res
+        })
+        if(res.deleteFlg!=1){
+          this.setData({
+            collectSuccess:true
+          })
+        }
+      }
+     
+    });
     app.globalData.dayFun = {
       dayFun: function (data) {
         var idx = data.idx
         var month = data.days[idx].month;
         var day = data.days[idx].day;
         that.setData({
-          date: data.days[idx].year.toString() + "-" +util.formatNumber(month)+'-'+util.formatNumber(day)
+          date: data.days[idx].year.toString() + "-" + util.formatNumber(month) + '-' + util.formatNumber(day)
         })
       }
     }
-    console.log('onload--date--',this.data.date)
+    console.log('onload--date--', this.data.date)
   },
-
+  checkIsCollected() {
+    var userInfo = this.data.userInfo
+    var doctor = this.data.doctor;
+    var that= this;
+    return new Promise(function (resolve, reject) {
+    wx.request({
+      url: urlApi.getSingleCollectInfo(),
+      method: "get",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        openid: userInfo.id,
+        docId: doctor.id,
+      },
+      success(res) {
+        var collectInfo = res.data;
+        if(util.checkIsNotNull(collectInfo)){
+        resolve(collectInfo)
+          // that.setData({
+          //   isCollected:collectInfo
+          // })
+        }
+        console.log('checkIsCollected--',res)
+      }
+    })
+  })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -191,64 +233,100 @@ Page({
   onShareAppMessage: function () {
 
   },
-  
-  collecting:function(){
-    if(this.checkUserIsNotLogin()){
+
+  collecting: function () {
+    if (this.checkUserIsNotLogin()) {
       return;
     }
+    this.checkIsCollected();
+    var collectSuccess = this.data.collectSuccess
+    this.setData({
+      collectSuccess: !collectSuccess
+    })
+    var deleteFlg;
+    var title;
+    //如果点击收藏
+    if (this.data.collectSuccess) {
+      deleteFlg = "0";
+      title='收藏成功'
+    } else {
+      deleteFlg = "1";
+      title='取消收藏';
+    }
+    console.log('collecting--collectSuccess--', this.data.collectSuccess)
     var that = this
     var userInfo = this.data.userInfo
-    var doctor = this.data.doctor
-    wx.request({
-      url: urlApi.saveCollect(),
-      method: "post",
-      data: {
-        openid:userInfo.id,
-        dptName:doctor.dptName,
-        dptId:doctor.dptId,
-        docId:doctor.id,
-        docName:doctor.name
-      },
-      success: function (res) {
-        let statusCode = res.statusCode.toString();
-        if(statusCode.startsWith('2')){
-          wx.showToast({
-            title: '收藏成功',
-            icon: "success",
-            duration:2000
-          })
-          that.setData({
-            collectSuccess:true,
-          })
-        } else {
-
+    var doctor = this.data.doctor 
+    console.log('collecting---isCollected--',this.data.isCollected)
+    var isCollected = this.data.isCollected;
+    if(util.checkIsNull(isCollected)){
+      wx.request({
+        url: urlApi.saveCollect(),
+        method: "post",
+        data: {
+          openid: userInfo.id,
+          dptName: doctor.dptName,
+          dptId: doctor.dptId,
+          docId: doctor.id,
+          docName: doctor.name,
+        },
+        success: function (res) {
+          let statusCode = res.statusCode.toString();
+          if (statusCode.startsWith('2')) {         
+            wx.showToast({
+              title: '收藏成功',
+              icon: "none",
+              duration: 2000
+            })
+          } 
         }
-      }
-    })
+      })
+    }else{
+      wx.request({
+        url: urlApi.updateCollectInfo(),
+        method:'POST',
+        data:{
+          id:isCollected.id,
+          deleteFlg:deleteFlg
+        },
+        success(res){
+          let statusCode= res.statusCode.toString();
+          console.log('else--res--',res)
+          if(statusCode.startsWith('2')){
+            wx.showToast({
+              title: title,
+              icon:'none',
+              duration:2000
+            })
+          }
+        }
+      })
+    }
+    
   },
-checkUserIsNotLogin(){
-  var userInfo = app.globalData.userInfo
-  if(util.checkIsNull(userInfo)||util.checkIsNull(userInfo.medicareCard)){
-    wx.showToast({
-      title: '请先绑定信息',
-      icon:'error',
-      duration:2000
-    })
-    return true;
-  }
-  return false;
-},
+  checkUserIsNotLogin() {
+    var userInfo = app.globalData.userInfo
+    if (util.checkIsNull(userInfo) || util.checkIsNull(userInfo.medicareCard)) {
+      wx.showToast({
+        title: '请先绑定信息',
+        icon: 'error',
+        duration: 2000
+      })
+      return true;
+    }
+    return false;
+  },
   //页面跳转
   confirmReg: function (e) {
-    if(this.checkUserIsNotLogin()){
+    if (this.checkUserIsNotLogin()) {
       this.setData({
         visible2: false
       });
-      return ;
+      return;
     }
     var doctorInfo = this.data.doctor
     var userInfo = this.data.userInfo
-    console.log('doctor--confirmReg--date-',this.data.date)
+    console.log('doctor--confirmReg--date-', this.data.date)
     var that = this
     wx.request({
       url: urlApi.saveRegisterInfo(),
@@ -256,14 +334,14 @@ checkUserIsNotLogin(){
       data: {
         openid: userInfo.id,
         dptId: doctorInfo.dptId,
-        dptName:doctorInfo.dptName,
-        docName:doctorInfo.name,
+        dptName: doctorInfo.dptName,
+        docName: doctorInfo.name,
         docId: doctorInfo.id,
         aptTime: this.data.date
       },
       success(res) {
         let statusCode = res.statusCode.toString();
-        console.log('doctor--confirm--res-',res)
+        console.log('doctor--confirm--res-', res)
         if (statusCode.startsWith('2')) {
           wx.navigateTo({
             url: '../registerSuccess/registerSuccess',
