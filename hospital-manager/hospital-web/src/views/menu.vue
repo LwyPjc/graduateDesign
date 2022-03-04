@@ -95,6 +95,13 @@
                       children: []
                     },
                   {
+                    name: "聊天",
+                    id: 7,
+                    icon: "el-icon-collection-tag",
+                    url: "/patient",
+                    children: []
+                  },
+                  {
                     name: "统计",
                     id: 5,
                     icon: "el-icon-collection-tag",
@@ -119,13 +126,6 @@
                     url: "/patient",
                     children: []
                   },
-                    {
-                        name: "聊天",
-                        id: 7,
-                        icon: "el-icon-collection-tag",
-                        url: "/chat",
-                        children: []
-                    },
                     {
                         name: "修改密码",
                         id: 5,

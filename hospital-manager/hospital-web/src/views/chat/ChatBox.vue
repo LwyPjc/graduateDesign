@@ -24,23 +24,27 @@
             </div>
             <div class="message-cell"
                  :style="{ flexDirection: message.direction === 'received' ? 'row' : 'row-reverse' }">
-              <van-image width="32" height="32"
-                         :src="message.direction === 'received' ? targetAvatar : sourceAvatar"/>
-              <!--<v-tag width="32" height="32"-->
-              <!--:name="message.direction === 'received' ? targetAvatar : sourceAvatar"-->
-              <!--&gt;-->
-              <!--{{message.direction === 'received' ? targetAvatar : sourceAvatar}}</v-tag>-->
+<!--              <van-image width="32" height="32"-->
+<!--                         :src="message.direction === 'received' ? targetAvatar : sourceAvatar"/>-->
+              <el-tag  width="32" height="32"
+              :name="message.direction === 'received' ? targetAvatar : sourceAvatar"
+              :color="message.direction === 'received' ? 'pink':'yellow' "
+              >
+              {{message.direction === 'received' ? targetAvatar : sourceAvatar}}</el-tag>
               <van-button type="default" size="small" round>{{ message.text }}</van-button>
             </div>
           </div>
         </div>
       </div>
       <div class="footer">
-        <van-field v-model="typingText" placeholder="输入内容" border>
-          <template #button>
-            <van-button size="small" type="primary" @click="sendText">发送</van-button>
-          </template>
-        </van-field>
+        <div  v-if="show">
+          <van-field v-model="typingText" placeholder="输入内容" border>
+            <template #button>
+              <van-button size="small" type="primary" @click="sendText">发送</van-button>
+            </template>
+          </van-field>
+        </div>
+
       </div>
 
     </div>
@@ -104,11 +108,16 @@
         }
       }
     },
+    mounted(){
+      if(window.sessionStorage.getItem("role")==='2'){
+        this.show = false;
+      }
+    },
     data() {
       return {
         dialogVisible: false,
         trueName:'',
-
+        show:true,
         messages: [],
         typingText: '',
         scrolledToBottom: false

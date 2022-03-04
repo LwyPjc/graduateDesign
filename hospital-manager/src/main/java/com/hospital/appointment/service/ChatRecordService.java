@@ -1,5 +1,6 @@
 package com.hospital.appointment.service;
 
+import com.hospital.appointment.entity.ChatInfo;
 import com.hospital.appointment.entity.ChatRecord;
 
 /**
@@ -14,4 +15,5 @@ import com.hospital.appointment.entity.ChatRecord;
  */
 public interface ChatRecordService extends BaseService<ChatRecord> {
 
+    void saveChatAssociation(ChatInfo chatInfo);
 }

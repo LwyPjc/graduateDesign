@@ -3,8 +3,6 @@
     <!-- 表头 查询与新增 -->
     <el-row>
       <el-col :span="24" class="filter-container">
-        <el-input placeholder="电话号码过滤" v-model="listQuery.phoneNum" size="small" class="filter-item"
-                  @keyup.enter.native="handleFilter"/>
         <el-input placeholder="姓名过滤" v-model="listQuery.trueName" size="small" class="filter-item"
                   @keyup.enter.native="handleFilter"/>
         <el-button
@@ -40,11 +38,6 @@
           <el-table-column label="姓名" show-overflow-tooltip style="width: 10%" align="center">
             <template slot-scope="scope">
               {{ scope.row.trueName }}
-            </template>
-          </el-table-column>
-          <el-table-column label="电话号码" show-overflow-tooltip style="width: 10%" align="center">
-            <template slot-scope="scope">
-              {{ scope.row.phoneNum }}
             </template>
           </el-table-column>
           <el-table-column label="聊天" show-overflow-tooltip style="width: 10%" align="center">
@@ -102,19 +95,21 @@
     },
     data() {
       return {
-        sourceAvatar: 'https://gitee.com/run27017/assets/raw/master/avatars/bear.jpg',
-        targetAvatar: '王五',
+        sourceAvatar: '',
+        targetAvatar: '',
         tableKey: 0,//表格key值
         list: null, //表格对象
         listLoading: true, //表格加载框
         total: 0, //分页总数
         tableHeight: window.innerHeight - 240, //表格高度
         openId: null,
+        docId: null,
         people: null,
         messagess: [],
         url: this.GLOBAL.baseUrl,
         listQuery: { //表格查询对象
           current: 1,
+          docId: null,
           size: 10,
           query: '',
           avatarUrl: null,
@@ -132,7 +127,7 @@
           '1': '有效',
           '0': '无效'
         },
-        prefixUrl: this.GLOBAL.baseUrl + 'userInfo',
+        prefixUrl: this.GLOBAL.baseUrl + 'chatRecord',
         ws: null,
       }
     },
@@ -145,7 +140,6 @@
       },
       // 定义加载历史消息的方式，该函数应该返回一个对象（`{ messages, hasMore }`），或者是返回该对象的 Promise （异步）。
       loadHistory() {
-
         return request({
           url: `${this.GLOBAL.baseUrl}chatInfo/findByDoubleIds`,
           method: 'get',
@@ -177,12 +171,9 @@
             }
           })
         });
-        console.log('ok', dd);
-        return dd;
       },
 
       // 定义发送消息的方式。如果发送成功，应该返回成功发送的消息数据，或者 Promise.
-      //todo
       sendMessage({text}) {
         //主动发送消息
         console.log('sendMessage--text-',text)
@@ -191,7 +182,8 @@
           trueName:this.trueName,
           content:text,
           sendFrom:"1",
-          docId:window.sessionStorage.getItem("docId")
+          docId:this.docId,
+          docName:this.docName
         };
         this.ws.send(JSON.stringify(mm));
         //
@@ -207,6 +199,9 @@
        */
       fetchData() {
         this.listLoading = true
+        if('1'===window.sessionStorage.getItem("role")) {
+          this.listQuery.docId = window.sessionStorage.getItem("docId");
+        }
         request({
           url: `${this.prefixUrl}/findListByPage`,
           method: 'get',
@@ -241,11 +236,17 @@
        */
       showDialog(row) {
         console.log('data is', row);
-        this.targetAvatar = row.avatarUrl;
-        this.openId = row.id;
+        this.targetAvatar = row.trueName;
+        this.sourceAvatar = row.docName;
+        this.openId = row.openid;
+        this.trueName = row.trueName;
+        this.docName = row.docName;
+        this.docId = row.docId;
         this.people = row.trueName;
         this.$refs.chat.init(row.trueName);
-        this.conenctWs();
+        if(window.sessionStorage.getItem("role") === '1'){
+          this.conenctWs();
+        }
       },
       conenctWs() {
         //创建websocket对象
@@ -264,7 +265,7 @@
           let b = JSON.parse(a);
           // 过滤消息
           // 医生 患者对应，且不是医生发的消息才更新
-         if(window.sessionStorage.docId==b.docId && that.openId === b.openid && b.sendFrom === '0') {
+         if(that.docId==b.docId && that.openId === b.openid && b.sendFrom === '0') {
            console.log("Received Message: " + evt.data);
            let newmsg = Object.assign({
              text: b.content,
@@ -281,40 +282,6 @@
       handleFilter() {
         this.listQuery.current = 1
         this.fetchData()
-      },
-      /**
-       * 删除操作
-       */
-      handleDelete(row) {
-        this.$confirm('确定删除?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          request({
-            url: `${this.prefixUrl}/delete/${row.id}`,
-            method: 'get'
-          }).then(res => {
-            this.fetchData();
-            this.$message({
-              message: '操作成功',
-              type: 'success',
-              duration: 1500,
-            })
-          }).catch(error => {
-            this.$message({
-              message: error,
-              type: 'error',
-              duration: 1500,
-            })
-          })
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除',
-            duration: 1500,
-          });
-        });
       },
     }
 

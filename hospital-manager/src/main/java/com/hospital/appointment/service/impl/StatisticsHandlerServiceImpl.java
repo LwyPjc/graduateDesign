@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -26,10 +27,13 @@ public class StatisticsHandlerServiceImpl implements StatisticsHandlerService {
     @Async
     public void saveOrUpdate(String docName, Integer docId, String patientId) {
         Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        simpleDateFormat.applyPattern("yyyy-MM-dd");
+        String format = simpleDateFormat.format(date);
         // 查询医生的统计值
         QueryWrapper<Statistics> statisticsQueryWrapper = new QueryWrapper<>();
         statisticsQueryWrapper.eq("doctor_id", docId);
-        statisticsQueryWrapper.eq("create_time", date);
+        statisticsQueryWrapper.eq("create_time", format);
         Statistics one = statisticsService.getOne(statisticsQueryWrapper);
         // 如果已有记录
         if (one != null) {
