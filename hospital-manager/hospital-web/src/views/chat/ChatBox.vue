@@ -4,38 +4,41 @@
     :visible.sync="dialogVisible"
     :close-on-click-modal="false"
     :before-close="handleClose"
+    class="spec-dialog"
     width="683px"
   >
     <div class="container">
-
-      <div class="content-container" ref="contentContainer">
-        <div ref="content">
-          <InfiniteLoading direction="top" @infinite="loadMoreHistory">
-            <template #no-more>
-              <div class="message-prompt">没有更多消息了</div>
-            </template>
-            <template #no-results>
-              <div class="message-prompt">没有更多消息了</div>
-            </template>
-          </InfiniteLoading>
-          <div v-for="message, index in messages">
-            <div class="message-prompt" v-if="isShowTimes[index]">
-              {{ message.time | according-to-now }}
-            </div>
-            <div class="message-cell"
-                 :style="{ flexDirection: message.direction === 'received' ? 'row' : 'row-reverse' }">
-<!--              <van-image width="32" height="32"-->
-<!--                         :src="message.direction === 'received' ? targetAvatar : sourceAvatar"/>-->
-              <el-tag  width="32" height="32"
-              :name="message.direction === 'received' ? targetAvatar : sourceAvatar"
-              :color="message.direction === 'received' ? 'pink':'yellow' "
-              >
-              {{message.direction === 'received' ? targetAvatar : sourceAvatar}}</el-tag>
-              <van-button type="default" size="small" round>{{ message.text }}</van-button>
+      <el-scrollbar style="height:550px;">
+        <div class="content-container" ref="contentContainer">
+          <div ref="content">
+            <InfiniteLoading direction="top" @infinite="loadMoreHistory">
+              <template #no-more>
+                <div class="message-prompt">没有更多消息了</div>
+              </template>
+              <template #no-results>
+                <div class="message-prompt">没有更多消息了</div>
+              </template>
+            </InfiniteLoading>
+            <div v-for="message, index in messages">
+              <div class="message-prompt" v-if="isShowTimes[index]">
+                {{ message.time | according-to-now }}
+              </div>
+              <div class="message-cell"
+                   :style="{ flexDirection: message.direction === 'received' ? 'row' : 'row-reverse' }">
+                <!--              <van-image width="32" height="32"-->
+                <!--                         :src="message.direction === 'received' ? targetAvatar : sourceAvatar"/>-->
+                <el-tag  width="32" height="32"
+                         :name="message.direction === 'received' ? targetAvatar : sourceAvatar"
+                         :color="message.direction === 'received' ? 'pink':'yellow' "
+                >
+                  {{message.direction === 'received' ? targetAvatar : sourceAvatar}}</el-tag>
+                <van-button type="default" size="small" round>{{ message.text }}</van-button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </el-scrollbar>
+
       <div class="footer">
         <div  v-if="show">
           <van-field v-model="typingText" placeholder="输入内容" border>
@@ -237,4 +240,14 @@
     font-size: 14px;
     line-height: 24px;
   }
+
+  //.spec-dialog .el-dialog__body {
+  //  padding: 3px 30px;
+  //  overflow-y: auto;
+  //  height: calc(100vh - 140px);
+  //}
+  .el-scrollbar__wrap {
+    overflow-x: hidden!important;
+  }
+
 </style>
