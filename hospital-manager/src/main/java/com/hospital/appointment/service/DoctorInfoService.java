@@ -16,4 +16,6 @@ import java.util.List;
  */
 public interface DoctorInfoService extends BaseService<DoctorInfo> {
     List<DoctorInfo> getByDptId(String dptId);
+    List<DoctorInfo> findByOpenid(String openid);
+
 }

@@ -44,13 +44,6 @@ public class WebsocketServerEndpoint {
         this.sendMessageSercice = sendMessageSercice;
     }
 
-//    private static Map<String, WsHandler> wsHandler = Maps.newConcurrentMap();
-//
-//    static {
-//        wsHandler.put("robot", new KfWsHandler());
-//        wsHandler.put("chat", new ChatWsHandler());
-//    }
-
     @OnOpen
     public void onOpen(Session session) {
         log.info("New ws connection {} ", session.getId());
@@ -62,16 +55,13 @@ public class WebsocketServerEndpoint {
 
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
-//        WsStore.remove(session.getId());
         wsSet.remove(this);
         log.warn("ws closed，reason:{}", closeReason);
     }
 
     @OnMessage
     public void onMessage(String message, Session session) {
-        System.out.println("onMEssage-session--" + session.getId());
         log.info("accept client messages: {}" + message);
-//        WsReqPayLoad payLoad = JSON.parseObject(message, WsReqPayLoad.class);
         ChatInfo chatInfo = JSON.parseObject(message, ChatInfo.class);
         if (StringUtils.isBlank(chatInfo.getSendFrom())) {
             respMsg(WsRespPayLoad.ofError("Type is null.").toJson());
@@ -80,27 +70,9 @@ public class WebsocketServerEndpoint {
         //save to db
         sendMessageSercice.saveChatInfo(chatInfo);
 
-//        WsUser wsUser = WsStore.get(session.getId());
-//        if (null == wsUser || StringUtils.isBlank(wsUser.getUsername())) {
-//            String sendFrom = chatInfo.getSendFrom();
-//            WsStore.put(session.getId(), WsUser.WsUserBuilder.aWsUser()
-//                    .id(session.getId())
-//                    .userId("0".equals(sendFrom) ? chatInfo.getOpenid() : String.valueOf(chatInfo.getDocId()))
-//                    .username("0".equals(sendFrom) ? chatInfo.getTrueName() : chatInfo.getDocName())
-//                    .build());
-//        }
         for (WebsocketServerEndpoint ws : wsSet) {
             ws.respMsg(chatInfo.toJson());
         }
-//        WsHandler handler = wsHandler.get(payLoad.getType());
-//        if (null != handler) {
-//            WsRespPayLoad resp = handler.onMessage(session, payLoad);
-//            if (null != resp) {
-//                respMsg(session, resp.toJson());
-//            }
-//        } else {
-//            respMsg(session, WsRespPayLoad.ok().toJson());
-//        }
     }
 
     @OnError
@@ -113,8 +85,6 @@ public class WebsocketServerEndpoint {
         try {
             this.session.getBasicRemote().sendText(content);
 //            this.session.getAsyncRemote().sendText(content);
-
-
         } catch (IOException e) {
             log.error("Ws resp msg error {} {}", content, e);
         }

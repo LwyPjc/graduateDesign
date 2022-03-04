@@ -7,4 +7,14 @@
             dpt_id=#{dptId,jdbcType=VARCHAR}
         </where>
     </select>
+
+    <select id="findByOpenid" parameterType="java.lang.String" resultType="com.hospital.appointment.entity.DoctorInfo">
+        SELECT * FROM doctor_info WHERE id IN (
+	SELECT doc_id FROM chat_info
+        <where>
+        openid=#{openid,jdbcType=VARCHAR}
+    </where>
+     GROUP BY openid,doc_id
+)
+    </select>
 </mapper>

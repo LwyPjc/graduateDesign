@@ -9,7 +9,13 @@
 .list-part-left{
   float: left;
 }
-.list-part-left{
+.clt{
+  color: #989898;
+  /* justify-content: center; */
+  margin-top: 50px;
+  text-align: center;
+}
+.list-part-left{  
   width: 80px;
   height: 80px;
   overflow: hidden;

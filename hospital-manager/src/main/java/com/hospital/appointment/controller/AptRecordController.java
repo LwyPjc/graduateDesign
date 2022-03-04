@@ -50,7 +50,7 @@ public class AptRecordController {
     }
 
     @PostMapping("/save")
-    public Serializable save(AptRecord aptRecord) {
+    public Serializable save(@RequestBody AptRecord aptRecord) {
         aptRecordService.save(aptRecord);
         return aptRecord.getId();
     }

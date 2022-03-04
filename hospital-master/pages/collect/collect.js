@@ -17,15 +17,7 @@ Page({
     current: 'tab1',
     current_scroll: 'tab1',
     show: "hidden",
-    actions: [
-      {
-        name: '删除',
-        color: '#fff',
-        fontsize: '20',
-        width: 100,
-        icon: 'like',
-        background: '#ed3f14'
-      },
+    actions: [ 
       {
         name: '返回',
         width: 100,
@@ -50,31 +42,7 @@ Page({
     }
   },
 
-  //根据id删除收藏额医生
-  deleteDoctor: function (id) {
-    var that = this;
-    var res = util.isInObject(this.data.doctors, id, "YSID");
-    var arr = this.data.doctors;
-    arr.splice(res.position, 1)
-    console.log("删除返回", arr);
-    this.setData({
-      doctors: arr
-    })
-    wx.request({
-      url: urlApi.getCollectingDeleteUrl(),
-      data: {
-        WID: app.globalData.openid,
-        BRID: app.globalData.BRID,
-        ID: id
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (response) {
-
-      }
-    })
-  },
+  
 
   /**
    * 生命周期函数--监听页面加载
@@ -119,6 +87,7 @@ Page({
       success: function (res) {
         var doctorList = res.data
         console.log('collect--getDoctorList--res-', res)
+      
         that.data.doctors = []
         doctorList.map(item => {
           that.data.doctors.push({
@@ -126,6 +95,7 @@ Page({
             color: "color",
             name: item.docName,
             dptName: item.dptName,
+            id:item.docId
 
           })
         })
@@ -210,7 +180,7 @@ Page({
     console.log("选中的医生", e);
     wx.navigateTo({
       url: '/pages/doctor/doctor?doctor=' + JSON.stringify(e.currentTarget.dataset.doctor)
-        + '&departmentName=' + this.data.department.name
+        +'&collectSuccess='+true
     })
   }
 })

@@ -93,6 +93,13 @@
                     "name": "",
                     "pathName": "pages/registerSuccess/registerSuccess",
                     "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/registerSuccess/registerSuccess",
+                    "query": "",
                     "scene": null,
                     "launchMode": "default"
                 }
