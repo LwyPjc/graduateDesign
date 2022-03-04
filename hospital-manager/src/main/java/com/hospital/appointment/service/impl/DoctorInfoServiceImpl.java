@@ -27,4 +27,9 @@ public class DoctorInfoServiceImpl extends ServiceImpl<DoctorInfoMapper, DoctorI
     public List<DoctorInfo> getByDptId(String dptId) {
         return doctorInfoMapper.getByDptId(dptId);
     }
+
+    @Override
+    public List<DoctorInfo> findByOpenid(String openid) {
+        return doctorInfoMapper.findByOpenid(openid);
+    }
 }

@@ -47,6 +47,7 @@ public class ChatInfoController {
         return chatInfoService.page(page, queryWrapper);
     }
 
+
     @GetMapping("/findByDoubleIds")
     public List<ChatInfoDo> findByOpenidAndDocId(@RequestParam String openid, @RequestParam String docId) {
         QueryWrapper<ChatInfo> queryWrapper = new QueryWrapper<>();

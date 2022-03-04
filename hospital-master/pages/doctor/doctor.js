@@ -19,7 +19,8 @@ Page({
     userInfo: "",
     dateType: "week",
     collectSuccess: false,
-    isCollected:'',
+    isCollected: '',
+
   },
 
   handleOpen2: function () {
@@ -57,27 +58,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
     var that = this;
     var doctor = JSON.parse(options.doctor);
+    if (util.checkIsNotNull(options.collectSuccess)) {
+      this.setData({
+        collectSuccess: JSON.parse(options.collectSuccess)
+      })
+    }
+    console.log('--doctor--', options)
     app.globalData.selectDoctor = doctor;
     var userInfo = app.globalData.userInfo
     this.setData({
       doctor,
       userInfo,
     })
-    this.checkIsCollected().then(res=>{
-      if(util.checkIsNotNull(res)){
+
+    this.checkIsCollected().then(res => {
+      console.log('doctor--onload--res--', res);
+      if (util.checkIsNotNull(res)) {
         this.setData({
-          isCollected:res
+          isCollected: res.id
         })
-        if(res.deleteFlg!=1){
+        if (res.deleteFlg != 1) {
           this.setData({
-            collectSuccess:true
+            collectSuccess: true
           })
         }
       }
-     
     });
     app.globalData.dayFun = {
       dayFun: function (data) {
@@ -94,30 +102,30 @@ Page({
   checkIsCollected() {
     var userInfo = this.data.userInfo
     var doctor = this.data.doctor;
-    var that= this;
+    var that = this;
     return new Promise(function (resolve, reject) {
-    wx.request({
-      url: urlApi.getSingleCollectInfo(),
-      method: "get",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        openid: userInfo.id,
-        docId: doctor.id,
-      },
-      success(res) {
-        var collectInfo = res.data;
-        if(util.checkIsNotNull(collectInfo)){
-        resolve(collectInfo)
-          // that.setData({
-          //   isCollected:collectInfo
-          // })
+      wx.request({
+        url: urlApi.getSingleCollectInfo(),
+        method: "get",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          openid: userInfo.id,
+          docId: doctor.id,
+        },
+        success(res) {
+          var collectInfo = res.data;
+          if (util.checkIsNotNull(collectInfo)) {
+            resolve(collectInfo)
+            // that.setData({
+            //   isCollected:collectInfo
+            // })
+          }
+          console.log('checkIsCollected--', res)
         }
-        console.log('checkIsCollected--',res)
-      }
+      })
     })
-  })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -238,28 +246,31 @@ Page({
     if (this.checkUserIsNotLogin()) {
       return;
     }
-    this.checkIsCollected();
+    // this.checkIsCollected().then(res => {
+    // })
+
     var collectSuccess = this.data.collectSuccess
     this.setData({
       collectSuccess: !collectSuccess
     })
-    var deleteFlg;
+
     var title;
+    var deleteFlg;
     //如果点击收藏
     if (this.data.collectSuccess) {
-      deleteFlg = "0";
-      title='收藏成功'
+      deleteFlg = '0'
+      title = '收藏成功'
     } else {
-      deleteFlg = "1";
-      title='取消收藏';
+      deleteFlg = '1'
+      title = '取消收藏';
     }
     console.log('collecting--collectSuccess--', this.data.collectSuccess)
     var that = this
     var userInfo = this.data.userInfo
-    var doctor = this.data.doctor 
-    console.log('collecting---isCollected--',this.data.isCollected)
+    var doctor = this.data.doctor
+    console.log('collecting---isCollected--', this.data.isCollected)
     var isCollected = this.data.isCollected;
-    if(util.checkIsNull(isCollected)){
+    if (util.checkIsNull(isCollected)) {
       wx.request({
         url: urlApi.saveCollect(),
         method: "post",
@@ -272,37 +283,41 @@ Page({
         },
         success: function (res) {
           let statusCode = res.statusCode.toString();
-          if (statusCode.startsWith('2')) {         
+          console.log('collecting--res--', res)
+          if (statusCode.startsWith('2')) {
             wx.showToast({
               title: '收藏成功',
               icon: "none",
               duration: 2000
             })
-          } 
+            that.setData({
+              isCollected: res.data
+            })
+          }
         }
       })
-    }else{
+    } else {
       wx.request({
         url: urlApi.updateCollectInfo(),
-        method:'POST',
-        data:{
-          id:isCollected.id,
-          deleteFlg:deleteFlg
+        method: 'POST',
+        data: {
+          id: isCollected,
+          deleteFlg: deleteFlg
         },
-        success(res){
-          let statusCode= res.statusCode.toString();
-          console.log('else--res--',res)
-          if(statusCode.startsWith('2')){
+        success(res) {
+          let statusCode = res.statusCode.toString();
+          console.log('else--res--', res)
+          if (statusCode.startsWith('2')) {
             wx.showToast({
               title: title,
-              icon:'none',
-              duration:2000
+              icon: 'none',
+              duration: 2000
             })
           }
         }
       })
     }
-    
+
   },
   checkUserIsNotLogin() {
     var userInfo = app.globalData.userInfo

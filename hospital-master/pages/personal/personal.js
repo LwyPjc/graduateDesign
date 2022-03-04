@@ -2,7 +2,6 @@ var app = getApp();
 const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0';
 var urlApi = require("../../utils/server.api.js");
 const util = require("../../utils/util.js");
-const utils = require('../../utils/util.js')
 Page({
   data: {
     firstLogin: true,
@@ -89,7 +88,7 @@ Page({
   userDetails(e) {
     var userInfo = this.data.userInfo;
     var gender = 'userInfowx.gender';
-    if (utils.checkIsNotNull(userInfo) && userInfo.gender === 0) {
+    if (util.checkIsNotNull(userInfo) && userInfo.gender === 0) {
       this.setData({
         [gender]: ''
       })
@@ -124,7 +123,7 @@ Page({
   onLoad: function (options) {
     //如果数据库中已经有该用户的信息，不需要再授权
     console.log('personal-userinfo--', app.globalData.userInfo);
-    if (utils.checkIsNotNull(app.globalData.userInfo)) {
+    if (util.checkIsNotNull(app.globalData.userInfo)) {
       console.log('personal-onload-isNotNull-userinfo-', app.globalData.userInfo)
       this.setData({
         userInfo: app.globalData.userInfo,

@@ -19,4 +19,5 @@ import java.util.List;
 @Mapper
 public interface DoctorInfoMapper extends BaseMapper<DoctorInfo> {
     List<DoctorInfo> getByDptId(String dptId);
+    List<DoctorInfo> findByOpenid(String openid);
 }

@@ -259,6 +259,10 @@ const connectWs = function(){
 const updateCollectInfo = function(){
   return apiUrl+'collectInfo/edit'
 }
+//my contact 
+const getMyContact = function(){
+  return apiUrl+'doctorInfo/findByOpenid'
+}
 // todo
 module.exports = {
   getPensorInfoUrl: getPensorInfoUrl,
@@ -277,37 +281,8 @@ module.exports = {
   getCollectInfos:getCollectInfos,
   getSingleCollectInfo:getSingleCollectInfo,
   updateCollectInfo:updateCollectInfo,
-
-  getInHosptalUrl: getInHosptalUrl,
-  getCollectingListUrl: getCollectingListUrl,
-  getRegisterUrl: getRegisterUrl,
-  getTableList: getTableList,
+  getMyContact:getMyContact,
   getOpenidUrl: getOpenidUrl,
-  queryRelatives: queryRelatives,
-  getNotPayListUrl: getNotPayListUrl,
-  getNotPayListUrl2: getNotPayListUrl2,
-  getRegisterLogUrl: getRegisterLogUrl,
-  getPayLogUrl: getPayLogUrl,
-  getMZPayLogUrl: getMZPayLogUrl,
-  getinHPayLogUrl: getinHPayLogUrl,
-  getDepositLogUrl: getDepositLogUrl,
-  getPayUrl: getPayUrl,
-  getPayInfo: getPayInfo,
-  getScikList: getScikList,
-  getLockModify: getLockModify,
-  // getScikList2: getScikList2,
-  queryRelatives2: queryRelatives2,
-  getTableList2: getTableList2,
-  getMZPayInfo: getMZPayInfo,
-  getSearchDoctor: getSearchDoctor,
-  getKSinfo: getKSinfo,
-  getDayLogUlrl: getDayLogUlrl,
-  getReportUrl: getReportUrl,
-  getGHPaySuccess: getGHPaySuccess,
-  getMZPaySuccess: getMZPaySuccess,
-  getYJ1PaySuccess: getYJ1PaySuccess,
-  getYJ2PaySuccess: getYJ2PaySuccess,
-  getInHopltalPay: getInHopltalPay,
-  getCollectingDeleteUrl: getCollectingDeleteUrl,
-  getMZnotPayLog: getMZnotPayLog
+
+  
 }

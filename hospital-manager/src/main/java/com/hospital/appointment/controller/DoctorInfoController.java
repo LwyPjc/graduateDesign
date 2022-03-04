@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.io.Serializable;
 import java.util.List;
 
@@ -50,6 +51,10 @@ public class DoctorInfoController {
     public Page<DoctorInfo> findListByPage(DoctorInfo doctorInfo, Page page) {
         QueryWrapper<DoctorInfo> queryWrapper = new QueryWrapper<>(doctorInfo);
         return doctorInfoService.page(page, queryWrapper);
+    }
+    @GetMapping("/findByOpenid")
+    public List<DoctorInfo> findByOpenid(@RequestParam String openid){
+        return doctorInfoService.findByOpenid(openid);
     }
 
     @GetMapping("/{id}")
