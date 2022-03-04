@@ -87,7 +87,6 @@ Page({
       success: function (res) {
         var doctorList = res.data
         console.log('collect--getDoctorList--res-', res)
-      
         that.data.doctors = []
         doctorList.map(item => {
           that.data.doctors.push({
