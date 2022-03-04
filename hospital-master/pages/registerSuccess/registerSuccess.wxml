@@ -1,0 +1,3 @@
+<!--pages/registerSuccess/registerSuccess.wxml-->
+<view class="iconfont icon-success icon-lo"></view>
+<view class=" icon-lo-txt" bindtap="backToHome">预约成功,点此返回首页</view>

@@ -1,0 +1,18 @@
+<!--pages/reserve/reserve.wxml-->
+<import src="../component/calendar/calendar/index.wxml"/>
+
+<view>
+  <view>
+  <view class="clt" wx:if="{{doctors==null||doctors==''||doctors==undefined}}">
+  暂无咨询
+  </view>
+    <i-swipeout wx:for="{{ doctors }}" wx:key="{{ item.id }}"  i-class="i-swipeout-demo-item" actions="{{actions}}" data-id="{{item.id}}" bindchange="handlerCloseButton" bindtap='chatDetails' data-doctor='{{item}}'>
+      <view slot="content">
+        <view class="iconWrap"><image src='../../images/doctor.jpg'></image></view>
+        <i-cell i-class="i-cell-padding" title="{{item.name}}" label="{{item.dptName}},{{ item.descs }}">
+        </i-cell>
+      </view>
+    </i-swipeout>
+   
+</view>
+</view>
