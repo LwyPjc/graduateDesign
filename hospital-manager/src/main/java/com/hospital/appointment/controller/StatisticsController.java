@@ -3,6 +3,7 @@ package com.hospital.appointment.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hospital.appointment.entity.Statistics;
+import com.hospital.appointment.entity.dto.StatisticsDto;
 import com.hospital.appointment.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +33,14 @@ public class StatisticsController {
     }
 
     @GetMapping("/findListByPage")
-    public Page<Statistics> findListByPage(Statistics statistics, Page page) {
-        QueryWrapper<Statistics> queryWrapper = new QueryWrapper<>(statistics);
-        return statisticsService.page(page, queryWrapper);
+    public Page<Statistics> findListByPage(StatisticsDto statistics, Page page) {
+        QueryWrapper<Statistics> queryWrapper = new QueryWrapper<Statistics>(statistics);
+        if (statistics.getDateStart() != null && statistics.getDateEnd() != null) {
+            queryWrapper.gt("create_time", statistics.getDateStartWithDate());
+            queryWrapper.le("create_time", statistics.getDateEndWithDate());
+        }
+        Page result = statisticsService.page(page, queryWrapper);
+        return result;
     }
 
     @GetMapping("/{id}")
