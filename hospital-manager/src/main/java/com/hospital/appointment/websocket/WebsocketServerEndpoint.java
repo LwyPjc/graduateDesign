@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -57,7 +58,7 @@ public class WebsocketServerEndpoint {
         this.session = session;
         wsSet.add(this);
         WsStore.put(session.getId(), WsUser.WsUserBuilder.aWsUser().id(session.getId()).session(session).build());
-        respMsg(WsRespPayLoad.ok().toJson());
+//        respMsg(WsRespPayLoad.ok().toJson());
     }
 
     @OnClose
@@ -76,6 +77,9 @@ public class WebsocketServerEndpoint {
         if (StringUtils.isBlank(chatInfo.getSendFrom())) {
             respMsg(WsRespPayLoad.ofError("Type is null.").toJson());
             return;
+        }
+        if (chatInfo.getCreateTime() == null) {
+            chatInfo.setCreateTime(new Date());
         }
         //save to db
         sendMessageSercice.saveChatInfo(chatInfo);
@@ -113,8 +117,6 @@ public class WebsocketServerEndpoint {
         try {
             this.session.getBasicRemote().sendText(content);
 //            this.session.getAsyncRemote().sendText(content);
-
-
         } catch (IOException e) {
             log.error("Ws resp msg error {} {}", content, e);
         }
