@@ -177,7 +177,6 @@ Page({
     wx.showLoading({
       title: '刷新中...'
     })
-    console.log('onPullDownRefresh--personal-info--')
     app.myLogin().then((res) => {
       console.log('personal--onPullFresh--res-', res)
       if(util.checkIsNotNull(res)){
