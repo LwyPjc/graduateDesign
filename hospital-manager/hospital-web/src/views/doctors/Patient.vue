@@ -140,14 +140,9 @@
       this.fetchData()
     },
     methods: {
-      // openWs(){
-      //   let ws = new websocket("ws://localhost:8083/ws");
-      //   ws.onopen = function(evt) {
-      //     console.log("Connection open ...");
-      //     ws.send("Hello WebSockets!");
-      //   };
-      // },
-
+      destroyed() {
+        this.ws.close();
+      },
       // 定义加载历史消息的方式，该函数应该返回一个对象（`{ messages, hasMore }`），或者是返回该对象的 Promise （异步）。
       loadHistory() {
 
@@ -199,22 +194,14 @@
           docId:window.sessionStorage.getItem("docId")
         };
         this.ws.send(JSON.stringify(mm));
-        // //
-        // return {
-        //   text,
-        //   time: new Date(),
-        //   direction: 'sent'
-        // }
-      },
-
-      // 该函数演示如何加载新消息（一般通过 WebSocket 实时收取）
-      receiveMessage(message) {
-        //接收服务端推送的消息
-        this.ws.onmessage = function(evt) {
-          console.log("Received Message: " + evt.data);
-          this.$refs.chat.appendNew(message)
+        //
+        return {
+          text,
+          time: new Date(),
+          direction: 'sent'
         }
       },
+
       /**
        * 获取表格数据
        */
@@ -265,40 +252,28 @@
         //  this.ws = new Websocket("ws://localhost:8083/ws");
         var that = this;
         this.ws = new WebSocket("ws://localhost:8083/ws");
+
         //开启websocket连接
         this.ws.onopen = function (evt) {
           console.log("Connection open ...");
         }
+
+        // 接收患者的消息
         this.ws.onmessage = function(evt) {
           let a = evt.data;
           let b = JSON.parse(a);
-
-          // console.log("Received Message: " + evt.data);
-          let messagessssss = Object.assign({
-            text: b.content,
-            time: b.createTime,
-            direction: b.sendFrom === '0' ? 'received' : 'sent'
-          });
-          console.log('memmmmm',b);
-          that.$refs.chat.appendNew(messagessssss)
+          // 过滤消息
+          // 医生 患者对应，且不是医生发的消息才更新
+         if(window.sessionStorage.docId==b.docId && that.openId === b.openid && b.sendFrom === '0') {
+           console.log("Received Message: " + evt.data);
+           let newmsg = Object.assign({
+             text: b.content,
+             time: new Date(),
+             direction: b.sendFrom === '0' ? 'received' : 'sent'
+           });
+           that.$refs.chat.appendNew(newmsg);
+         }
         }
-
-        //主动发送消息
-        //   ws.send("Hello WebSockets!");
-        // };
-        //
-
-        //接收服务端推送的消息
-        // ws.onmessage = function(evt) {
-        //   console.log( "Received Message: " + evt.data);
-
-        //
-        //   ws.close();
-        // };
-        //
-        // ws.onclose = function(evt) {
-        //   console.log("Connection closed.");
-        // };
       },
       /**
        * 搜索过滤
