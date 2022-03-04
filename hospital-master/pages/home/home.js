@@ -122,14 +122,7 @@ Page({
       url: '../myresident/myresident'
     })
   },
-  /**
-   * 住院充值
-   */
-  gotoDeposit: function () {
-    wx.navigateTo({
-      url: '../deposit/deposit'
-    })
-  },
+
 
   //记录查询
   registerLog: function () {
@@ -139,19 +132,6 @@ Page({
     })
   },
 
-  //去住院日清单页面
-  goDayLog: function (e) {
-    wx.navigateTo({
-      url: '/pages/dayLog/dayLog'
-    })
-  },
-
-  //住院报告
-  report: function () {
-    wx.navigateTo({
-      url: '/pages/report/report'
-    })
-  },
 
   goBranchList: function (e) {
     wx.navigateTo({
@@ -159,12 +139,7 @@ Page({
     })
   },
 
-  //获取二维码
-  EWM: function () {
-    this.setData({
-      visible1: true
-    });
-  },
+
 
   //取消
   handleClose1() {
@@ -173,12 +148,6 @@ Page({
     });
   },
 
-  //和changeMan,的通信函数
-  onGetCode: function (e) {
-    this.setData({
-      code: e.detail.val
-    })
-  },
 
 
   /**
@@ -201,45 +170,7 @@ Page({
         })
       }
     })
-    // if (util.checkIsNotNull(app.globalData.userInfo)) {
-    //   var info = app.globalData.userInfo;
-    //   console.log('home---info--', info);
-    //   if (util.checkIsNotNull(info.medicareCard)) {
-    //     //已经添加过就诊卡
-    //     this.setData({
-    //       pensorShowTop: "hidden",
-    //       pensorShowBottom: "show",
-    //       medicareCard: info.medicareCard,
-    //       pensorName: info.trueName,
-    //     })
-    //   }
-    // }
-    // var that = this;
-    // app.globalData.sickList = [];
-    // app.globalData.changeMan = {
-    //   changeMan:function(data){
-    //     console.log("切换人",data)
-    //     that.setData({
-    //       pensorName: data.NAME,
-    //       // pensorNumber: data.PATIENT_ID
-    //     })
-    //     app.globalData.sickName = data.NAME;
-    //     app.globalData.BRID= data.BR_ID;
-    //     app.globalData.SFZH = data.IDCARD;
-    //     app.globalData.sickCard = data.PATIENT_ID;
-    //   }
-    // }
-    // app.globalData.getPonsorInfo = {
-    //   getPonsorInfo: function(){
-    //     that.getPonsorInfo()
-    //   }
-    // }
-    // app.globalData.getPonsorInfo = {
-    //   getPonsorInfo:function(){
-    //     console.log("这个函数执行了的");
-    //     that.getPonsorInfo();
-    //   }
-    // }  
+    
   },
 
   /**
@@ -253,23 +184,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // var updateShow = wx.getStorageSync('updateShow');
-
-    // if(util.checkIsNull(updateShow)&&!updateShow){
-    //   return;
-    // }
-    // this.setData({
-    //   userInfo:app.globalData.userInfo
-    // })
-    // console.log('onshow--',app.globalData.userInfo)
-    // console.log('onshow--',this.data.userInfo)
-
-    // if(util.checkIsNotNull(this.data.userInfo)&&util.checkIsNotNull(this.data.medicareCard)){
-    //   this.setData({
-    //     pensorShowTop: "hidden",
-    // pensorShowBottom: "show",
-    //   })
-    // }
+    
 
   },
 

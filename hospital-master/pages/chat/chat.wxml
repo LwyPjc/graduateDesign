@@ -1,0 +1,91 @@
+<!--pages/wechat2/wechat2.wxml-->
+<view class="chat-header">
+    <!-- <view class="header-image-box">
+        <image class="header-image" src="{{userInfo.avatarUrl}}"></image>
+    </view> -->
+    <view>
+        <view class="chat-name">{{doctorInfo.dptName}}-{{doctorInfo.name}}医生</view>
+        <!-- <view class="chat-company">{{userInfo.trueName}} </view> -->
+    </view>
+</view>
+<view class='news'>
+    <view class="historycon">
+        <!-- <scroll-view scroll-y="true" scroll-into-view="{{scrollid}}" scroll-with-animation="{{true}}" style="height:{{scrollHeight}}" class="history" refresher-enabled="true" bindrefresherrefresh="refresh" refresher-triggered="{{triggered}}"> -->
+        <!-- 历史记录部分start -->
+        <view wx:if="{{historyList.length > 0}}">
+            <view class="historyText">历史消息</view>
+            <block wx:for="{{historyList}}" wx:key="id">
+                <!--此处为other -->
+                <!-- <view wx:if="{{item.sendFrom==0}}" id="historyscrollid{{index}}"> -->
+                <view wx:if="{{item.sendFrom==1}}">
+                    <view>
+                        <text class='chat-time' style="display:none;">{{item.createTime}}</text>
+                    </view>
+                    <view class='other-record'>
+                        <image class='other-head-img' src='../../images/doctor2.jpg'></image>
+                        <view class='other-record-content-triangle'></view>
+                        <view class='other-record-content'>
+                            {{item.content}}</view>
+                    </view>
+                </view>
+                <!--此处为结尾 -->
+                <!--此处为own -->
+                <!-- <view id="historyscrollid{{index}}" wx:else> -->
+                <view wx:else>
+                    <view>
+                        <text class='chat-time'>{{item.createTime}}</text>
+                    </view>
+                    <view class='own-record'>
+                        <view class='own-record-content'>{{item.content}}</view>
+                        <view class='own-record-content-triangle'></view>
+                        <image class='own-head-img' src='{{userInfo.avatarUrl}}'></image>
+                    </view>
+                </view>
+                <!-- own结尾 -->
+            </block>
+            <view class="historyText">以上为历史消息</view>
+        </view>
+        <!-- 历史记录部分end -->
+        <block wx:for="{{newsList}}" wx:key="index">
+            <!--此处为other -->
+            <view wx:if="{{item.sendFrom==1}}" id="scrollid{{index}}">
+                <view>
+                    <text class='chat-time' style="display:none;">{{item.createTime}}</text>
+                </view>
+                <view class='other-record'>
+                    <image class='other-head-img' src='../../images/doctor2.jpg'></image>
+                    <view class='other-record-content-triangle'></view>
+                    <view class='other-record-content'>
+                        {{item.content}}</view>
+                </view>
+            </view>
+            <!--此处为结尾 -->
+            <!--此处为own -->
+            <view id="scrollid{{index}}" wx:else>
+                <view>
+                    <text class='chat-time' style="display:none;">{{item.createTime}}</text>
+                </view>
+                <view class='own-record'>
+                    <view class='own-record-content'>{{item.content}}</view>
+                    <view class='own-record-content-triangle'></view>
+                    <image class='own-head-img' src='{{userInfo.avatarUrl}}'></image>
+                </view>
+            </view>
+            <!-- own结尾 -->
+        </block>
+        <!-- </scroll-view> -->
+    </view>
+</view>
+<view class="sendmessage">
+    <form bindsubmit="formSubmit">
+        <view class="send-message">
+            <input class="chat-input" sendFrom="text" bindinput="bindChange" confirm-sendFrom="done" name='input' value="{{input}}" cursor-spacing="16px" hold-keyboard="{{true}}" placeholder="" />
+            <!-- <image class="chat-emotion" src="../../images/2.jpg" bindtap="emotionChange"></image> -->
+            <button class="btn" formType='submit'>发送</button>
+        </view>
+    </form>
+
+    <!-- <view class="emotions" wx:if="{{emotionVisible}}">
+        <view class="emotions-item" wx:for="{{connectemoji}}" wx:key="index" bindtap="addemotion" data-index="{{index}}">{{item}}</view>
+    </view> -->
+</view>
