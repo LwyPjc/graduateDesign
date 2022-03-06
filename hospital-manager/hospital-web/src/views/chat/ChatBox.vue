@@ -152,7 +152,8 @@
        * 关闭对话框操作
        */
       handleClose(done) {
-        this.dialogVisible = false
+        this.dialogVisible = false;
+        location.reload();
       },
       sendText() {
         const message = this.sendMessage({text: this.typingText})
