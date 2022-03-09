@@ -95,7 +95,7 @@
                       children: []
                     },
                   {
-                    name: "聊天",
+                    name: "聊天记录",
                     id: 7,
                     icon: "el-icon-collection-tag",
                     url: "/patient",

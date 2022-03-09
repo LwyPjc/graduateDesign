@@ -138,6 +138,7 @@
                       return false
                     }
                   this.dialogFormData.departmentList = null;
+                  this.dialogFormData.createTime = null;
                   const apiName = `${!this.dialogFormData.id ? 'save' : 'edit'}`
                   request({
                     url: `${this.prefixUrl}/${apiName}`,

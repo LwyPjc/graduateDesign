@@ -53,7 +53,7 @@
                             {{ scope.row.createTime  | timeFilter }}
                         </template>
                     </el-table-column>
-                    <el-table-column label="统计值" show-overflow-tooltip style="width: 10%" align="center">
+                    <el-table-column label="咨询人数" show-overflow-tooltip style="width: 10%" align="center">
                         <template slot-scope="scope">
                             {{ scope.row.value }}
                         </template>

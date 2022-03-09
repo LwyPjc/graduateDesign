@@ -35,9 +35,9 @@
               {{ scope.$index }}
             </template>
           </el-table-column>
-          <el-table-column label="姓名" show-overflow-tooltip style="width: 10%" align="center">
+          <el-table-column label="聊天对象" show-overflow-tooltip style="width: 10%" align="center">
             <template slot-scope="scope">
-              {{ scope.row.trueName }}
+              {{ scope.row.name }}
             </template>
           </el-table-column>
           <el-table-column label="聊天" show-overflow-tooltip style="width: 10%" align="center">
@@ -143,7 +143,7 @@
         return request({
           url: `${this.GLOBAL.baseUrl}chatInfo/findByDoubleIds`,
           method: 'get',
-          params: {docId: window.sessionStorage.getItem("docId"), openid: this.openId},
+          params: {docId: this.docId, openid: this.openId},
           async: false, // 同步
         }).then(res => {
           let dd = {
@@ -208,7 +208,10 @@
           params: this.listQuery
         }).then(res => {
           this.list = res.records
-
+            this.list.forEach(re=>{
+              let name = '患者:'+re.trueName+' 医生:'+re.docName;
+              re.name = name;
+            })
           this.list.forEach(l => {
             if (0 === l.gender) {
               l.gender = "未知"
